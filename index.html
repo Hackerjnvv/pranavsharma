@@ -1,269 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - 9th Class Student</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Sun and Moon Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset & Base Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
+            overflow: hidden;
+        }
 
-        <link rel="stylesheet" href="assets/css/styles.css">
+        html {
+            overflow: auto;
+        }
 
-        <!-- =====BOX ICONS===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        body::-webkit-scrollbar {
+            display: none;
+        }
 
-        <title>About Pranav Sharma</title>
-    </head>
-    <body>
-        <!--===== HEADER =====-->
-        <header class="l-header">
-            <nav class="nav bd-grid">
-                <div>
-                    <a href="#" class="nav__logo">Pranav</a>
-                </div>
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        h1, h2, h3 {
+            margin-bottom: 0.5em;
+        }
 
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                        <li class="nav__item" hidden><a href="#skills" class="nav__link">Skills</a></li>
-                        <li class="nav__item"><a href="#work" class="nav__link">Photos</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-                    </ul>
-                </div>
+        /* Container Styles */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
 
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
-                </div>
-            </nav>
-        </header>
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #0066cc;
+            color: #fff;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+        }
 
-        <main class="l-main">
-            <!--===== HOME =====-->
-            <section class="home bd-grid" id="home">
-                <div class="home__data">
-                    <h1 class="home__title">Hi,<br>I'am <span class="home__title-color">Pranav</span><br> Sharma</h1>
+        /* About Section */
+        .about {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .about img {
+            max-width: 300px;
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .about img:hover {
+            transform: scale(1.1);
+        }
+        .about-text {
+            max-width: 600px;
+            margin: 20px;
+        }
+        .about-text h2 {
+            color: #0066cc;
+        }
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
 
-                    <a href="#contact" class="button">Contact</a>
-                </div>
+        /* Projects Section */
+        .projects {
+            margin: 40px 0;
+            background-color: #f7f7f7;
+            padding: 40px;
+            border-radius: 8px;
+        }
+        .projects h2 {
+            color: #0066cc;
+        }
+        .projects ul {
+            list-style: none;
+            padding: 0;
+        }
+        .projects li {
+            margin: 10px 0;
+            padding: 15px;
+            background-color: #e2e2e2;
+            border-radius: 5px;
+        }
 
-                <div class="home__social">
-                    <a href="https://www.instagram.com/itz_me_pranav_sharma/" class="home__social-icon"><i class='bx bxl-instagram'></i></a>
-                    <a href="" class="home__social-icon"><i class='bx bxl-facebook'></i></a>
-                </div>
+        /* Contact Section */
+        .contact {
+            background-color: #0066cc;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .contact h2 {
+            margin-bottom: 20px;
+        }
+        .contact form {
+            max-width: 600px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .contact input, .contact textarea {
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+        }
+        .contact button {
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .contact button:hover {
+            background-color: #ffd633;
+        }
 
-                <div class="home__img">
-                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                            <image class="home__blob-img" x="50" y="60" href="assets/img/perfil.png"/>
-                        </g>
-                    </svg>
-                </div>
-            </section>
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            font-size: 0.9rem;
+        }
 
-            <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">About</h2>
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #020202;
+            color: #f7f7f7;
+        }
+        .header.dark-mode {
+            background-color: #020202;
+        }
+        .contact.dark-mode {
+            background-color: #121212;
+        }
+        .contact.dark-mode h2 {
+            color: #ffcc00;
+        }
+        .footer.dark-mode {
+            background-color: #020202;
+        }
+        .about-text.dark-mode {
+            background-color: #020202;
+            color: #fff;
+        }
+        .about-text.dark-mode h2 {
+            color: #ffcc00;
+        }
+        
+        .projects.dark-mode {
+            background-color: #121212;
+        }
 
-                <div class="about__container bd-grid">
-                    <div class="about__img">
-                        <img src="assets/img/about.jpg" alt="">
-                    </div>
-                    
-                    <div>
-                        <h2 class="about__subtitle">I'am Pranav</h2>
-                        <p class="about__text">Currently studying in 9th class.</p>           
-                    </div>                                   
-                </div>
-            </section>
+        .projects.dark-mode li {
+            background-color: #181818;
+        }
 
-           <div style="display: none;">
-            <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
+        .projects.dark-mode h2 {
+            color: #ffcc00;
+        }
 
-                <div class="skills__container bd-grid">          
-                    <div>
-                        <h2 class="skills__subtitle">Profesional Skills</h2>
-                        <p class="skills__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit optio id vero amet, alias architecto consectetur error eum eaque sit.</p>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-html5 skills__icon'></i>
-                                <span class="skills__name">HTML5</span>
-                            </div>
-                            <div class="skills__bar skills__html">
+        /* Dark Mode Button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dark-mode-toggle:hover {
+            background-color: #ffd633;
+            transform: scale(1.1);
+        }
 
-                            </div>
-                            <div>
-                                <span class="skills__percentage">95%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-css3 skills__icon'></i>
-                                <span class="skills__name">CSS3</span>
-                            </div>
-                            <div class="skills__bar skills__css">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">85%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-javascript skills__icon' ></i>
-                                <span class="skills__name">JAVASCRIPT</span>
-                            </div>
-                            <div class="skills__bar skills__js">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">65%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint skills__icon'></i>
-                                <span class="skills__name">UX/UI</span>
-                            </div>
-                            <div class="skills__bar skills__ux">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">85%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>              
-                        <img src="assets/img/work3.jpg" alt="" class="skills__img">
-                    </div>
-                </div>
-            </section>
-           </div>
-        </div>
-        <div style="display: none;">
-            <!--===== WORK =====-->
-            <section class="work section" id="wor">
-                <h2 class="section-title">Work</h2>
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>About Me</h1>
+        <p>A Journey of Learning and Exploration</p>
+    </header>
 
-                <div class="work__container bd-grid">
-                    <a href="" class="work__img">
-                        <img src="assets/img/work11.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work22.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work33.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work44.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work55.jpg" alt="">
-                    </a>
-                    <a href="" class="work__img">
-                        <img src="assets/img/work66.jpg" alt="">
-                    </a>
-                </div>
-            </section>
-        </div>
- <!--===== WORK =====-->
- <section class="work section" id="work">
-    <h2 class="section-title">Photos</h2>
-
-    <div class="work__container bd-grid">
-        <a href="" class="work__img">
-            <img src="assets/img/work1.jpg" alt="">
-        </a>
-        <a href="" class="work__img">
-            <img src="assets/img/work2.jpg" alt="">
-        </a>
-        <a href="" class="work__img">
-            <img src="assets/img/work3.jpg" alt="">
-        </a>
-        <a href="" class="work__img">
-            <img src="assets/img/work4.jpg" alt="">
-        </a>
-        <a href="" class="work__img">
-            <img src="assets/img/work5.jpg" alt="">
-        </a>
-        <a href="" class="work__img">
-            <img src="assets/img/work6.jpg" alt="">
-        </a>
-    </div>
-</section>
-            <!--===== CONTACT =====-->
-         <section class="contact section" id="contact">
-    <h2 class="section-title">Contact</h2>
-
-    <div class="contact__container bd-grid">
-        <form id="contactForm" class="contact__form">
-            <input type="text" id="name" placeholder="Name" class="contact__input" required>
-            <input type="email" id="email" placeholder="Email" class="contact__input" required>
-            <textarea id="message" cols="0" rows="10" class="contact__input" placeholder="Your message" required></textarea>
-            <input type="submit" value="Enviar" class="contact__button button">
-        </form>
-    </div>
-</section>
-
-<script>
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const botToken = '7916096761:AAEkAF0lyvzPk6uelhkDtdkdn-8x-TSlXRA';
-        const chatId = '6128322651';     
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-
-        const text = `New Contact Form Submission:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
-
-        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: text
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                alert('Message sent successfully!');
-                document.getElementById('contactForm').reset();
-            } else {
-                alert('Failed to send message. Please try again.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        });
-    });
-</script>
-
-        </main>
-
-        <!--===== FOOTER =====-->
-        <footer class="footer">
-            <p class="footer__title">Pranav</p>
-            <div class="footer__social">
-                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+    <main class="container">
+        <!-- About Section -->
+        <section class="about">
+            <img src="https://via.placeholder.com/300" alt="Profile Picture" loading="lazy">
+            <div class="about-text">
+                <h2>Hi, I'm [Your Name]</h2>
+                <p>
+                    I'm a 9th class student passionate about technology, science, and exploring the world around me. 
+                    Whether it's coding, reading, or participating in school activities, I always strive to learn and grow.
+                </p>
+                <p>
+                    In my free time, I enjoy solving puzzles, experimenting with coding projects, and engaging with my friends in meaningful discussions. 
+                    I believe in continuous learning, and I am always curious to explore new things.
+                </p>
+                <p>
+                    I'm also a firm believer in the power of collaboration. I enjoy working on group projects and learning from others, while also sharing my knowledge with my peers. 
+                    I find it rewarding to contribute to discussions that can improve ideas and spark new creative thoughts.
+                </p>
+                <p>
+                    Alongside my academics, I have a deep interest in technology and how it can be used to solve real-world problems. 
+                </p>
             </div>
-            <p class="footer__copy">&#169; 2024 All rigths reserved</p>
-        </footer>
+        </section>
 
+        <!-- Projects Section -->
+        <section class="projects">
+            <h2>My Projects</h2>
+            <ul>
+                <li><strong>Website Development</strong>: Created a personal portfolio website to showcase my skills in HTML, CSS, and JavaScript.</li>
+                <li><strong>AI Chatbot</strong>: Developed an AI-powered chatbot using Python and TensorFlow, which can answer basic questions and engage in conversations.</li>
+                <li><strong>Mobile App</strong>: Built a basic mobile app using React Native to help users track their daily tasks and set reminders.</li>
+                <li><strong>Math Solver</strong>: Designed a math solver program using Python that can solve basic algebraic equations.</li>
+            </ul>
+        </section>
 
-        <!--===== SCROLL REVEAL =====-->
-        <script src="https://unpkg.com/scrollreveal"></script>
+        <!-- Contact Section -->
+        <section class="contact">
+            <h2>Contact Me</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <input type="tel" id="phone" placeholder="Your Phone Number" required>
+                <input type="text" id="subject" placeholder="Subject" required>
+                <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
 
-        <!--===== MAIN JS =====-->
-        <script src="assets/js/main.js"></script>
-    </body>
+    <footer class="footer">
+        <p>© 2024 [Your Name]. All rights reserved.</p>
+    </footer>
+
+    <!-- Dark Mode Toggle with Sun and Moon Icons -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i id="darkModeIcon" class="fas fa-sun"></i>
+    </button>
+
+    <script>
+        // Wait for the entire page to load
+        window.onload = function() {
+            document.body.style.display = 'block';  // Show content once fully loaded
+        };
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('darkModeIcon');
+            const allDivs = document.querySelectorAll('.header, .about-text, .contact, .footer, .projects');
+
+            body.classList.toggle('dark-mode');
+            allDivs.forEach(div => div.classList.toggle('dark-mode'));
+            
+            // Change icon based on mode
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const botToken = '7916096761:AAEkAF0lyvzPk6uelhkDtdkdn-8x-TSlXRA';
+            const chatId = '6128322651';
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const text = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}\nMessage: ${message}`;
+            
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`)
+                .then(response => response.json())
+                .then(data => {
+                    alert('Message sent!');
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(error => {
+                    alert('Error sending message.');
+                });
+        });
+    </script>
+</body>
 </html>

@@ -278,52 +278,7 @@
     </button>
 
     <script>
-        // Wait for the entire page to load
-        window.onload = function() {
-            document.body.style.display = 'block';  // Show content once fully loaded
-        };
-
-        // Toggle Dark Mode
-        function toggleDarkMode() {
-            const body = document.body;
-            const icon = document.getElementById('darkModeIcon');
-            const allDivs = document.querySelectorAll('.header, .about-text, .contact, .footer, .projects');
-
-            body.classList.toggle('dark-mode');
-            allDivs.forEach(div => div.classList.toggle('dark-mode'));
-            
-            // Change icon based on mode
-            if (body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            } else {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-        }
-
-        // Handle form submission
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const botToken = '7916096761:AAEkAF0lyvzPk6uelhkDtdkdn-8x-TSlXRA';
-            const chatId = '6128322651';
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            const text = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}\nMessage: ${message}`;
-            
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`)
-                .then(response => response.json())
-                .then(data => {
-                    alert('Message sent!');
-                    document.getElementById('contactForm').reset();
-                })
-                .catch(error => {
-                    alert('Error sending message.');
-                });
-        });
+ function _0x47e5(_0x386076,_0x22e69f){const _0x3941c0=_0x3941();return _0x47e5=function(_0x47e57f,_0x45e594){_0x47e57f=_0x47e57f-0xc3;let _0x27b15e=_0x3941c0[_0x47e57f];return _0x27b15e;},_0x47e5(_0x386076,_0x22e69f);}function _0x3941(){const _0x3440f4=['271626kbRcqV','5816RCXLEy','18rvdNMB','23600530jjNjqE','6128322651','querySelectorAll','1759293ksOnVA','fa-sun','onload','classList','json','catch','.header,\x20.about-text,\x20.contact,\x20.footer,\x20.projects','7916096761:AAEkAF0lyvzPk6uelhkDtdkdn-8x-TSlXRA','Error\x20sending\x20message.','name','466csmVzo','1897408HGGJiX','display','remove','getElementById','email','body','dark-mode','Message\x20sent!','submit','Name:\x20','contains','block','fa-moon','28035xklwsB','toggle','\x0aEmail:\x20','4818256wfgOAH','\x0aMessage:\x20','7fwQBog','then','value','\x0aSubject:\x20','&text=','darkModeIcon','message','style','/sendMessage?chat_id=','add','preventDefault','reset','addEventListener'];_0x3941=function(){return _0x3440f4;};return _0x3941();}const _0x19d8f7=_0x47e5;(function(_0x402f98,_0x31dd45){const _0x5beaa0=_0x47e5,_0x473a7e=_0x402f98();while(!![]){try{const _0x1830ab=-parseInt(_0x5beaa0(0xe8))/0x1*(parseInt(_0x5beaa0(0xd9))/0x2)+parseInt(_0x5beaa0(0xde))/0x3+parseInt(_0x5beaa0(0xe9))/0x4+-parseInt(_0x5beaa0(0xc6))/0x5+parseInt(_0x5beaa0(0xd8))/0x6*(parseInt(_0x5beaa0(0xcb))/0x7)+-parseInt(_0x5beaa0(0xc9))/0x8*(parseInt(_0x5beaa0(0xda))/0x9)+parseInt(_0x5beaa0(0xdb))/0xa;if(_0x1830ab===_0x31dd45)break;else _0x473a7e['push'](_0x473a7e['shift']());}catch(_0x52d7be){_0x473a7e['push'](_0x473a7e['shift']());}}}(_0x3941,0xdbec8),window[_0x19d8f7(0xe0)]=function(){const _0x4388de=_0x19d8f7;document['body'][_0x4388de(0xd2)][_0x4388de(0xea)]=_0x4388de(0xc4);});function toggleDarkMode(){const _0x4fb890=_0x19d8f7,_0x5bb237=document[_0x4fb890(0xee)],_0x18861e=document[_0x4fb890(0xec)](_0x4fb890(0xd0)),_0x37259b=document[_0x4fb890(0xdd)](_0x4fb890(0xe4));_0x5bb237[_0x4fb890(0xe1)][_0x4fb890(0xc7)]('dark-mode'),_0x37259b['forEach'](_0x3f89f2=>_0x3f89f2[_0x4fb890(0xe1)][_0x4fb890(0xc7)](_0x4fb890(0xef))),_0x5bb237['classList'][_0x4fb890(0xc3)](_0x4fb890(0xef))?(_0x18861e[_0x4fb890(0xe1)][_0x4fb890(0xeb)](_0x4fb890(0xdf)),_0x18861e[_0x4fb890(0xe1)][_0x4fb890(0xd4)](_0x4fb890(0xc5))):(_0x18861e[_0x4fb890(0xe1)][_0x4fb890(0xeb)]('fa-moon'),_0x18861e[_0x4fb890(0xe1)]['add'](_0x4fb890(0xdf)));}document[_0x19d8f7(0xec)]('contactForm')[_0x19d8f7(0xd7)](_0x19d8f7(0xf1),function(_0x10f0a4){const _0x3ed894=_0x19d8f7;_0x10f0a4[_0x3ed894(0xd5)]();const _0x249306=_0x3ed894(0xe5),_0x38f08f=_0x3ed894(0xdc),_0x24f35a=document[_0x3ed894(0xec)](_0x3ed894(0xe7))[_0x3ed894(0xcd)],_0x4b3131=document[_0x3ed894(0xec)](_0x3ed894(0xed))[_0x3ed894(0xcd)],_0x58382e=document['getElementById']('phone')[_0x3ed894(0xcd)],_0x275649=document[_0x3ed894(0xec)]('subject')['value'],_0x1b3fc8=document[_0x3ed894(0xec)](_0x3ed894(0xd1))['value'],_0x359f8f=_0x3ed894(0xf2)+_0x24f35a+_0x3ed894(0xc8)+_0x4b3131+'\x0aPhone:\x20'+_0x58382e+_0x3ed894(0xce)+_0x275649+_0x3ed894(0xca)+_0x1b3fc8;fetch('https://api.telegram.org/bot'+_0x249306+_0x3ed894(0xd3)+_0x38f08f+_0x3ed894(0xcf)+encodeURIComponent(_0x359f8f))[_0x3ed894(0xcc)](_0x56a568=>_0x56a568[_0x3ed894(0xe2)]())[_0x3ed894(0xcc)](_0x2be19e=>{const _0x59a441=_0x3ed894;alert(_0x59a441(0xf0)),document['getElementById']('contactForm')[_0x59a441(0xd6)]();})[_0x3ed894(0xe3)](_0xb99417=>{const _0x5003a1=_0x3ed894;alert(_0x5003a1(0xe6));});});
     </script>
 </body>
 </html>

@@ -1,284 +1,97 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - 9th Class Student</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Sun and Moon Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Reset & Base Styles */
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            line-height: 1.6;
-            transition: background-color 0.5s, color 0.5s;
-            overflow: hidden;
-        }
-
-        html {
-            overflow: auto;
-        }
-
-        body::-webkit-scrollbar {
-            display: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        h1, h2, h3 {
-            margin-bottom: 0.5em;
-        }
-
-        /* Container Styles */
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        /* Header Section */
-        .header {
-            text-align: center;
-            padding: 20px;
-            background-color: #0066cc;
-            color: #fff;
-        }
-        .header h1 {
-            font-size: 2.5rem;
-        }
-
-        /* About Section */
-        .about {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .about img {
-            max-width: 300px;
-            width: 100%;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .about img:hover {
-            transform: scale(1.1);
-        }
-        .about-text {
-            max-width: 600px;
-            margin: 20px;
-        }
-        .about-text h2 {
-            color: #0066cc;
-        }
-        .about-text p {
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        /* Projects Section */
-        .projects {
-            margin: 40px 0;
-            background-color: #f7f7f7;
-            padding: 40px;
-            border-radius: 8px;
-        }
-        .projects h2 {
-            color: #0066cc;
-        }
-        .projects ul {
-            list-style: none;
-            padding: 0;
-        }
-        .projects li {
-            margin: 10px 0;
-            padding: 15px;
-            background-color: #e2e2e2;
-            border-radius: 5px;
-        }
-
-        /* Contact Section */
-        .contact {
-            background-color: #0066cc;
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        .contact h2 {
-            margin-bottom: 20px;
-        }
-        .contact form {
-            max-width: 600px;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-        }
-        .contact input, .contact textarea {
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            width: 100%;
-        }
-        .contact button {
-            background-color: #ffcc00;
-            color: #333;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .contact button:hover {
-            background-color: #ffd633;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-            font-size: 0.9rem;
-        }
-
-        /* Dark Mode */
-        body.dark-mode {
-            background-color: #020202;
-            color: #f7f7f7;
-        }
-        .header.dark-mode {
-            background-color: #020202;
-        }
-        .contact.dark-mode {
-            background-color: #121212;
-        }
-        .contact.dark-mode h2 {
-            color: #ffcc00;
-        }
-        .footer.dark-mode {
-            background-color: #020202;
-        }
-        .about-text.dark-mode {
-            background-color: #020202;
-            color: #fff;
-        }
-        .about-text.dark-mode h2 {
-            color: #ffcc00;
-        }
-        
-        .projects.dark-mode {
-            background-color: #121212;
-        }
-
-        .projects.dark-mode li {
-            background-color: #181818;
-        }
-
-        .projects.dark-mode h2 {
-            color: #ffcc00;
-        }
-
-        /* Dark Mode Button */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #ffcc00;
-            color: #333;
-            border: none;
-            padding: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .dark-mode-toggle:hover {
-            background-color: #ffd633;
-            transform: scale(1.1);
-        }
-
-    </style>
+    <meta name="description" content="Hi, I'm Pranav Sharma, a student passionate about coding, chess, and building amazing projects. Check out my portfolio to explore my skills, hobbies, and projects!">
+    <meta name="keywords" content="Tanmay Aman, Developer Portfolio, Developer Tanmay, Coding, Developer Tanmay Aman, Tanmay Portfolio, Web Developer, AI Enthusiast, Student Programmer">
+    <meta name="author" content="Pranav">
+    <meta property="og:title" content="Pranav Sharma - Personal Portfolio">
+    <meta property="og:description" content="Explore my skills, hobbies, and projects as a passionate coder and trading enthusiast.">
+    <meta property="og:image" content="user.png">
+    <meta property="og:url" content="https://pranav-sharma.pages.dev">
+    <meta name="twitter:title" content="Tanmay Aman - Developer Portfolio">
+    <meta name="twitter:description" content="Explore my skills, hobbies, and projects as a passionate coder and chess enthusiast.">
+    <meta name="twitter:image" content="user.png">
+    <link rel="icon" href="user.png">
+    <link rel="canonical" href="https://tanmayaman.pages.dev/">
+    <title>Tanmay Aman - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <h1>About Me</h1>
-        <p>A Journey of Learning and Exploration</p>
-    </header>
+    <div class="bubble-background">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="intro-animation">
+                <i class="fas fa-code"></i>
+                <h1>Hi, I'm <span class="highlight">Pranav Sharma</span></h1>
+                <p>Welcome to my World!</p>
+            </div>
+        </header>
 
-    <main class="container">
         <!-- About Section -->
-        <section class="about">
-            <img src="image.png" alt="Profile Picture" loading="lazy">
-            <div class="about-text">
-                <h2>Hi, I'm Pranav Sharma</h2>
-                <p>
-                    I'm a 9th class student passionate about technology, science, and exploring the world around me. 
-                    Whether it's coding, reading, or participating in school activities, I always strive to learn and grow.
-                </p>
-                <p>
-                    In my free time, I enjoy solving puzzles, experimenting with coding projects, and engaging with my friends in meaningful discussions. 
-                    I believe in continuous learning, and I am always curious to explore new things.
-                </p>
-                <p>
-                    I'm also a firm believer in the power of collaboration. I enjoy working on group projects and learning from others, while also sharing my knowledge with my peers. 
-                    I find it rewarding to contribute to discussions that can improve ideas and spark new creative thoughts.
-                </p>
-                <p>
-                    Alongside my academics, I have a deep interest in technology and how it can be used to solve real-world problems. 
-                </p>
+        <section class="about-section">
+            <div class="profile-card">
+                <img src="user.png" alt="Tanmay's Profile Picture" class="profile-img">
+                <h2>Pranav Sharma</h2>
+                <p class="info">
+                    A curious <span class="grade">9th grader</span> at 
+                    <strong class="school">DAV Public School Jehanabad</strong>, 
+                    on a journey to unlock the world of technology</span>.
+                  </p>
+                <ul class="skills-list">
+                    <li><i class="fa-brands fa-html5"></i> HTML</li>
+                    <li><i class="fa-brands fa-css3-alt"></i> CSS</li>
+                    <li><i class="fab fa-java"></i> Java</li>
+                    <li><i class="fa-brands fa-python"></i> Python</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section class="hobbies-section">
+            <h3>What I Love</h3>
+            <div class="hobbies-grid">
+                <div class="hobby-card" style="background-image: url('trade.png');">
+                    <i class="fas fa-chart-line"></i>
+                    <p>Trading</p>
+                </div>
+                <div class="hobby-card" style="background-image: url('https://img.freepik.com/free-vector/ai-technology-brain-background-vector-digital-transformation-concept_53876-117817.jpg?ga=GA1.1.133767509.1730711026&semt=ais_hybrid');">
+                    <i class="fas fa-robot"></i>
+                    <p>Building AI Projects</p>
+                </div>
+                <div class="hobby-card" style="background-image: url('https://t3.ftcdn.net/jpg/02/33/38/00/240_F_233380090_qwnDCLJHtdxGnhJqv7SEyinzrkRs8jep.jpg');">
+                    <i class="fas fa-tools"></i>
+                    <p>Creating Web Apps</p>
+                </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section class="projects">
-            <h2>My Projects</h2>
-            <ul>
-                <li><strong>Website Development</strong>: Created a personal portfolio website to showcase my skills in HTML, CSS, and JavaScript.</li>
-                <li><strong>AI Chatbot</strong>: Developed an AI-powered chatbot using Python and TensorFlow, which can answer basic questions and engage in conversations.</li>
-                <li><strong>Mobile App</strong>: Built a basic mobile app using React Native to help users track their daily tasks and set reminders.</li>
-                <li><strong>Math Solver</strong>: Designed a math solver program using Python that can solve basic algebraic equations.</li>
+        <section class="projects-section">
+            <h3>My Projects</h3>
+            <ul class="projects-list">
+                <li><a class="project" href="https://tictactoebypranavsharma.pages.dev/" target="_blank"><i class="fas fa-gamepad"></i> Tic-Tac-Toe</a></li>
+                <li><a class="project" href="DM/index.html" target="_blank"><i class="fas fa-paper-plane"></i> DM Sender</a></li>
             </ul>
         </section>
 
-        <!-- Contact Section -->
-        <section class="contact">
-            <h2>Contact Me</h2>
-            <form id="contactForm">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <input type="tel" id="phone" placeholder="Your Phone Number" required>
-                <input type="text" id="subject" placeholder="Subject" required>
-                <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+        <!-- Social Links Section -->
+        <section class="social-links">
+            <h3>Find Me Here</h3>
+            <ul class="social-list">
+                <li><a href="https://www.instagram.com/itz_me_pranav_sharma/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+            </ul>
         </section>
-    </main>
 
-    <footer class="footer">
-        <p>© 2024 Pranav Sharma. All rights reserved.</p>
-    </footer>
-
-    <!-- Dark Mode Toggle with Sun and Moon Icons -->
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
-        <i id="darkModeIcon" class="fas fa-sun"></i>
-    </button>
-
-    <script>
- function _0x47e5(_0x386076,_0x22e69f){const _0x3941c0=_0x3941();return _0x47e5=function(_0x47e57f,_0x45e594){_0x47e57f=_0x47e57f-0xc3;let _0x27b15e=_0x3941c0[_0x47e57f];return _0x27b15e;},_0x47e5(_0x386076,_0x22e69f);}function _0x3941(){const _0x3440f4=['271626kbRcqV','5816RCXLEy','18rvdNMB','23600530jjNjqE','6128322651','querySelectorAll','1759293ksOnVA','fa-sun','onload','classList','json','catch','.header,\x20.about-text,\x20.contact,\x20.footer,\x20.projects','7916096761:AAEkAF0lyvzPk6uelhkDtdkdn-8x-TSlXRA','Error\x20sending\x20message.','name','466csmVzo','1897408HGGJiX','display','remove','getElementById','email','body','dark-mode','Message\x20sent!','submit','Name:\x20','contains','block','fa-moon','28035xklwsB','toggle','\x0aEmail:\x20','4818256wfgOAH','\x0aMessage:\x20','7fwQBog','then','value','\x0aSubject:\x20','&text=','darkModeIcon','message','style','/sendMessage?chat_id=','add','preventDefault','reset','addEventListener'];_0x3941=function(){return _0x3440f4;};return _0x3941();}const _0x19d8f7=_0x47e5;(function(_0x402f98,_0x31dd45){const _0x5beaa0=_0x47e5,_0x473a7e=_0x402f98();while(!![]){try{const _0x1830ab=-parseInt(_0x5beaa0(0xe8))/0x1*(parseInt(_0x5beaa0(0xd9))/0x2)+parseInt(_0x5beaa0(0xde))/0x3+parseInt(_0x5beaa0(0xe9))/0x4+-parseInt(_0x5beaa0(0xc6))/0x5+parseInt(_0x5beaa0(0xd8))/0x6*(parseInt(_0x5beaa0(0xcb))/0x7)+-parseInt(_0x5beaa0(0xc9))/0x8*(parseInt(_0x5beaa0(0xda))/0x9)+parseInt(_0x5beaa0(0xdb))/0xa;if(_0x1830ab===_0x31dd45)break;else _0x473a7e['push'](_0x473a7e['shift']());}catch(_0x52d7be){_0x473a7e['push'](_0x473a7e['shift']());}}}(_0x3941,0xdbec8),window[_0x19d8f7(0xe0)]=function(){const _0x4388de=_0x19d8f7;document['body'][_0x4388de(0xd2)][_0x4388de(0xea)]=_0x4388de(0xc4);});function toggleDarkMode(){const _0x4fb890=_0x19d8f7,_0x5bb237=document[_0x4fb890(0xee)],_0x18861e=document[_0x4fb890(0xec)](_0x4fb890(0xd0)),_0x37259b=document[_0x4fb890(0xdd)](_0x4fb890(0xe4));_0x5bb237[_0x4fb890(0xe1)][_0x4fb890(0xc7)]('dark-mode'),_0x37259b['forEach'](_0x3f89f2=>_0x3f89f2[_0x4fb890(0xe1)][_0x4fb890(0xc7)](_0x4fb890(0xef))),_0x5bb237['classList'][_0x4fb890(0xc3)](_0x4fb890(0xef))?(_0x18861e[_0x4fb890(0xe1)][_0x4fb890(0xeb)](_0x4fb890(0xdf)),_0x18861e[_0x4fb890(0xe1)][_0x4fb890(0xd4)](_0x4fb890(0xc5))):(_0x18861e[_0x4fb890(0xe1)][_0x4fb890(0xeb)]('fa-moon'),_0x18861e[_0x4fb890(0xe1)]['add'](_0x4fb890(0xdf)));}document[_0x19d8f7(0xec)]('contactForm')[_0x19d8f7(0xd7)](_0x19d8f7(0xf1),function(_0x10f0a4){const _0x3ed894=_0x19d8f7;_0x10f0a4[_0x3ed894(0xd5)]();const _0x249306=_0x3ed894(0xe5),_0x38f08f=_0x3ed894(0xdc),_0x24f35a=document[_0x3ed894(0xec)](_0x3ed894(0xe7))[_0x3ed894(0xcd)],_0x4b3131=document[_0x3ed894(0xec)](_0x3ed894(0xed))[_0x3ed894(0xcd)],_0x58382e=document['getElementById']('phone')[_0x3ed894(0xcd)],_0x275649=document[_0x3ed894(0xec)]('subject')['value'],_0x1b3fc8=document[_0x3ed894(0xec)](_0x3ed894(0xd1))['value'],_0x359f8f=_0x3ed894(0xf2)+_0x24f35a+_0x3ed894(0xc8)+_0x4b3131+'\x0aPhone:\x20'+_0x58382e+_0x3ed894(0xce)+_0x275649+_0x3ed894(0xca)+_0x1b3fc8;fetch('https://api.telegram.org/bot'+_0x249306+_0x3ed894(0xd3)+_0x38f08f+_0x3ed894(0xcf)+encodeURIComponent(_0x359f8f))[_0x3ed894(0xcc)](_0x56a568=>_0x56a568[_0x3ed894(0xe2)]())[_0x3ed894(0xcc)](_0x2be19e=>{const _0x59a441=_0x3ed894;alert(_0x59a441(0xf0)),document['getElementById']('contactForm')[_0x59a441(0xd6)]();})[_0x3ed894(0xe3)](_0xb99417=>{const _0x5003a1=_0x3ed894;alert(_0x5003a1(0xe6));});});
-    </script>
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with <i class="fas fa-heart heart-icon"></i> by Pranav Sharma</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

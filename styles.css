@@ -1,0 +1,320 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, hsl(0, 0%, 1%), hwb(197 5% 93%));
+    color: hwb(0 90% 10%);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.bubble-background {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.intro-animation i {
+    font-size: 3rem;
+    color: #007BFF;
+    animation: bounce 2s infinite;
+}
+
+.intro-animation h1 {
+    font-size: 2.5rem;
+    color: hsl(0, 0%, 89%);
+    margin: 10px 0;
+}
+
+.intro-animation .highlight {
+    color: hsl(211, 100%, 50%);
+    font-weight: bold;
+}
+
+.intro-animation p {
+    color: #c4c4c4;
+    font-size: 1.2rem;
+}
+
+/* Profile Card */
+.profile-card {
+    background: linear-gradient(145deg, #050505, #00060f);
+    border-radius: 16px;
+    box-shadow: 0 6px 20px hwb(0 0% 100% / 0.1);
+    padding: 30px;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card .profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 4px solid #007BFF;
+}
+
+.profile-card h2 {
+    font-size: 1.8rem;
+    margin: 10px 0;
+    color: #e3e3e3;
+}
+
+.profile-card .info {
+    font-size: 1rem;
+    color: hwb(0 77% 23%);
+    margin: 15px 0;
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.skills-list li {
+    font-size: 1.2rem;
+    color: #49535e;
+}
+
+/* Hobbies Section */
+.hobbies-section {
+    text-align: center;
+    margin: 50px 20px;
+}
+
+.hobbies-section h3 {
+    font-size: 1.8rem;
+    color: #b4b4b4;
+    margin-bottom: 20px;
+}
+
+.hobbies-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+
+.hobby-card {
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hobby-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hobby-card i {
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+/* Projects Section */
+.projects-section {
+    text-align: center;
+    margin: 50px 20px;
+}
+
+.projects-section h3 {
+    font-size: 1.8rem;
+    color: #b4b4b4;
+    margin-bottom: 20px;
+}
+
+.projects-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.projects-list li {
+    background: linear-gradient(145deg, #050505, #00060f);
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projects-list li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background: #ffffff1d;
+    color: #fff;
+}
+
+.projects-list li i {
+    color: white;
+}
+
+/* Footer */
+.footer {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 1rem;
+    color: #d7d7d7;
+}
+
+.footer .heart-icon {
+    color: rgb(255, 0, 0);
+    animation: heartbeat 1.5s infinite;
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hobbies-grid {
+        flex-wrap: wrap;
+    }
+
+    .profile-card {
+        margin: 20px;
+    }
+
+    .projects-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .projects-list li {
+        width: 90%;
+    }
+
+    .hobby-card {
+        width: 120px;
+    }
+}
+
+.hobby-card {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.hobby-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.hobby-card i, .hobby-card p {
+    position: relative;
+    z-index: 1;
+}
+
+/* Social Links */
+.social-links {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.social-links h3 {
+    font-size: 1.5rem;
+    color: #b4b4b4;
+    margin-bottom: 15px;
+}
+
+.social-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-list li a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-list li a:hover {
+    color: #0056b3;
+}
+
+/* Enhanced 3D Tilt Effect Smooth Transitions */
+.hobby-card, .projects-list li {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.hobby-card:hover, .projects-list li:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Amplified shadow for a stronger effect */
+}
+
+
+.header h1, .hobbies-section h3, .projects-section h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-card h2, .skills-list li, .footer p {
+    font-family: 'Roboto', sans-serif;
+}
+
+.project {
+    color: #006bdd;
+    font-weight: 900;
+    text-decoration: none;
+}

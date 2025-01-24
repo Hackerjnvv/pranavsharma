@@ -128,3 +128,40 @@ textarea:focus {
 .send-btn i {
     font-size: 20px;
 }
+
+/* Initially hide the contact form */
+.contact-form {
+    display: none;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Styling for the button */
+.toggle-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #0056b3;
+}
+
+/* Transition effect for smooth expansion */
+.contact-form {
+    transition: max-height 0.5s ease-in-out;
+    overflow: hidden;
+    max-height: 0;
+}
+
+.contact-form.expanded {
+    max-height: 1000px; /* or an appropriate max height */
+}

@@ -158,8 +158,30 @@ body {
     justify-content: center;
 }
 
+.backendProject-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .projects-list li {
     background: linear-gradient(145deg, #050505, #00060f);
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.backendProject-list li {
+    background: linear-gradient(145deg, #050505, #0f0900);
     border-radius: 16px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
@@ -177,7 +199,19 @@ body {
     color: #fff;
 }
 
+.backendProject-list li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background: #ffffff1d;
+    color: #fff;
+}
+
+
 .projects-list li i {
+    color: white;
+}
+
+.backendProject-list li i {
     color: white;
 }
 
@@ -315,6 +349,12 @@ body {
 
 .project {
     color: #006bdd;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.backendProject {
+    color: #dd9b00;
     font-weight: 900;
     text-decoration: none;
 }

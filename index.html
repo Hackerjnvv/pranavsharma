@@ -45,13 +45,30 @@
                     <li><i class="fab fa-java"></i> Java</li>
                     <li><i class="fa-brands fa-python"></i> Python</li>
                 </ul>
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Enter your email" required><br><br>
+                <div id="message">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="Enter your email" 
+                        required 
+                        spellcheck="false" 
+                        autocapitalize="none" 
+                        autocomplete="off">
+                    <br><br>
+                    <textarea 
+                        id="message1" 
+                        style="height: 40px; overflow-y: hidden;" 
+                        oninput="adjustHeight(this)" 
+                        placeholder="Enter your message" 
+                        required 
+                        spellcheck="false" 
+                        autocapitalize="none" 
+                        autocomplete="off"></textarea>
+                    <br><br>
+                    <button onclick="sendDetails()">Send Message</button>
+                </div>
+                <button id="toggleButton" onclick="toggleMessageDiv()">Message</button>
                 
-                <label for="message">Message:</label>
-                <textarea id="message" placeholder="Enter your message" required></textarea><br><br>
-              
-                <button onclick="sendDetails()">Send Message</button>
               
         </section>
         <section class="hobbies-section">
@@ -77,7 +94,7 @@
           <p>Due to platform backend processing restrictions,<br>I cannot host a backend project that requires server-side support.<br>Below is the zip download link, and you can test it on your machine.</p>
           <ul class="backendProject-list">
             <li class="backend"><a class="backendProject" href="backendProject\edhacking.zip" target="_blank"><i class="fa-solid fa-skull-crossbones"></i>
-            </i> Edhacking</a></li>
+            </i> EDhacking</a></li>
             <li class="backend"><a class="backendProject" href="backendProject\boxPP.zip" target="_blank"><i class="fa-solid fa-upload"></i>
             </i>BoxPP</a></li>
             <li class="backend"><a class="backendProject" href="backendProject\chatsystem.zip" target="_blank"><i class="fa-solid fa-message"></i>
@@ -87,11 +104,12 @@
         <section class="social-links">
             <h3>Find Me Here</h3>
             <ul class="social-list">
-                <li><a href="https://www.instagram.com/itz_me_pranav_sharma/" target="_blank"><i class="fa-brands fa-instagram"></i> <b>itz_me_pranav_sharma</b></a></li>
+                <li><a href="https://www.instagram.com/itz_me_pranav_sharma/" target="_blank"><i class="fa-brands fa-square-instagram fa-fade" style="color: #ffffff;"></i> <b>itz_me_pranav_sharma</b></a></li>
+                <li><a href="https://www.t.me/itz_me_pranav_sharma/" target="_blank"><i class="fa-brands fa-telegram fa-fade" style="color: #ffffff;"></i> <b>itz_me_pranav_sharma</b></a></li>
             </ul>
         </section>
         <footer class="footer">
-            <p>Made with <i class="fas fa-heart heart-icon"></i> by Pranav Sharma</p><br>Last Updated: 24 Jan 2025
+            <p>Made with <i class="fas fa-heart heart-icon"></i> by Pranav Sharma</p><br>Last Updated: 25 Jan 2025
         </footer>
     </div>
     <script src="script.js"></script>

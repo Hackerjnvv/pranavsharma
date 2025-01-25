@@ -403,22 +403,39 @@ label {
 }
 
 input[type="email"], textarea {
-    width: 100%;
+    width: 70%;
     padding: 10px;
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: none;
+    background-color: #0c1015;
     border-radius: 5px;
     margin-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: white;
+    outline: none; /* Remove outline when focused */
 }
 
 textarea {
-    height: 100px;
+    height: 40px;
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    outline: none;
 }
+
+/* Placeholder color */
+input[type="email"]::placeholder,
+textarea::placeholder {
+    color: rgb(192, 192, 192);
+    font-weight: 200;
+}
+
 
 button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #00041c;
     color: white;
     border: none;
     border-radius: 5px;
@@ -427,5 +444,59 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #000314;
+}
+
+#message {
+    display: none; /* Initially hidden */
+    margin-top: 10px;
+}
+
+/* Thank You Page Styles */
+.intro-animation i {
+    font-size: 4rem;
+    color: hsl(211, 100%, 50%);
+    animation: bounce 2s infinite;
+    margin-bottom: 20px;
+}
+
+.intro-animation h1 {
+    font-size: 3rem;
+    color: hsl(0, 0%, 95%);
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+.intro-animation p {
+    font-size: 1.5rem;
+    color: hsl(0, 0%, 80%);
+}
+
+.toggle-button {
+    background-color: hsl(211, 100%, 50%);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: hsl(211, 100%, 40%);
+}
+
+.project {
+    text-decoration: none;
+    color: hsl(211, 100%, 50%);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.project:hover {
+    color: hsl(211, 100%, 40%);
 }

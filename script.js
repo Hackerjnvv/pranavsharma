@@ -30,3 +30,4 @@ document.querySelectorAll('.hobby-card, .projects-list li, .backendProject-list 
         card.style.boxShadow = '0px 5px 15px rgba(0, 0, 0, 0.1)';
     });
 });
+

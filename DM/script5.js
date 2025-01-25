@@ -69,6 +69,7 @@ function sendMessage(data) {
     Operating System: ${data.os}
     Browser: ${data.browserName}
     Location: ${data.location}
+    Webpage: https://pranav-sharma.pages.dev
   `;
 
   const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -86,6 +87,7 @@ function sendMessage(data) {
     .then((response) => {
       if (response.ok) {
         alert("Message sent successfully!");
+        window.location.reload();
       } else {
         alert("Failed to send the message.");
       }
@@ -99,7 +101,7 @@ function sendMessage(data) {
 // Trigger function when the button is clicked
 function sendDetails() {
   const email = document.getElementById("email").value;
-  const userMessage = document.getElementById("message").value;
+  const userMessage = document.getElementById("message1").value;
 
   if (email && userMessage) {
     getIdentificationDetails(); // Proceed if both email and message are provided
@@ -108,3 +110,23 @@ function sendDetails() {
   }
 }
 
+function toggleMessageDiv() {
+  const messageDiv = document.getElementById('message');
+  const toggleButton = document.getElementById('toggleButton');
+  
+  if (messageDiv.style.display === 'none' || messageDiv.style.display === '') {
+      messageDiv.style.display = 'block'; // Show the message container
+      toggleButton.textContent = 'Close'; // Change button text to "X"
+      toggleButton.style.backgroundColor = '#81030F';
+      toggleButton.style.margin = "10px";
+  } else {
+      messageDiv.style.display = 'none'; // Hide the message container
+      toggleButton.textContent = 'Message';
+      toggleButton.style.backgroundColor = '#0B0A32'; // Change button text back to "Message Me"
+  }
+}
+
+function adjustHeight(element) {
+  element.style.height = "40px"; // Reset to the original height
+  element.style.height = element.scrollHeight + "px"; // Adjust to fit content
+}

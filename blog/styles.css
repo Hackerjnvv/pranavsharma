@@ -1,0 +1,538 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #434343;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .headingAnchor {
+    text-decoration: none;
+    color: #f6f6f6;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #529dec;
+  }
+  
+  header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  header .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  header h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2.5rem;
+  }
+  
+  header nav {
+    margin-top: 1rem;
+  }
+  
+  header nav a {
+    font-size: 1.1rem;
+    margin: 0 1rem;
+    font-weight: 600;
+  }
+  
+  header nav a:hover {
+    color: #eaeaea;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+  }
+  
+  .toc-container {
+    flex: 0 0 250px;
+    position: sticky;
+    top: 20px;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-right: 2rem;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .toc-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .toc-container ul {
+    list-style-type: none;
+  }
+  
+  .toc-container ul li {
+    margin: 0.5rem 0;
+  }
+  
+  .toc-container ul li a {
+    font-size: 1.1rem;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .toc-container ul li a:hover {
+    color: #0056b3;
+  }
+  
+  article {
+    flex: 1;
+    max-width: 800px;
+  }
+  
+  article h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  article h3, article h4 {
+    color: #333;
+  }
+  
+  article p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .image-container img:hover {
+    transform: scale(1.05);
+  }
+  
+  .custom-player-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #000000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
+   -webkit-box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
+   -moz-box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
+}
+
+.custom-player {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+button, .progress-bar {
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #92c6ff;
+}
+
+.play-pause {
+    font-size: 1.5rem;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    margin: 0 10px;
+    background-color: #e4e4e4;
+    border-radius: 5px;
+}
+
+.progress-bar::-webkit-slider-runnable-track {
+    background: rgba(24, 24, 24, 0.4);
+}
+
+.progress-bar::-webkit-slider-thumb {
+    background-color: #3094ff;
+    border-radius: 50%;
+}
+
+.time-display {
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: #000000;
+    border-radius: 10%;
+    padding: 2px;
+}
+
+.mute-button, .fullscreen-button, .download-button {
+    font-size: 1rem;
+}
+
+/* Font Awesome icons styling */
+.fas {
+    font-size: 1.5rem;
+    margin-left: 5px;
+}
+
+/* Hide native video controls */
+video::-webkit-media-controls {
+    display: none;
+}
+
+video::-moz-media-controls {
+    display: none;
+}
+
+/* Custom volume slider */
+.volume-control {
+    width: 100px;
+    margin-left: 10px;
+}
+
+/* Custom Download Button */
+.download-button {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 5px;
+    color: white;
+}
+
+  progress-bar-container {
+    position: fixed;
+    bottom: 200;
+    width: 100%;
+    height: 5px;
+    background-color: #ff0000;
+  }
+  
+  .reading-progress {
+    height: 100%;
+    width: 0;
+    background-color: #4caf50;
+  }
+  
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .theme-toggle button {
+    background-color: #fff;
+    border: 2px solid #007bff;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .theme-toggle button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Dark Theme Styles */
+  body.dark {
+    background-color: #222;
+    color: #f1f1f1;
+  }
+  
+  body.dark header {
+    background-color: #1a1a1a;
+  }
+  
+  body.dark .theme-toggle button {
+    background-color: #333;
+    border-color: #ccc;
+  }
+  
+  body.dark .theme-toggle button:hover {
+    background-color: #444;
+    color: #fff;
+  }
+  
+  body.dark .toc-container {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  body.dark .toc-container ul li a {
+    color: #66ccff;
+  }
+  
+  body.dark article {
+    background-color: #444;
+    color: #f1f1f1;
+  }
+  
+  body.dark a {
+    color: #66ccff;
+  }
+  
+  body.dark .image-container img {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+  
+  body.dark video, body.dark audio {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Media Query for Mobile */
+  @media (max-width: 768px) {
+    main {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  
+    .toc-container {
+      position: static;
+      margin-bottom: 2rem;
+      max-height: none;
+      width: 100%;
+    }
+  
+    .toc-container h2 {
+      font-size: 1.3rem;
+    }
+  
+    .toc-container ul li a {
+      font-size: 1rem;
+    }
+  
+    article {
+      max-width: 100%;
+    }
+  
+    header h1 {
+      font-size: 2rem;
+    }
+  
+    header nav a {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
+  
+    .theme-toggle button {
+      padding: 8px 16px;
+      font-size: 1rem;
+    }
+  }
+
+
+  
+  .sh-card {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: #edf2f7;
+    padding: 7px 10px;
+    border-radius: 50px;
+    border: none;
+    color: #000;
+    box-shadow: 2px 2px 20px -10px #000;
+    transition: all 0.3s ease;
+    z-index: 99999;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.5;
+    overflow: hidden;
+    width: 18px;
+    white-space: nowrap;
+  }
+  .sh-card:hover {
+    width: 92px;
+  }
+  
+  .sh-card-icon,
+  .sh-card-info {
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: 1;
+  }
+  
+  .sh-card-info {
+    font-size: 16px;
+    margin-left: 7px;
+  }
+  
+  .sh-card-icon {
+    width: 18px;
+    height: 15px;
+  }
+  
+  .sh-card-link,
+  .sh-card-link:hover,
+  .sh-card-link:active,
+  .sh-card-link:visited {
+    color: #000;
+    text-decoration: none;
+    line-height: 1;
+  }
+  
+  .sh-card-box {
+    display: block;
+  }
+  
+  @-webkit-keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% {
+      opacity: 0;
+      -webkit-transform: scale3d(0.3, 0.3, 0.3);
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+    20% {
+      -webkit-transform: scale3d(1.1, 1.1, 1.1);
+      transform: scale3d(1.1, 1.1, 1.1);
+    }
+    40% {
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+    60% {
+      opacity: 1;
+      -webkit-transform: scale3d(1.03, 1.03, 1.03);
+      transform: scale3d(1.03, 1.03, 1.03);
+    }
+    80% {
+      -webkit-transform: scale3d(0.97, 0.97, 0.97);
+      transform: scale3d(0.97, 0.97, 0.97);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+  }
+  @keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% {
+      opacity: 0;
+      -webkit-transform: scale3d(0.3, 0.3, 0.3);
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+    20% {
+      -webkit-transform: scale3d(1.1, 1.1, 1.1);
+      transform: scale3d(1.1, 1.1, 1.1);
+    }
+    40% {
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+    60% {
+      opacity: 1;
+      -webkit-transform: scale3d(1.03, 1.03, 1.03);
+      transform: scale3d(1.03, 1.03, 1.03);
+    }
+    80% {
+      -webkit-transform: scale3d(0.97, 0.97, 0.97);
+      transform: scale3d(0.97, 0.97, 0.97);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+  }
+  .sh-bounceIn {
+    -webkit-animation-duration: 0.75s;
+    animation-duration: 0.75s;
+    -webkit-animation-name: bounceIn;
+    animation-name: bounceIn;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    opacity: 0;
+  }
+  
+  canvas {
+    width: 100%;
+    height: 130px;
+    background: #f9f9f9;
+    margin: 2rem auto;
+    box-shadow: inset 0px 0px 25px -15px #000;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .wrapper {
+    padding: 2rem;
+  }
+
+  canvas {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #444;
+    border-radius: 10px;
+  }
+  .audio-controls {
+    margin-top: 20px;
+  }
+  .audio-controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  .audio-controls button:hover {
+    background-color: #333;
+  }

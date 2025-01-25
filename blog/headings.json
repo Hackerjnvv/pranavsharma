@@ -1,0 +1,14 @@
+{
+    "home": {
+        "title": "Welcome to My Blog",
+        "subtitle": "Exploring Ideas, Creativity, and Technology"
+    },
+    "about": {
+        "title": "About Me - Updated",
+        "subtitle": "An Insight Into My Journey"
+    },
+    "projects": {
+        "title": "My Projects",
+        "subtitle": "A Showcase of My Work"
+    }
+}

@@ -143,59 +143,69 @@ videoPlayer.addEventListener('seeked', () => {
   }
 });
 
+const audioUni = document.getElementById("audio-uni");
+          const playPauseUni = document.getElementById("play-pause-uni");
+          const muteUni = document.getElementById("mute-uni");
+          const loopUni = document.getElementById("loop-uni");
+          const speedUni = document.getElementById("speed-uni");
+          const progressBarUni = document.getElementById("progress-bar-uni");
+          const progressContainerUni = document.getElementById("progress-container-uni");
+      
+          // Play/Pause functionality
+          playPauseUni.addEventListener("click", () => {
+            if (audioUni.paused) {
+              audioUni.play();
+              playPauseUni.textContent = "Pause";
+            } else {
+              audioUni.pause();
+              playPauseUni.textContent = "Play";
+            }
+          });
+      
+          // Mute functionality
+          muteUni.addEventListener("click", () => {
+            audioUni.muted = !audioUni.muted;
+            muteUni.textContent = audioUni.muted ? "Unmute" : "Mute";
+          });
+      
+          // Loop functionality
+          loopUni.addEventListener("click", () => {
+            audioUni.loop = !audioUni.loop;
+            loopUni.setAttribute("aria-pressed", audioUni.loop);
+          });
+      
+          // Speed control functionality
+          speedUni.addEventListener("change", () => {
+            audioUni.playbackRate = parseFloat(speedUni.value);
+          });
+      
+          // Update progress bar as audio plays
+          audioUni.addEventListener("timeupdate", () => {
+            const progressPercent = (audioUni.currentTime / audioUni.duration) * 100;
+            progressBarUni.style.width = `${progressPercent}%`;
+          });
+      
+          // Seek functionality
+          progressContainerUni.addEventListener("click", (event) => {
+            const rect = progressContainerUni.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const width = rect.width;
+            const newTime = (clickX / width) * audioUni.duration;
+            audioUni.currentTime = newTime;
+          });
 
-const audio = document.getElementById('audio');
-const playBtn = document.getElementById('play-btn');
-const pauseBtn = document.getElementById('pause-btn');
-const canvas = document.getElementById('visualizer');
-const ctx = canvas.getContext('2d');
-
-// Web Audio API
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-const analyser = audioContext.createAnalyser();
-const audioSource = audioContext.createMediaElementSource(audio);
-
-// Connect the audio source to analyser and destination
-audioSource.connect(analyser);
-analyser.connect(audioContext.destination);
-analyser.fftSize = 256;
-
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
-
-// Visualization settings
-function drawVisualizer() {
-  requestAnimationFrame(drawVisualizer);
-  analyser.getByteFrequencyData(dataArray);
-
-  ctx.fillStyle = '#121212';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  const barWidth = canvas.width / bufferLength;
-  let barHeight;
-  let x = 0;
-
-  for (let i = 0; i < bufferLength; i++) {
-    barHeight = dataArray[i] / 2;
-    ctx.fillStyle = `rgb(${barHeight + 100}, 50, 150)`;
-    ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-    x += barWidth + 1;
+          // Fetch the .txt file and insert its content as HTML
+fetch('example.txt')
+.then(response => {
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
   }
-}
-
-// Event listeners
-playBtn.addEventListener('click', async () => {
-    try {
-      if (audioContext.state === 'suspended') {
-        await audioContext.resume();
-      }
-      await audio.play();
-      drawVisualizer();
-    } catch (err) {
-      console.error('Error playing audio:', err);
-    }
-  });
-  
-pauseBtn.addEventListener('click', () => {
-  audio.pause();
+  return response.text();
+})
+.then(data => {
+  // Insert the fetched content into the DOM as HTML
+  document.getElementById('content').innerHTML = data;
+})
+.catch(error => {
+  console.error('Error fetching the file:', error);
 });

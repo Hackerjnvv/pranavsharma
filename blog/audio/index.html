@@ -1,0 +1,160 @@
+<!-- File: audio-player-uni.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Audio Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .audio-player-uni {
+      width: 400px;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .controls-uni {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .progress-bar-container-uni {
+      position: relative;
+      width: 100%;
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .progress-bar-uni {
+      height: 100%;
+      width: 0;
+      background: #3498db;
+      transition: width 0.1s linear;
+    }
+    button {
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    button[aria-pressed="true"] {
+      background: #e74c3c;
+    }
+    select {
+      padding: 6px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+    .audioDescription {
+        margin-top: -10px;
+        margin-bottom: -2px;
+        font-weight: 300;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="audio-player-uni">
+    <audio id="audio-uni" src="https://pranav-sharma.pages.dev/audio1.mp3"></audio>
+
+    <div class="progress-bar-container-uni" id="progress-container-uni">
+      <div class="progress-bar-uni" id="progress-bar-uni"></div>
+    </div>
+<p align="center" class="audioDescription">Audio Name must be shorter so it can get fit</p>
+    <div class="controls-uni">
+      <button id="play-pause-uni">Play</button>
+      <button id="mute-uni">Mute</button>
+      <button id="loop-uni" aria-pressed="false">Loop</button>
+      <select id="speed-uni">
+        <option value="0.25">0.25x</option>
+        <option value="0.5">0.5x</option>
+        <option value="0.75">0.75x</option>
+        <option value="1" selected>1x</option>
+        <option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option>
+        <option value="1.75">1.75x</option>
+        <option value="2">2x</option>
+        <option value="4">4x</option>
+        <option value="8">8x</option>
+        <option value="16">16x</option>
+      </select>
+    </div>
+  </div>
+
+  <script>
+    const audioUni = document.getElementById("audio-uni");
+    const playPauseUni = document.getElementById("play-pause-uni");
+    const muteUni = document.getElementById("mute-uni");
+    const loopUni = document.getElementById("loop-uni");
+    const speedUni = document.getElementById("speed-uni");
+    const progressBarUni = document.getElementById("progress-bar-uni");
+    const progressContainerUni = document.getElementById("progress-container-uni");
+
+    // Play/Pause functionality
+    playPauseUni.addEventListener("click", () => {
+      if (audioUni.paused) {
+        audioUni.play();
+        playPauseUni.textContent = "Pause";
+      } else {
+        audioUni.pause();
+        playPauseUni.textContent = "Play";
+      }
+    });
+
+    // Mute functionality
+    muteUni.addEventListener("click", () => {
+      audioUni.muted = !audioUni.muted;
+      muteUni.textContent = audioUni.muted ? "Unmute" : "Mute";
+    });
+
+    // Loop functionality
+    loopUni.addEventListener("click", () => {
+      audioUni.loop = !audioUni.loop;
+      loopUni.setAttribute("aria-pressed", audioUni.loop);
+    });
+
+    // Speed control functionality
+    speedUni.addEventListener("change", () => {
+      audioUni.playbackRate = parseFloat(speedUni.value);
+    });
+
+    // Update progress bar as audio plays
+    audioUni.addEventListener("timeupdate", () => {
+      const progressPercent = (audioUni.currentTime / audioUni.duration) * 100;
+      progressBarUni.style.width = `${progressPercent}%`;
+    });
+
+    // Seek functionality
+    progressContainerUni.addEventListener("click", (event) => {
+      const rect = progressContainerUni.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const width = rect.width;
+      const newTime = (clickX / width) * audioUni.duration;
+      audioUni.currentTime = newTime;
+    });
+  </script>
+</body>
+</html>

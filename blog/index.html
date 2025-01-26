@@ -47,9 +47,8 @@
       <p>And here's section 3...</p>
 
       <section class="image-container">
-        <img src="images/" alt="Sample Image">
+        <img src="images/image1.jpg" alt="Sample Image">
       </section>
-
       <div class="custom-player-container">
         <video id="videoPlayer" class="custom-player" width="100%" preload="auto">
             <source src="videos/video1.mp4" type="video/mp4">
@@ -71,32 +70,45 @@
               <i class="fa-solid fa-download"></i>
             </button>
         </div>
-    </div>
-    
-    
-
-    <section class="audio-container">
-      <h3>Listen to My Podcast</h3>
-  
-      <canvas id="visualizer" width="800" height="300"></canvas>
-
-      <div class="audio-controls">
-        <button id="play-btn">Play</button>
-        <button id="pause-btn">Pause</button>
       </div>
-    
-      <audio id="audio" src="https://pranav-sharma.pages.dev/audio1.mp3"></audio>
+    </section>
 
+    <div class="audio-player-uni">
+          <audio id="audio-uni" src="https://pranav-sharma.pages.dev/audio1.mp3"></audio>
+      
+          <div class="progress-bar-container-uni" id="progress-container-uni">
+            <div class="progress-bar-uni" id="progress-bar-uni"></div>
+          </div>
+          <p align="center" class="audioDescription">Audio Name must be shorter so it can get fit</p>
+          <div class="controls-uni">
+            <button id="play-pause-uni">Play</button>
+            <button id="mute-uni">Mute</button>
+            <button id="loop-uni" aria-pressed="false">Loop</button>
+            <select id="speed-uni">
+              <option value="0.25">0.25x</option>
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="1.75">1.75x</option>
+              <option value="2">2x</option>
+              <option value="4">4x</option>
+              <option value="8">8x</option>
+              <option value="16">16x</option>
+            </select>
+          </div>
+        </div>
     </article>
     <div class="progress-bar-container">
       <div id="reading-progress" class="reading-progress"></div>
     </div>
   </main>
-
   <footer>
     <p>&copy; 2025 My Blog</p>
+    <div id="content"></div>
   </footer>
-
+  <script src="main.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -7,15 +7,15 @@
   
   body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f0f4f8;
-    color: #434343;
+    background-color: #F8FAFC;
+    color: #001F3F;
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   .headingAnchor {
     text-decoration: none;
-    color: #f6f6f6;
+    color: #356290;
     transition: color 0.3s ease;
   }
   
@@ -24,8 +24,8 @@
   }
   
   header {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #99aec6;
+    color: #424f5b;
     padding: 2rem;
     text-align: center;
   }
@@ -105,12 +105,12 @@
   
   article h2 {
     font-size: 2rem;
-    color: #333;
+    color: #227b94;
     margin-bottom: 1rem;
   }
   
   article h3, article h4 {
-    color: #333;
+    color: #78B7D0;
   }
   
   article p {
@@ -368,171 +368,102 @@ video::-moz-media-controls {
       padding: 8px 16px;
       font-size: 1rem;
     }
-  }
+  }  
+
+  .audio-player-uni {
+    width: 90%; /* Make it scale for smaller screens */
+    max-width: 400px; /* Prevent it from growing too large */
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    /* Remove position:absolute to keep it in the normal flow */
+    margin: 20px auto; /* Add space around it */
+}
 
 
-  
-  .sh-card {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background: #edf2f7;
-    padding: 7px 10px;
-    border-radius: 50px;
-    border: none;
-    color: #000;
-    box-shadow: 2px 2px 20px -10px #000;
-    transition: all 0.3s ease;
-    z-index: 99999;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    line-height: 1.5;
-    overflow: hidden;
-    width: 18px;
-    white-space: nowrap;
-  }
-  .sh-card:hover {
-    width: 92px;
-  }
-  
-  .sh-card-icon,
-  .sh-card-info {
-    display: inline-block;
-    vertical-align: baseline;
-    line-height: 1;
-  }
-  
-  .sh-card-info {
-    font-size: 16px;
-    margin-left: 7px;
-  }
-  
-  .sh-card-icon {
-    width: 18px;
-    height: 15px;
-  }
-  
-  .sh-card-link,
-  .sh-card-link:hover,
-  .sh-card-link:active,
-  .sh-card-link:visited {
-    color: #000;
-    text-decoration: none;
-    line-height: 1;
-  }
-  
-  .sh-card-box {
-    display: block;
-  }
-  
-  @-webkit-keyframes bounceIn {
-    0%, 20%, 40%, 60%, 80%, to {
-      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    0% {
-      opacity: 0;
-      -webkit-transform: scale3d(0.3, 0.3, 0.3);
-      transform: scale3d(0.3, 0.3, 0.3);
-    }
-    20% {
-      -webkit-transform: scale3d(1.1, 1.1, 1.1);
-      transform: scale3d(1.1, 1.1, 1.1);
-    }
-    40% {
-      -webkit-transform: scale3d(0.9, 0.9, 0.9);
-      transform: scale3d(0.9, 0.9, 0.9);
-    }
-    60% {
-      opacity: 1;
-      -webkit-transform: scale3d(1.03, 1.03, 1.03);
-      transform: scale3d(1.03, 1.03, 1.03);
-    }
-    80% {
-      -webkit-transform: scale3d(0.97, 0.97, 0.97);
-      transform: scale3d(0.97, 0.97, 0.97);
-    }
-    to {
-      opacity: 1;
-      -webkit-transform: scaleX(1);
-      transform: scaleX(1);
-    }
-  }
-  @keyframes bounceIn {
-    0%, 20%, 40%, 60%, 80%, to {
-      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    0% {
-      opacity: 0;
-      -webkit-transform: scale3d(0.3, 0.3, 0.3);
-      transform: scale3d(0.3, 0.3, 0.3);
-    }
-    20% {
-      -webkit-transform: scale3d(1.1, 1.1, 1.1);
-      transform: scale3d(1.1, 1.1, 1.1);
-    }
-    40% {
-      -webkit-transform: scale3d(0.9, 0.9, 0.9);
-      transform: scale3d(0.9, 0.9, 0.9);
-    }
-    60% {
-      opacity: 1;
-      -webkit-transform: scale3d(1.03, 1.03, 1.03);
-      transform: scale3d(1.03, 1.03, 1.03);
-    }
-    80% {
-      -webkit-transform: scale3d(0.97, 0.97, 0.97);
-      transform: scale3d(0.97, 0.97, 0.97);
-    }
-    to {
-      opacity: 1;
-      -webkit-transform: scaleX(1);
-      transform: scaleX(1);
-    }
-  }
-  .sh-bounceIn {
-    -webkit-animation-duration: 0.75s;
-    animation-duration: 0.75s;
-    -webkit-animation-name: bounceIn;
-    animation-name: bounceIn;
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    opacity: 0;
-  }
-  
-  canvas {
+/* Other styles remain unchanged */
+.controls-uni {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-bar-container-uni {
+    position: relative;
     width: 100%;
-    height: 130px;
-    background: #f9f9f9;
-    margin: 2rem auto;
-    box-shadow: inset 0px 0px 25px -15px #000;
-    border-radius: 5px;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
     overflow: hidden;
-  }
-  
-  .wrapper {
-    padding: 2rem;
-  }
-
-  canvas {
-    display: block;
-    margin: 20px auto;
-    border: 1px solid #444;
-    border-radius: 10px;
-  }
-  .audio-controls {
-    margin-top: 20px;
-  }
-  .audio-controls button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
-    margin: 0 10px;
-  }
-  .audio-controls button:hover {
-    background-color: #333;
-  }
+}
+
+.progress-bar-uni {
+    height: 100%;
+    width: 0;
+    background: #3498db;
+    transition: width 0.1s linear;
+}
+
+.audio-player-uni button { 
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.audio-player-uni button:active {
+    transform: scale(0.95);
+}
+
+.audio-player-uni button[aria-pressed="true"] {
+    background: #e74c3c;
+}
+
+.audio-player-uni select {
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.audioDescription {
+    margin-top: -10px;
+    margin-bottom: -2px;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+@media (max-width: 480px) {
+    .audio-player-uni {
+        bottom: 10px; /* Adjust margin for smaller screens */
+        padding: 12px;
+        gap: 12px;
+    }
+    button {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+    select {
+        font-size: 12px;
+        padding: 4px;
+    }
+    .audioDescription {
+        font-size: 12px;
+    }
+}
+
+

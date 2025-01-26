@@ -195,7 +195,7 @@ const audioUni = document.getElementById("audio-uni");
           });
 
           // Fetch the .txt file and insert its content as HTML
-fetch('example.txt')
+fetch('https://pranav-sharma.pages.dev/example.txt')
 .then(response => {
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);

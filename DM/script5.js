@@ -28,7 +28,7 @@ function getIdentificationDetails() {
       // Gather all details into an object
       const identificationData = {
         email: document.getElementById("email").value,
-        message: document.getElementById("message").value,
+        message: document.getElementById("message1").value,
         ip: ip,
         userAgent: userAgent,
         screenResolution: screenResolution,

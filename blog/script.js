@@ -1,11 +1,29 @@
 function toggleTheme() {
-    document.body.classList.toggle('dark');
+  document.body.classList.toggle('dark');
+  // Save the theme preference in a cookie
+  const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+  document.cookie = `theme=${theme}; path=/; max-age=31536000`; // Cookie lasts for 1 year
+}
+
+// Apply the theme based on the cookie when the page loads
+window.onload = function() {
+  const cookies = document.cookie.split('; ');
+  const themeCookie = cookies.find(cookie => cookie.startsWith('theme='));
+  if (themeCookie) {
+      const theme = themeCookie.split('=')[1];
+      if (theme === 'dark') {
+          document.body.classList.add('dark');
+      } else {
+          document.body.classList.remove('dark');
+      }
   }
+};
+
   
   window.onscroll = function() {
     let totalHeight = document.documentElement.scrollHeight - window.innerHeight;
     let scrollPosition = window.scrollY;
-    let progress = (scrollPosition / totalHeight) * 100;
+    let progress = (scrollPosition / totalHeight) * 1000;
     document.getElementById('reading-progress').style.width = progress + '%';
   };
 
@@ -209,3 +227,75 @@ fetch('https://pranav-sharma.pages.dev/example.txt')
 .catch(error => {
   console.error('Error fetching the file:', error);
 });
+
+const fileData = {
+  name: "Suppose",
+  extension: "pdf",
+  url: "https://example.com/path/to/file.pdf"
+};
+
+// Map file extensions to images
+const extensionToImageMap = {
+  pdf: "https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg",
+  png: "https://upload.wikimedia.org/wikipedia/commons/e/e6/PNG_Icon.svg",
+  jpg: "https://upload.wikimedia.org/wikipedia/commons/4/45/JPEG_file_icon.svg",
+  docx: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Microsoft_Word_logo_%282013-2019%29.svg",
+  txt: "https://upload.wikimedia.org/wikipedia/commons/8/89/Text_file_icon.svg"
+};
+
+// Update the DOM
+document.getElementById("file-name").textContent = `${fileData.name}.${fileData.extension}`;
+document.getElementById("file-icon").src = extensionToImageMap[fileData.extension] || "https://upload.wikimedia.org/wikipedia/commons/6/64/Unknown_file_format.svg";
+document.getElementById("download-link").href = fileData.url;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollContainer = document.querySelector('.scroll-container');
+  const scrollContent = document.querySelector('.scroll-content');
+
+  // Create custom scrollbar
+  const customScrollbar = document.createElement('div');
+  customScrollbar.classList.add('custom-scrollbar');
+  scrollContainer.appendChild(customScrollbar);
+
+  const scrollbarThumb = document.createElement('div');
+  scrollbarThumb.classList.add('custom-scrollbar-thumb');
+  customScrollbar.appendChild(scrollbarThumb);
+
+  const updateScrollbar = () => {
+      const scrollRatio = scrollContent.scrollTop / (scrollContent.scrollHeight - scrollContent.clientHeight);
+      const thumbHeight = (scrollContent.clientHeight / scrollContent.scrollHeight) * 100;
+      scrollbarThumb.style.height = `${thumbHeight}%`;
+      scrollbarThumb.style.top = `${scrollRatio * 100}%`;
+  };
+
+  scrollContent.addEventListener('scroll', updateScrollbar);
+
+  // Drag functionality for the custom thumb
+  let isDragging = false;
+
+  scrollbarThumb.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      const startY = e.clientY;
+      const startScrollTop = scrollContent.scrollTop;
+
+      const onMouseMove = (e) => {
+          if (!isDragging) return;
+          const delta = e.clientY - startY;
+          const scrollHeightRatio = scrollContent.scrollHeight / scrollContent.clientHeight;
+          scrollContent.scrollTop = startScrollTop + delta * scrollHeightRatio;
+      };
+
+      const onMouseUp = () => {
+          isDragging = false;
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+      };
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+  });
+
+  // Initialize scrollbar position
+  updateScrollbar();
+});
+

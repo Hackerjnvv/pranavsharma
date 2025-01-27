@@ -3,12 +3,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html {
-    scrollbar-width: thin;
-
-    /* Firefox */
+  }
+  
+  html {
+    scrollbar-width: thin; /* Firefox */
     scrollbar-color: #00aeff #ffffff00;
 }
 
@@ -21,76 +19,68 @@ body {
 }
 
 body::-webkit-scrollbar {
-    width: 10px;
-
-    /* Width of the scrollbar */
+    width: 10px; /* Width of the scrollbar */
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: #007BFF;
-
-    /* Color of the scrollbar thumb */
-    border-radius: 5px;
-
-    /* Rounded corners */
+    background-color: #007BFF; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Rounded corners */
 }
 
 body::-webkit-scrollbar-track {
-    background: #f0f0f0;
-
-    /* Background of the scrollbar track */
+    background: #f0f0f0; /* Background of the scrollbar track */
     border-radius: 5px;
 }
 
-.headingAnchor {
+  .headingAnchor {
     text-decoration: none;
     color: #356290;
     transition: color 0.3s ease;
-}
-
-a:hover {
+  }
+  
+  a:hover {
     color: #529dec;
-}
-
-header {
+  }
+  
+  header {
     background-color: #99aec6;
     color: #424f5b;
     padding: 2rem;
     text-align: center;
-}
-
-header .header-content {
+  }
+  
+  header .header-content {
     max-width: 1200px;
     margin: 0 auto;
-}
-
-header h1 {
+  }
+  
+  header h1 {
     font-family: 'Open Sans', sans-serif;
     font-size: 2.5rem;
-}
-
-header nav {
+  }
+  
+  header nav {
     margin-top: 1rem;
-}
-
-header nav a {
+  }
+  
+  header nav a {
     font-size: 1.1rem;
     margin: 0 1rem;
     font-weight: 600;
-}
-
-header nav a:hover {
+  }
+  
+  header nav a:hover {
     color: #eaeaea;
-}
-
-main {
+  }
+  
+  main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 3rem 2rem;
-}
-
-.toc-container {
+  }
+  
+  .toc-container {
     flex: 0 0 250px;
     position: sticky;
     top: 20px;
@@ -101,68 +91,66 @@ main {
     margin-right: 2rem;
     max-height: 80vh;
     overflow-y: auto;
-}
-
-.toc-container h2 {
+  }
+  
+  .toc-container h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-}
-
-.toc-container ul {
+  }
+  
+  .toc-container ul {
     list-style-type: none;
-}
-
-.toc-container ul li {
+  }
+  
+  .toc-container ul li {
     margin: 0.5rem 0;
-}
-
-.toc-container ul li a {
+  }
+  
+  .toc-container ul li a {
     font-size: 1.1rem;
     color: #007bff;
     font-weight: 500;
     transition: color 0.3s ease;
-}
-
-.toc-container ul li a:hover {
+  }
+  
+  .toc-container ul li a:hover {
     color: #0056b3;
-}
-
-article {
+  }
+  
+  article {
     flex: 1;
     max-width: 800px;
-}
-
-article h2 {
+  }
+  
+  article h2 {
     font-size: 2rem;
     color: #227b94;
     margin-bottom: 1rem;
-}
-
-article h3,
-article h4 {
+  }
+  
+  article h3, article h4 {
     color: #78B7D0;
-    left: 1px;
-}
-
-article p {
+  }
+  
+  article p {
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
-}
-
-.image-container img {
+  }
+  
+  .image-container img {
     width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-}
-
-.image-container img:hover {
+  }
+  
+  .image-container img:hover {
     transform: scale(1.005);
-}
-
-.custom-player-container {
+  }
+  
+  .custom-player-container {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
@@ -171,8 +159,8 @@ article p {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
-    -webkit-box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
-    -moz-box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
+   -webkit-box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
+   -moz-box-shadow: 15px 24px 36px -6px rgba(0,0,0,0.41);
 }
 
 .custom-player {
@@ -193,8 +181,7 @@ article p {
     width: 100%;
 }
 
-button,
-.progress-bar {
+button, .progress-bar {
     background-color: transparent;
     border: none;
     color: rgb(255, 255, 255);
@@ -234,9 +221,7 @@ button:hover {
     padding: 2px;
 }
 
-.mute-button,
-.fullscreen-button,
-.download-button {
+.mute-button, .fullscreen-button, .download-button {
     font-size: 1rem;
 }
 
@@ -269,28 +254,28 @@ video::-moz-media-controls {
     color: white;
 }
 
-progress-bar-container {
+  progress-bar-container {
     position: fixed;
     bottom: 200;
     width: 100%;
     height: 5px;
     background-color: #ff0000;
-}
-
-.reading-progress {
+  }
+  
+  .reading-progress {
     height: 100%;
     width: 0;
     background-color: #4caf50;
-}
-
-.theme-toggle {
+  }
+  
+  .theme-toggle {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 9999;
-}
-
-.theme-toggle button {
+  }
+  
+  .theme-toggle button {
     background-color: #fff;
     border: 2px solid #007bff;
     padding: 10px 20px;
@@ -299,145 +284,144 @@ progress-bar-container {
     border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.theme-toggle button:hover {
+  }
+  
+  .theme-toggle button:hover {
     background-color: #007bff;
     color: #fff;
-}
-
-footer {
+  }
+  
+  
+  footer {
     text-align: center;
     padding: 2rem 0;
     background-color: #007bff;
     color: #fff;
-}
-
-/* Dark Theme Styles */
-body.dark {
+  }
+  
+  /* Dark Theme Styles */
+  body.dark {
     background-color: #000000;
     color: #f1f1f1;
-}
-
-body.dark header {
+  }
+  
+  body.dark header {
     background-color: #000000;
     border: 0.5px solid white;
     color: #f1f1f1;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .theme-toggle button {
+  }
+  
+  body.dark .theme-toggle button {
     background-color: #000000;
     border-color: #ccc;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .theme-toggle button:hover {
+  }
+  
+  body.dark .theme-toggle button:hover {
     background-color: #181818;
     color: #fff;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .toc-container {
+  }
+  
+  body.dark .toc-container {
     background-color: #020202;
     color: #fff;
     border: 0.5px solid white;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .toc-container ul li a {
+  }
+  
+  body.dark .toc-container ul li a {
     color: #66ccff;
     transition: color 0.3s ease;
-}
-
-body.dark article {
+  }
+  
+  body.dark article {
     background-color: #00000000;
     color: #f1f1f1;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark a {
+  }
+  
+  body.dark a {
     color: #66ccff;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .image-container img {
+  }
+  
+  body.dark .image-container img {
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.027);
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark video,
-body.dark audio,
-body.dark .audio-player-uni {
+  }
+  
+  body.dark video, body.dark audio, body.dark .audio-player-uni {
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.027);
     background-color: #000000;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .audio-player-uni button {
+  }
+  
+  body.dark .audio-player-uni button {
     background-color: #0a0a0a;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark .audioDescription {
+  }
+  
+  body.dark .audioDescription {
     color: #f1f1f1;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
+  }
 
-body.dark .file-container,
-body.dark .file-details {
-    color: #f1f1f1;
+  body.dark .file-container, body.dark .file-details {
+    color:#f1f1f1;
     background-color: #000000;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
 
-/* Media Query for Mobile */
-@media (max-width: 768px) {
+  }
+  
+  /* Media Query for Mobile */
+  @media (max-width: 768px) {
     main {
-        flex-direction: column;
-        padding: 1rem;
+      flex-direction: column;
+      padding: 1rem;
     }
-
+  
     .toc-container {
-        position: static;
-        margin-bottom: 2rem;
-        max-height: none;
-        width: 100%;
+      position: static;
+      margin-bottom: 2rem;
+      max-height: none;
+      width: 100%;
     }
-
+  
     .toc-container h2 {
-        font-size: 1.3rem;
+      font-size: 1.3rem;
     }
-
+  
     .toc-container ul li a {
-        font-size: 1rem;
+      font-size: 1rem;
     }
-
+  
     article {
-        max-width: 100%;
+      max-width: 100%;
     }
-
+  
     header h1 {
-        font-size: 2rem;
+      font-size: 2rem;
     }
-
+  
     header nav a {
-        font-size: 1rem;
+      font-size: 1rem;
     }
-}
-
-@media (max-width: 480px) {
+  }
+  
+  @media (max-width: 480px) {
     header h1 {
-        font-size: 1.5rem;
+      font-size: 1.5rem;
     }
-
+  
     .theme-toggle button {
-        padding: 8px 16px;
-        font-size: 1rem;
+      padding: 8px 16px;
+      font-size: 1rem;
     }
-}
+  }  
 
-.audio-player-uni {
+  .audio-player-uni {
     width: 50%;
     background: #ffffff;
     border: 1px solid #ddd;
@@ -449,10 +433,9 @@ body.dark .file-details {
     gap: 16px;
 
     /* Remove position:absolute to keep it in the normal flow */
-    margin: 20px auto;
-
-    /* Add space around it */
+    margin: 20px auto; /* Add space around it */
 }
+
 
 /* Other styles remain unchanged */
 .controls-uni {
@@ -479,7 +462,7 @@ body.dark .file-details {
     transition: width 0.25s linear;
 }
 
-.audio-player-uni button {
+.audio-player-uni button { 
     background: #4784c1;
     color: #fff;
     border: none;
@@ -516,37 +499,29 @@ body.dark .file-details {
 
 @media (max-width: 480px) {
     .audio-player-uni {
-        bottom: 10px;
-
-        /* Adjust margin for smaller screens */
+        bottom: 10px; /* Adjust margin for smaller screens */
         padding: 12px;
         gap: 12px;
     }
-
     button {
         font-size: 12px;
         padding: 6px 8px;
     }
-
     select {
         font-size: 12px;
         padding: 4px;
     }
-
     .audioDescription {
         font-size: 12px;
     }
-
     .toc-container h2 {
-        text-align: center;
-
-        /* Correct way to align text to the center */
-        margin-bottom: 1rem;
-    }
+      text-align: center; /* Correct way to align text to the center */
+      margin-bottom: 1rem;
+  }
+  
 }
-
 .file-container {
-    width: 50%;
+  width: 50%;
     background: #ffffff;
     border: 1px solid #ddd;
     border-radius: 12px;
@@ -557,92 +532,74 @@ body.dark .file-details {
     gap: 16px;
 
     /* Remove position:absolute to keep it in the normal flow */
-    margin: 20px auto;
+    margin: 20px auto; 
 }
 
 .file-details {
-    display: flex;
-
-    /* Align icon and file name horizontally */
-    align-items: center;
-
-    /* Vertically center the icon and name */
-    gap: 10px;
-
-    /* Horizontal spacing between icon and name */
+  display: flex; /* Align icon and file name horizontally */
+  align-items: center; /* Vertically center the icon and name */
+  gap: 10px; /* Horizontal spacing between icon and name */
 }
 
 .file-details img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .file-details .file-name {
-    font-size: 16px;
-    font-weight: bold;
-    white-space: nowrap;
-
-    /* Prevents wrapping */
+  font-size: 16px;
+  font-weight: bold;
+  white-space: nowrap; /* Prevents wrapping */
 }
 
 .download-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
-    text-align: center;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
 }
 
 .download-btn:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .scroll-container {
-    width: 100%;
-    height: 100vh;
-
-    /* Full viewport height */
-    overflow: hidden;
-
-    /* Hide the default scrollbar */
-    position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Hide the default scrollbar */
+  position: relative;
 }
 
 .scroll-content {
-    height: 200%;
-
-    /* Example long content */
-    overflow-y: scroll;
-
-    /* Enable scrolling */
-    scroll-behavior: smooth;
-    padding-right: 15px;
-
-    /* Add padding for custom scrollbar */
+  height: 200%; /* Example long content */
+  overflow-y: scroll; /* Enable scrolling */
+  scroll-behavior: smooth;
+  padding-right: 15px; /* Add padding for custom scrollbar */
 }
 
 .custom-scrollbar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10px;
-    height: 100%;
-    background: #f0f0f0;
-    border-radius: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background: #f0f0f0;
+  border-radius: 5px;
 }
 
 .custom-scrollbar-thumb {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10px;
-    background: #007BFF;
-    border-radius: 5px;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  background: #007BFF;
+  border-radius: 5px;
+  cursor: pointer;
 }
 

@@ -1,0 +1,131 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <head> 
+            <meta charset="UTF-8"> 
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+            <meta name="description" content="Your blog description here"> 
+            <meta name="keywords" content="blog, personal, growth, development"> 
+            <meta name="author" content="Your Name"> 
+            <meta property="og:title" content="Your Blog Title"> 
+            <meta property="og:description" content="Your blog description here"> 
+            <meta property="og:image" content="image_url_for_preview"> 
+            <meta property="og:url" content="https://yourblog.com"> 
+            <meta name="twitter:card" content="summary_large_image"> 
+            <meta name="twitter:site" content="@your_twitter_handle"> 
+            <meta name="twitter:title" content="Your Blog Title"> 
+            <meta name="twitter:description" content="Your blog description here"> 
+            <meta name="twitter:image" content="image_url_for_preview"> 
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"> 
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;700&family=Inter:wght@400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet"> 
+            <link rel="stylesheet" href="styles.css"> 
+            <title>Your Blog Title</title>             
+        </head>         
+        <body> 
+            <div id="theme-toggle" class="theme-toggle"> 
+                <button style="color:rgb(243, 205, 35);" nclick="toggleTheme()">🌙 / 🌞</button>                 
+            </div>             
+            <header> 
+                <div class="header-content"> 
+                    <h1 class="heading">Welcome to Pranav Sharma Blogs!</h1> 
+                    <p class="subtitle"></p> 
+                    <nav> 
+                        <a class="headingAnchor" href="#">Home</a> | 
+                        <a class="headingAnchor" href="#">About</a> 
+                    </nav>                     
+                </div>                 
+            </header>             
+            <main> 
+                <div id="toc" class="toc-container"> 
+                    <h2>Table of Contents</h2> 
+                    <ul id="toc-list"></ul>                     
+                </div>                 
+                <article> 
+                    <h2>My First Blog</h2> 
+                    <p>Welcome to my blog where I will share my thoughts and ideas...</p> 
+                    <h3>Section 1</h3> 
+                    <p>This is the first section of the blog...</p> 
+                    <h3>Section 2</h3> 
+                    <p>This is the second section...</p> 
+                    <h4>Subsection 2.1</h4> 
+                    <p>Details about subsection...</p> 
+                    <h3>Section 3</h3> 
+                    <p>And here's section 3...</p> 
+                    <section class="image-container"> 
+                        <img src="images/pngtree-red-balloon-pixels-png-image_8975816.png" alt="Sample Image"> 
+                    </section>                     
+                    <div class="custom-player-container"> 
+                        <video id="videoPlayer" class="custom-player" width="100%" preload="auto" src="videos/video1.mp4"> 
+                            <source src="videos/video1.mp4" type="video/mp4"> 
+                            Your browser does not support the video tag.
+                        </video>
+                        <video id="videoPlayer" class="custom-player" width="100%" preload="auto" src="videos/video1.mp4"> 
+                            <source src="videos/video1.mp4" type="video/mp4"> 
+                            Your browser does not support the video tag.
+                        </video>                         
+                        <div class="controls"> 
+                            <button id="playPause" class="play-pause"> 
+                                <i class="fas fa-play"></i> 
+                            </button>                             
+                            <input type="range" id="progressBar" class="progress-bar" value="0" step="1" min="0" max="100"> 
+                            <span id="timeDisplay" class="time-display">00:00</span> 
+                            <button id="muteButton" class="mute-button"> 
+                                <i class="fas fa-volume-up"></i> 
+                            </button>                             
+                            <button id="fullScreenButton" class="fullscreen-button"> 
+                                <i class="fas fa-expand"></i> 
+                            </button>                             
+                            <button id="downloadButton" class="download-button"> 
+                                <i class="fa-solid fa-download"></i> 
+                            </button>                             
+                        </div>                         
+                    </div>                     
+                </section>                 
+                <div class="audio-player-uni"> 
+                    <audio id="audio-uni" src="https://pranav-sharma.pages.dev/audio1.mp3"></audio>                     
+                    <div class="progress-bar-container-uni" id="progress-container-uni"> 
+                        <div class="progress-bar-uni" id="progress-bar-uni"></div>                         
+                    </div>                     
+                    <p align="center" class="audioDescription">Audio Name must be shorter so it can get fit</p> 
+                    <div class="controls-uni"> 
+                        <button id="play-pause-uni">Play</button>                         
+                        <button id="mute-uni">Mute</button>                         
+                        <button id="loop-uni" aria-pressed="false">Loop</button>                         
+                        <select id="speed-uni"> 
+                            <option value="0.25">0.25x</option>                             
+                            <option value="0.5">0.5x</option>                             
+                            <option value="0.75">0.75x</option>                             
+                            <option value="1" selected>1x</option>                             
+                            <option value="1.25">1.25x</option>                             
+                            <option value="1.5">1.5x</option>                             
+                            <option value="1.75">1.75x</option>                             
+                            <option value="2">2x</option>                             
+                            <option value="4">4x</option>                             
+                            <option value="8">8x</option>                             
+                            <option value="16">16x</option>                             
+                        </select>                         
+                    </div>                     
+                </div>                 
+                <div class="file-container"> 
+                    <div class="file-details"> 
+                        <img id="file-icon" src="" alt="File Extension"> 
+                        <span class="file-name" id="file-name"></span> 
+                    </div>                     
+                    <a id="download-link" class="download-btn" href="#" download>Download</a> 
+                </div>                 
+            </article>             
+            <div class="progress-bar-container"> 
+                <div id="reading-progress" class="reading-progress"></div>                 
+            </div>             
+        </main>         
+        <footer> 
+            <div id="content"></div>             
+        </footer>         
+        <script src="main.js"></script>         
+        <script src="script.js"></script>         
+    </body>     
+</html>

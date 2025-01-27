@@ -63,18 +63,8 @@
                 <video id="player2" class="plyr__video-embed" playsinline="" controls="">
                     <source src="videos/IMG_4804.MP4" type="video/mp4">
                 </video>
-                <h3>Section 4</h3>
                 <p>Hi Guys!!! In this</p>
                 <p>soooo</p>
-<audio id="audio1" class="plyr__audio-embed" controls>
-    <source src="audios/audio1.mp3" type="audio/mp3" />
-</audio>
-
-<!-- Second Audio Player -->
-<audio id="audio2" class="plyr__audio-embed" controls>
-    <source src="audios/audio1.mp3" type="audio/mp3" />
-</audio>
-
             </article>             
             <div class="progress-bar-container"> 
                 <div id="reading-progress" class="reading-progress"></div>                 
@@ -86,10 +76,7 @@
         <script src="main.js"></script>         
         <script src="script.js"></script>
         <script>
-            const players = Array.from(document.querySelectorAll('.plyr__audio-embed')).map(player => new Plyr(player));
-        </script>
-        <script>
-            const player = Array.from(document.querySelectorAll('.plyr__video-embed')).map(player => new Plyr(player));
+            const players = Array.from(document.querySelectorAll('.plyr__video-embed')).map(player => new Plyr(player));
         </script>         
     </body>     
 </html>

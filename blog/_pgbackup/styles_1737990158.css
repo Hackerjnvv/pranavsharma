@@ -142,7 +142,6 @@ article h3,
 article h4 {
     color: #78B7D0;
     left: 1px;
-    margin-bottom: -0.85rem;
 }
 
 article p {
@@ -648,9 +647,7 @@ body.dark .file-details {
 }
 
 article p {
-    font-size: 0.8rem;
-    line-height: 30.4px;
-    margin-bottom: -0.5rem;
-
-    /* Reduced the bottom margin to decrease the gap */
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin-bottom: -0.5rem; /* Reduced the bottom margin to decrease the gap */
 }

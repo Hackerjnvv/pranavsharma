@@ -103,7 +103,7 @@ main {
 
 .toc-container ul li a {
     font-size: 1.1rem;
-    color: #6a83a1;
+    color: #007bff;
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -135,8 +135,8 @@ article h4 {
 }
 
 article p {
-    font-size: 1.25rem;
-    line-height: 2.2rem;
+    font-size: 1rem;
+    line-height: 1.8rem;
     margin-bottom: -0.8rem;
     padding-bottom: -1rem;
 }
@@ -233,23 +233,23 @@ footer {
 
 /* Dark Theme */
 body.dark {
-    background-color: #0a0c0f;
-    color: #f1f11;
+    background-color: #0b0b0b;
+    color: #f1f1f1;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark header {
-    background-color: #101419;
+    background-color: #171717;
     color: #f1f1f1;
 }
 
 body.dark .theme-toggle button {
-    background-color: #242d39;
+    background-color: #000000;
     border-color: #ccc;
 }
 
 body.dark .toc-container {
-    background-color: #101419;
+    background-color: #020202;
     color: #fff;
 }
 
@@ -259,7 +259,7 @@ body.dark article {
 }
 
 body.dark a {
-    color: #9ccce4;
+    color: #66ccff;
 }
 
 /* Media Queries */

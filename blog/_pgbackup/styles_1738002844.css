@@ -136,7 +136,7 @@ article h4 {
 
 article p {
     font-size: 1.25rem;
-    line-height: 2.2rem;
+    line-height: 1.8rem;
     margin-bottom: -0.8rem;
     padding-bottom: -1rem;
 }
@@ -233,8 +233,8 @@ footer {
 
 /* Dark Theme */
 body.dark {
-    background-color: #0a0c0f;
-    color: #f1f11;
+    background-color: #0b0b0b;
+    color: #f1f1f1;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -259,7 +259,7 @@ body.dark article {
 }
 
 body.dark a {
-    color: #9ccce4;
+    color: #66ccff;
 }
 
 /* Media Queries */

@@ -30,7 +30,7 @@
                 <h1 class="heading">Welcome to Pranav Sharma Blogs!</h1> 
                 <p class="subtitle"></p> 
                 <nav> 
-                    <a class="headingAnchor" href="#">Home</a> | 
+                    <a class="headingAnchor" href="https://pranav-sharma.pages.dev/blog">Home</a> | 
                     <a class="headingAnchor" href="#">About</a> 
                 </nav>                 
             </div>             
@@ -48,11 +48,13 @@
                 <h3>Section 2</h3> 
                 <p>This is the second section...</p> 
                 <h4>Subsection 2.1</h4> 
-                <p>Details about subsection...</p> 
+                <p>Details about subsection...</p>
+                <p>So, I was going to write a Blog, with my own coding experience, here I&apos;ll teach you,</p>
+                <p>how, to do that. So please, do not note my&nbsp;<span style="font-size: 1rem;">grammatical mistake. :)&nbsp;</span></p> 
                 <h3>Section 3</h3> 
                 <p>And here&apos;s section 3...</p> 
                 <section class="image-container"> 
-                    <img src="images/pngtree-red-balloon-pixels-png-image_8975816.png" alt="Sample Image"> 
+                    <img src="images/image1.jpg" alt="Sample Image"> 
                 </section>                 
                 <link rel="stylesheet" href="vid_styles.css">
                 <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
@@ -63,6 +65,7 @@
                 <video id="player2" class="plyr__video-embed" playsinline="" controls="">
                     <source src="videos/IMG_4804.MP4" type="video/mp4">
                 </video>
+                <h3>Section 4</h3>
                 <p>Hi Guys!!! In this</p>
                 <p>soooo</p>
             </article>             
@@ -76,7 +79,10 @@
         <script src="main.js"></script>         
         <script src="script.js"></script>
         <script>
-            const players = Array.from(document.querySelectorAll('.plyr__video-embed')).map(player => new Plyr(player));
+            const players = Array.from(document.querySelectorAll('.plyr__audio-embed')).map(player => new Plyr(player));
+        </script>
+        <script>
+            const player = Array.from(document.querySelectorAll('.plyr__video-embed')).map(player => new Plyr(player));
         </script>         
     </body>     
 </html>

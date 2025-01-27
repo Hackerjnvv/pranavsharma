@@ -129,14 +129,13 @@ article h3,
 article h4 {
     font-size: 1.4rem;
     color: #78B7D0;
-    margin-top: 1rem;
+    margin: 1rem 0 0.5rem;
 }
 
 article p {
     font-size: 1rem;
-    line-height: 1.8rem;
-    margin-bottom: -0.8rem;
-    padding-bottom: -1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
 }
 
 .image-container img {

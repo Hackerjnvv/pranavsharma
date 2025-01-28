@@ -19,13 +19,6 @@ window.onload = function() {
   }
 };
 
-  
-  window.onscroll = function() {
-    let totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    let scrollPosition = window.scrollY;
-    let progress = (scrollPosition / totalHeight) * 1000;
-    document.getElementById('reading-progress').style.width = progress + '%';
-  };
 
   document.addEventListener("DOMContentLoaded", function() {
     let tocList = document.getElementById("toc-list");
@@ -127,4 +120,3 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize scrollbar position
   updateScrollbar();
 });
-

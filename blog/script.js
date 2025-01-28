@@ -71,7 +71,7 @@ fetch('https://pranav-sharma.pages.dev/header.txt')
 })
 .then(data => {
   // Insert the fetched content into the DOM as HTML
-  document.getElementById('content').innerHTML = data;
+  document.getElementById('hcontent').innerHTML = data;
 })
 .catch(error => {
   console.error('Error fetching the file:', error);

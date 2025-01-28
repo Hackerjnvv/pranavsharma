@@ -126,6 +126,7 @@ article p {
     line-height: 2.2rem;
     margin-bottom: -0.8rem;
     padding-bottom: -1rem;
+    color: 
 }
 
 .image-container {
@@ -140,13 +141,14 @@ article p {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.5rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-radius 0.3s ease;
+    border: 2px solid transparent; /* Set transparent border initially */
 }
-
 
 .image-container img:hover {
     transform: scale(1.01);
     border-radius: 2px;
+    border: 2px solid #101419;
 }
 
 .theme-toggle {

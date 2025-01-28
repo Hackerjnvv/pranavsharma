@@ -47,7 +47,22 @@ window.onload = function() {
 
 
           // Fetch the .txt file and insert its content as HTML
-fetch('https://pranav-sharma.pages.dev/example.txt')
+fetch('https://pranav-sharma.pages.dev/footer.txt')
+.then(response => {
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  return response.text();
+})
+.then(data => {
+  // Insert the fetched content into the DOM as HTML
+  document.getElementById('content').innerHTML = data;
+})
+.catch(error => {
+  console.error('Error fetching the file:', error);
+});
+
+fetch('https://pranav-sharma.pages.dev/header.txt')
 .then(response => {
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);

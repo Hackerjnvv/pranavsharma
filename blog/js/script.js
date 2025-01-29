@@ -40,7 +40,7 @@ window.onload = function() {
 
 
           // Fetch the .txt file and insert its content as HTML
-fetch('https://pranav-sharma.pages.dev/blog/footer.txt')
+fetch('/blog/footer.txt')
 .then(response => {
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -55,7 +55,7 @@ fetch('https://pranav-sharma.pages.dev/blog/footer.txt')
   console.error('Error fetching the file:', error);
 });
 
-fetch('https://pranav-sharma.pages.dev/blog/header.txt')
+fetch('/blog/header.txt')
 .then(response => {
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);

@@ -4,3 +4,7 @@
                     <a class="headingAnchor" href="https://pranav-sharma.pages.dev/blog">Home</a> | 
                     <a class="headingAnchor" href="https://pranav-sharma.pages.dev">About</a> 
                 </nav>
+                 <nav> 
+                    <a class="headingAnchor" href="https://pranav-sharma.pages.dev/blog">Home</a> | 
+                    <a class="headingAnchor" href="https://pranav-sharma.pages.dev">About</a> 
+                </nav>

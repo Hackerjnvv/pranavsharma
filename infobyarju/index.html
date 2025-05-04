@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | vidyarthi_arjun</title>
+    <style>
+        :root {
+            --text-primary: #1D1B20;
+            --text-secondary: #45464F;
+            --bg-primary: #FEF7FF;
+            --bg-secondary: #F3EDF7;
+            --accent: #6750A4;
+            --accent-container: #EADDFF;
+            --surface: #F3EDF7;
+            --outline: #79747E;
+            --shadow: 0 3px 6px rgba(0,0,0,0.1);
+            --radius-small: 8px;
+            --radius-large: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #E6E1E5;
+            --text-secondary: #CAC4D0;
+            --bg-primary: #141218;
+            --bg-secondary: #1D1B20;
+            --accent: #D0BCFF;
+            --accent-container: #4F378B;
+            --surface: #1D1B20;
+            --outline: #938F99;
+            --shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+            background-image: radial-gradient(circle at 70% 30%, var(--accent-container) 0%, transparent 60%);
+        }
+
+        .card {
+            max-width: 640px;
+            width: 100%;
+            background: var(--surface);
+            border-radius: var(--radius-large);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--outline);
+            transition: var(--transition);
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-container) 100%);
+            color: white;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .profile-pic {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 16px;
+            background-color: var(--accent-container);
+            transition: var(--transition);
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15px;
+        }
+
+        h2 {
+            color: var(--accent);
+            margin: 32px 0 16px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        p, li {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            letter-spacing: 0.25px;
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-container);
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 10;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="light"] .theme-toggle {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgb(136, 130, 226);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 10;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-4px) scale(1.1);
+        }
+
+        .tagline {
+            font-style: italic;
+            opacity: 0.9;
+            margin: 8px 0 16px;
+            font-size: 0.875rem;
+            background: rgba(0,0,0,0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .identity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent-container);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        ul {
+            padding-left: 24px;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        li:before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: -18px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .detail-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-container);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                border-radius: var(--radius-small);
+            }
+            
+            .profile-pic {
+                width: 96px;
+                height: 96px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .profile-section {
+                padding: 24px 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 12px;
+            }
+            
+            .profile-pic {
+                width: 84px;
+                height: 84px;
+            }
+            
+            h2 {
+                font-size: 1.125rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="card">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="profile-section">
+            <img src="logo.jpg" alt="Profile Picture" class="profile-pic">
+            <h1>vidyarthi_arjun</h1>
+            <p class="tagline">Memes & Unofficial Chronicles</p>
+            <div class="identity-badge">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Ex-DAVian • Passout Topper</span>
+            </div>
+            <div class="social-links">
+                <a href="mailto:Connect_somebody@hotmail.com" title="Email" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.instagram.com/vidyarthi_arjun/" target="_blank" title="Instagram" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" title="Twitter" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Digital Persona</h2>
+            <p>An untraceable meme curator and unofficial chronicler. Specializing in unfiltered humor and subtext-laden content that exists just outside mainstream algorithms.</p>
+
+            <h2>Key Attributes</h2>
+            <ul>
+                <li class="detail-item">
+                    <span class="detail-icon">🔐</span>
+                    <span><strong>Privacy:</strong> Architecturally anonymous by design</span>
+                </li>
+                <li class="detail-item">
+                    <span class="detail-icon">📬</span>
+                    <span><strong>Contact:</strong> <a href="mailto:Connect_somebody@hotmail.com">Connect_somebody@hotmail.com</a></span>
+                </li>
+                <li class="detail-item">
+                    <span class="detail-icon">🏫</span>
+                    <span><strong>Pedigree:</strong> DAV alumni network</span>
+                </li>
+                <li class="detail-item">
+                    <span class="detail-icon">🎯</span>
+                    <span><strong>Legacy:</strong> Former academic topper</span>
+                </li>
+            </ul>
+
+            <h2>Content Principles</h2>
+            <ul>
+                <li>Zero corporate affiliations or sponsorships</li>
+                <li>Memes as cultural cryptography</li>
+                <li>Designed to bypass algorithmic categorization</li>
+                <li>Open to creative collabs, closed to surveillance</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or use OS preference
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateToggle(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggle(newTheme);
+            
+            // Add ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            themeToggle.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+
+        function updateToggle(theme) {
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // Add hover effects to all interactive elements
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.transform = 'translateY(-2px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>

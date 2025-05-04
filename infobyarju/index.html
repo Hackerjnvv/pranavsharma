@@ -5,91 +5,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | vidyarthi_arjun</title>
     <style>
-       :root {
-    --text-primary: #1A1D21; /* Darker neutral for better contrast with blue */
-    --text-secondary: #3D4A5C; /* Blue-gray to complement accent */
-    --bg-primary: #F8FAFC; /* Slightly cooler background */
-    --bg-secondary: #EDF2F7; /* Light blue-gray */
-    --accent: #5180c7; /* Primary blue */
-    --accent-light: #7BA4E0; /* Lighter blue for hover states */
-    --accent-container: #E1E8F5; /* Very light blue container */
-    --surface: #FFFFFF; /* Pure white surface */
-    --outline: #A0AEC0; /* Blue-gray outline */
-    --shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
+        :root {
+            --text-primary: #1D1B20;
+            --text-secondary: #45464F;
+            --bg-primary: #FEF7FF;
+            --bg-secondary: #F3EDF7;
+            --accent: #5180c7;
+            --accent-container: #EADDFF;
+            --surface: #F3EDF7;
+            --outline: #79747E;
+            --shadow: 0 3px 6px rgba(0,0,0,0.1);
+            --radius-small: 8px;
+            --radius-large: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-[data-theme="dark"] {
-    --text-primary: #E2E8F0; /* Light blue-gray */
-    --text-secondary: #A0AEC0; /* Medium blue-gray */
-    --bg-primary: #1A202C; /* Dark blue-black */
-    --bg-secondary: #2D3748; /* Dark blue-gray */
-    --accent: #63B3ED; /* Brighter blue for dark mode */
-    --accent-light: #90CDF4; /* Lighter blue */
-    --accent-container: #2D3748; /* Dark blue container */
-    --surface: #2D3748; /* Dark blue surface */
-    --outline: #4A5568; /* Dark blue outline */
-    --shadow: 0 6px 12px rgba(0,0,0,0.25);
-}
+        [data-theme="dark"] {
+            --text-primary: #E6E1E5;
+            --text-secondary: #CAC4D0;
+            --bg-primary: #141218;
+            --bg-secondary: #1D1B20;
+            --accent: #D0BCFF;
+            --accent-container: #374d8b;
+            --surface: #1D1B20;
+            --outline: #938F99;
+            --shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
 
-/* Update all text elements to use blue-based colors */
-h1, h2, h3 {
-    color: var(--accent);
-}
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+            background-image: radial-gradient(circle at 70% 30%, var(--accent-container) 0%, transparent 60%);
+        }
 
-h2:after {
-    background: var(--accent);
-}
+        .card {
+            max-width: 640px;
+            width: 100%;
+            background: var(--surface);
+            border-radius: var(--radius-large);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--outline);
+            transition: var(--transition);
+        }
 
-p, li {
-    color: var(--text-secondary);
-}
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-container) 100%);
+            color: white;
+            position: relative;
+            transition: var(--transition);
+        }
 
-a {
-    color: var(--accent);
-}
+        .profile-pic {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 16px;
+            background-color: var(--accent-container);
+            transition: var(--transition);
+        }
 
-a:hover {
-    color: var(--accent-light);
-}
+        .content {
+            padding: 24px;
+        }
 
-.identity-badge {
-    background: var(--accent-container);
-    color: var(--accent);
-}
+        h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15px;
+        }
 
-.tagline {
-    background: rgba(81, 128, 199, 0.1); /* 10% opacity of accent */
-    color: var(--text-secondary);
-}
+        h2 {
+            color: var(--accent);
+            margin: 32px 0 16px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 8px;
+        }
 
-/* Update profile section to use blue gradient */
-.profile-section {
-    background: linear-gradient(135deg, var(--accent) 0%, #3A5A8A 100%);
-}
+        h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
 
-/* Update social links to use blue */
-.social-links a {
-    background: rgba(81, 128, 199, 0.2); /* 20% opacity of accent */
-}
+        p, li {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            letter-spacing: 0.25px;
+            line-height: 1.6;
+        }
 
-.social-links a:hover {
-    background: rgba(81, 128, 199, 0.3); /* 30% opacity of accent */
-}
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
 
-/* Update detail icons */
-.detail-icon {
-    background: var(--accent-container);
-    color: var(--accent);
-}
+        a:hover {
+            color: var(--accent-container);
+            text-decoration: underline;
+        }
 
-/* Update theme toggle button */
-.theme-toggle {
-    background: rgba(81, 128, 199, 0.2);
-}
+        .theme-toggle {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 10;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
 
-[data-theme="light"] .theme-toggle {
-    background: rgba(81, 128, 199, 0.7);
-}
+        [data-theme="light"] .theme-toggle {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgb(136, 130, 226);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 10;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
 
 
         .theme-toggle:hover {

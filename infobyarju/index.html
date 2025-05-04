@@ -12,6 +12,7 @@
             --bg-secondary: #F3EDF7;
             --accent: #5180c7;
             --accent-container: #EADDFF;
+            --accent-container2: #0076e4;
             --surface: #F3EDF7;
             --outline: #79747E;
             --shadow: 0 3px 6px rgba(0,0,0,0.1);
@@ -47,6 +48,22 @@
             padding: 16px;
             background-image: radial-gradient(circle at 70% 30%, var(--accent-container) 0%, transparent 60%);
         }
+
+
+        @keyframes myAnim {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
 
         .card {
             max-width: 640px;
@@ -211,9 +228,11 @@
             opacity: 0.9;
             margin: 8px 0 16px;
             font-size: 0.875rem;
-            background: rgba(0,0,0,0.15);
+            background: var(--accent-container2);
+            color: var(--accent);
             padding: 6px 12px;
             border-radius: 20px;
+            animation: myAnim 1s ease 0s infinite normal none;
         }
 
         .identity-badge {
@@ -263,6 +282,22 @@
             justify-content: center;
             color: var(--accent);
             flex-shrink: 0;
+        }
+
+        .horizontal-pane {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        }
+
+        .horizontal-pane p {
+        margin: 0;
+        cursor: pointer; /* Changes cursor to a hand on hover */
+        }
+
+        /* Optional: Add hover effect */
+        .horizontal-pane p:hover {
+        text-decoration: underline;
         }
 
         @media (max-width: 600px) {
@@ -315,7 +350,15 @@
         <div class="profile-section">
             <img src="logo.jpg" alt="Profile Picture" class="profile-pic">
             <h1>Vinay Arjun</h1>
-            <p class="tagline"><a href="meme" class="headanch">Memes</a> & <a href="info" class="headanch">Information</a></p>
+            <div class="horizontal-pane">
+                <p class="tagline" onclick="window.location.href='meme'">
+                  <a href="meme" class="headanch">Memes</a>
+                </p>
+                <p>&</p>
+                <p class="tagline" onclick="window.location.href='info'">
+                  <a href="info" class="headanch">Information</a>
+                </p>
+              </div>
             <div class="identity-badge">
                 <i class="fas fa-graduation-cap"></i>
                 <span>Ex-DAVian • Passout Topper</span>

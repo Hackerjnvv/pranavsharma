@@ -1,113 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hi, I'm Pranav Sharma, a student passionate about coding, chess, and building amazing projects. Check out my portfolio to explore my skills, hobbies, and projects!">
-    <meta name="keywords" content="Pranav Sharma, Developer Portfolio, Developer Pranav, Coding, Developer Pranav Sharma, Pranav Pulse Portfolio, Pranav Pulse Web Developer, AI Enthusiast, Student Programmer">
-    <meta name="author" content="Pranav">
+    <meta name="description" content="Hi, I'm Pranav Sharma. A portfolio showcasing my skills in coding and web development, designed with a futuristic Liquid Glass aesthetic.">
+    <meta name="keywords" content="Pranav Sharma, Liquid Glass, iOS 26 Design, Developer Portfolio, Web Developer, AI Enthusiast, Student Programmer">
+    <meta name="author" content="Pranav Sharma">
     <meta property="og:title" content="Pranav Sharma - Personal Portfolio">
-    <meta property="og:description" content="Explore my skills, hobbies, and projects as a passionate coder and trading enthusiast.">
+    <meta property="og:description" content="Explore my skills and projects through a dynamic, translucent interface inspired by the 'Liquid Glass' design language.">
     <meta property="og:image" content="user.png">
     <meta property="og:url" content="https://pranav-sharma.pages.dev">
-    <meta name="twitter:title" content="Pranav Sharma - Personal Portfolio">
-    <meta name="twitter:description" content="Explore my skills, hobbies, and projects as a passionate coder and chess enthusiast.">
-    <meta name="twitter:image" content="user.png">
     <link rel="icon" href="user.png">
-    <link rel="canonical" href="https://pranav-sharma.pages.dev">
     <title>Pranav Sharma - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <link rel="stylesheet" href="styles.css">
-    <script src="DM/script5.js"></script>
 </head>
 <body>
-    <div class="bubble-background">
-        <header class="header">
-            <div class="intro-animation">
-                <i class="fas fa-code"></i>
-                <h1>Hi, I'm <span class="highlight">Pranav Sharma</span></h1>
-                <p>Welcome to my World!</p>
-            </div>
-        </header>
-        <section class="about-section">
-            <div class="profile-card">
-                <img src="user.png" alt="Pranav's Profile Picture" class="profile-img">
-                <h2>Pranav Sharma</h2>
-                <p class="info">
-                    A curious <span class="grade">10th grader</span> at 
-                    <strong class="school">DAV Public School Jehanabad</strong>, 
-                    on a journey to unlock the world of technology</span>.
-                  </p>
-                <ul class="skills-list">
-                    <li><i class="fa-brands fa-html5"></i> HTML</li>
-                    <li><i class="fa-brands fa-css3-alt"></i> CSS</li>
-                    <li><i class="fab fa-java"></i> Java</li>
-                    <li><i class="fa-brands fa-python"></i> Python</li>
-                </ul>
-                <div id="message">
-                    <input 
-                        type="email" 
-                        id="email" 
-                        placeholder="Enter your email" 
-                        required 
-                        spellcheck="false" 
-                        autocapitalize="none" 
-                        autocomplete="off">
-                    <br><br>
-                    <textarea 
-                        id="message1" 
-                        style="height: 40px; overflow-y: hidden;" 
-                        oninput="adjustHeight(this)" 
-                        placeholder="Enter your message" 
-                        required 
-                        spellcheck="false" 
-                        autocapitalize="none" 
-                        autocomplete="off"></textarea>
-                    <br><br>
-                    <button onclick="sendDetails()">Send Message</button>
-                </div>
-                <button id="toggleButton" onclick="toggleMessageDiv()">Message</button>
-                
-              
-        </section>
-        <section class="hobbies-section">
-            <h3>What I Love</h3>
-            <div class="hobbies-grid">
-                <div class="hobby-card" style="background-image: url('https://t3.ftcdn.net/jpg/02/33/38/00/240_F_233380090_qwnDCLJHtdxGnhJqv7SEyinzrkRs8jep.jpg');">
-                    <i class="fas fa-tools"></i>
-                    <p>Creating Web Apps</p>
-                </div>
-            </div>
-        </section>
-        <section class="projects-section">
-            <h3>My Projects</h3>
-            <ul class="projects-list">
-                <li><a class="project" href="https://tictactoebypranavsharma.pages.dev/" target="_blank"><i class="fas fa-gamepad"></i> Tic-Tac-Toe</a></li>
-                <li><a class="project" href="DM/index.html" target="_blank"><i class="fas fa-paper-plane"></i> DM Sender</a></li>
-                <li><a class="project" href="https://databypranav.pages.dev/" target="_blank"><i class="fas fa-solid fa-file"></i> Birthday Data</a></li>
-            </ul>
-          <p>Due to platform backend processing restrictions,<br>I cannot host a backend project that requires server-side support.<br>Below is the zip download link, and you can test it on your machine.</p>
-          <ul class="backendProject-list">
-            <li class="backend"><a class="backendProject" href="backendProject\edhacking.zip" target="_blank"><i class="fa-solid fa-skull-crossbones"></i>
-            </i> EDhacking</a></li>
-            <li class="backend"><a class="backendProject" href="backendProject\boxPP.zip" target="_blank"><i class="fa-solid fa-upload"></i>
-            </i>BoxPP</a></li>
-            <li class="backend"><a class="backendProject" href="backendProject\chatsystem.zip" target="_blank"><i class="fa-solid fa-message"></i>
-            </i>Chatsystem</a></li>
-          </ul>
-        </section>
-        <section class="social-links">
-            <h3>Find Me Here</h3>
-            <ul class="social-list">
-                <li><a href="https://www.instagram.com/itz_me_pranav_sharma/" target="_blank"><i class="fa-brands fa-square-instagram fa-fade" style="color: #ffffff;"></i> <b>itz_me_pranav_sharma</b></a></li><p></p>
-                <li><a href="https://www.t.me/itz_me_pranav_sharma/" target="_blank"><i class="fa-brands fa-telegram fa-fade" style="color: #ffffff;"></i> <b>itz_me_pranav_sharma</b></a></li>
-            </ul>
-        </section>
-        <footer class="footer">
-            <p>Made with <i class="fas fa-heart heart-icon"></i> by Pranav Sharma</p><br>Last Updated: 25 Jan 2025
-        </footer>
+
+    <div class="background-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
     </div>
+
+    <header class="sticky-header">
+        <div class="header-content">
+            <h1 class="header-title">Pranav Sharma</h1>
+            <button id="theme-toggle" class="theme-button" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="portfolio-container">
+
+        <!-- About Section -->
+        <section id="about" class="glass-card profile-card">
+            <img src="user.png" alt="Pranav's Profile Picture" class="profile-img">
+            <h2 class="profile-name">Hi, I'm Pranav Sharma</h2>
+            <p class="profile-bio">
+                A curious <span class="highlight">10th grader</span> at <strong>DAV Public School Jehanabad</strong>, exploring the frontiers of technology and design.
+            </p>
+            
+            <div class="skills-grid">
+                <div class="skill-item"><i class="fab fa-html5"></i><span>HTML</span></div>
+                <div class="skill-item"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+                <div class="skill-item"><i class="fab fa-java"></i><span>Java</span></div>
+                <div class="skill-item"><i class="fab fa-python"></i><span>Python</span></div>
+            </div>
+        </section>
+
+        <!-- Projects & Hobbies Section -->
+        <div class="grid-layout">
+            <section id="hobbies" class="glass-card">
+                <h3>What I Love</h3>
+                <div class="hobby-card">
+                    <div class="hobby-content">
+                        <i class="fas fa-code-branch"></i>
+                        <p>Creating Web Apps</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="glass-card">
+                <h3>My Projects</h3>
+                <ul class="projects-list">
+                    <li><a href="https://tictactoebypranavsharma.pages.dev/" target="_blank"><i class="fas fa-gamepad icon"></i><span>Tic-Tac-Toe</span><i class="fas fa-arrow-up-right-from-square link-icon"></i></a></li>
+                    <li><a href="DM/index.html" target="_blank"><i class="fas fa-paper-plane icon"></i><span>DM Sender</span><i class="fas fa-arrow-up-right-from-square link-icon"></i></a></li>
+                    <li><a href="https://databypranav.pages.dev/" target="_blank"><i class="fas fa-database icon"></i><span>Birthday Data</span><i class="fas fa-arrow-up-right-from-square link-icon"></i></a></li>
+                </ul>
+            </section>
+        </div>
+
+        <section id="contact" class="glass-card">
+             <h3>Get in Touch</h3>
+            <form id="contact-form" class="contact-form">
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" rows="3" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="social-links">
+            <a href="https://www.instagram.com/itz_me_pranav_sharma/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.t.me/itz_me_pranav_sharma/" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Made with <i class="fas fa-heart"></i> by Pranav Sharma</p>
+        <p class="last-updated">Last Updated: 25 Jan 2025</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

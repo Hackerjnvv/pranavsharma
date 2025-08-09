@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attractor Workbench</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="preview-container"></div>
+    <div id="controls">
+        <h2>Controls</h2>
+        
+        <!-- Parameter 'a' with buttons -->
+        <div class="slider-group">
+            <label>Parameter 'a': <span id="a-value">-1.4</span></label>
+            <div class="slider-container">
+                <button class="stepper-btn" id="a-minus">-</button>
+                <input type="range" id="a-slider" min="-2.5" max="2.5" value="-1.4" step="0.01">
+                <button class="stepper-btn" id="a-plus">+</button>
+            </div>
+        </div>
+        
+        <!-- Parameter 'b' with buttons -->
+        <div class="slider-group">
+            <label>Parameter 'b': <span id="b-value">1.6</span></label>
+            <div class="slider-container">
+                <button class="stepper-btn" id="b-minus">-</button>
+                <input type="range" id="b-slider" min="-2.5" max="2.5" value="1.6" step="0.01">
+                <button class="stepper-btn" id="b-plus">+</button>
+            </div>
+        </div>
+
+        <!-- Parameter 'c' with buttons -->
+        <div class="slider-group">
+            <label>Parameter 'c': <span id="c-value">1.0</span></label>
+            <div class="slider-container">
+                <button class="stepper-btn" id="c-minus">-</button>
+                <input type="range" id="c-slider" min="-2.5" max="2.5" value="1.0" step="0.01">
+                <button class="stepper-btn" id="c-plus">+</button>
+            </div>
+        </div>
+
+        <!-- Parameter 'd' with buttons -->
+        <div class="slider-group">
+            <label>Parameter 'd': <span id="d-value">0.7</span></label>
+            <div class="slider-container">
+                <button class="stepper-btn" id="d-minus">-</button>
+                <input type="range" id="d-slider" min="-2.5" max="2.5" value="0.7" step="0.01">
+                <button class="stepper-btn" id="d-plus">+</button>
+            </div>
+        </div>
+        
+        <hr>
+        <label for="color-scheme">Color Scheme:</label>
+        <select id="color-scheme">
+            <option value="nebula">Nebula (Cyan-Pink)</option>
+            <option value="volcano">Volcano (Yellow-Red)</option>
+            <option value="forest">Forest (Green-Yellow)</option>
+        </select>
+        <hr>
+        <button id="open-render-page">Generate in 4K</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="workbench.js"></script>
+</body>
+</html>

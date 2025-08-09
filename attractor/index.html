@@ -2,64 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attractor Workbench</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div id="preview-container"></div>
-    <div id="controls">
-        <h2>Controls</h2>
-        
-        <!-- Parameter 'a' with buttons -->
-        <div class="slider-group">
-            <label>Parameter 'a': <span id="a-value">-1.4</span></label>
-            <div class="slider-container">
-                <button class="stepper-btn" id="a-minus">-</button>
-                <input type="range" id="a-slider" min="-2.5" max="2.5" value="-1.4" step="0.01">
-                <button class="stepper-btn" id="a-plus">+</button>
-            </div>
-        </div>
-        
-        <!-- Parameter 'b' with buttons -->
-        <div class="slider-group">
-            <label>Parameter 'b': <span id="b-value">1.6</span></label>
-            <div class="slider-container">
-                <button class="stepper-btn" id="b-minus">-</button>
-                <input type="range" id="b-slider" min="-2.5" max="2.5" value="1.6" step="0.01">
-                <button class="stepper-btn" id="b-plus">+</button>
-            </div>
-        </div>
+    <div class="app-container">
+        <header class="app-header">
+            <h1><i class="fas fa-atom"></i> Attractor Workbench</h1>
+            <p class="subtitle">Explore chaotic attractors in real-time</p>
+        </header>
 
-        <!-- Parameter 'c' with buttons -->
-        <div class="slider-group">
-            <label>Parameter 'c': <span id="c-value">1.0</span></label>
-            <div class="slider-container">
-                <button class="stepper-btn" id="c-minus">-</button>
-                <input type="range" id="c-slider" min="-2.5" max="2.5" value="1.0" step="0.01">
-                <button class="stepper-btn" id="c-plus">+</button>
+        <div class="main-content">
+            <div id="preview-container" class="preview-panel">
+                <div class="canvas-container" id="canvas-wrapper"></div>
+                <div class="performance-info">
+                    <span id="fps-counter">0 FPS</span>
+                    <span id="point-counter">0 points</span>
+                </div>
             </div>
-        </div>
 
-        <!-- Parameter 'd' with buttons -->
-        <div class="slider-group">
-            <label>Parameter 'd': <span id="d-value">0.7</span></label>
-            <div class="slider-container">
-                <button class="stepper-btn" id="d-minus">-</button>
-                <input type="range" id="d-slider" min="-2.5" max="2.5" value="0.7" step="0.01">
-                <button class="stepper-btn" id="d-plus">+</button>
+            <div id="controls" class="control-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-sliders-h"></i> Controls</h2>
+                    <button id="reset-btn" class="icon-btn" title="Reset">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </div>
+
+                <div class="control-groups">
+                    <!-- Parameter 'a' -->
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span class="param-name">Parameter A</span>
+                            <span class="param-value" id="a-value">-1.40</span>
+                        </label>
+                        <div class="slider-container">
+                            <button class="stepper-btn" id="a-minus">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="range" id="a-slider" min="-2.5" max="2.5" value="-1.4" step="0.01" class="slider">
+                            <button class="stepper-btn" id="a-plus">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Parameter 'b' -->
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span class="param-name">Parameter B</span>
+                            <span class="param-value" id="b-value">1.60</span>
+                        </label>
+                        <div class="slider-container">
+                            <button class="stepper-btn" id="b-minus">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="range" id="b-slider" min="-2.5" max="2.5" value="1.6" step="0.01" class="slider">
+                            <button class="stepper-btn" id="b-plus">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Parameter 'c' -->
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span class="param-name">Parameter C</span>
+                            <span class="param-value" id="c-value">1.00</span>
+                        </label>
+                        <div class="slider-container">
+                            <button class="stepper-btn" id="c-minus">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="range" id="c-slider" min="-2.5" max="2.5" value="1.0" step="0.01" class="slider">
+                            <button class="stepper-btn" id="c-plus">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Parameter 'd' -->
+                    <div class="control-group">
+                        <label class="control-label">
+                            <span class="param-name">Parameter D</span>
+                            <span class="param-value" id="d-value">0.70</span>
+                        </label>
+                        <div class="slider-container">
+                            <button class="stepper-btn" id="d-minus">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="range" id="d-slider" min="-2.5" max="2.5" value="0.7" step="0.01" class="slider">
+                            <button class="stepper-btn" id="d-plus">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="color-scheme" class="control-label">
+                            <span class="param-name">Color Scheme</span>
+                        </label>
+                        <select id="color-scheme" class="styled-select">
+                            <option value="nebula">Nebula (Cyan-Pink)</option>
+                            <option value="volcano">Volcano (Yellow-Red)</option>
+                            <option value="forest">Forest (Green-Yellow)</option>
+                            <option value="monochrome">Monochrome</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="point-density" class="control-label">
+                            <span class="param-name">Point Density</span>
+                            <span class="param-value" id="density-value">Medium</span>
+                        </label>
+                        <input type="range" id="point-density" min="1" max="3" value="2" step="1" class="slider">
+                    </div>
+                </div>
+
+                <button id="open-render-page" class="action-btn">
+                    <i class="fas fa-image"></i> Generate 4K Image
+                </button>
             </div>
         </div>
-        
-        <hr>
-        <label for="color-scheme">Color Scheme:</label>
-        <select id="color-scheme">
-            <option value="nebula">Nebula (Cyan-Pink)</option>
-            <option value="volcano">Volcano (Yellow-Red)</option>
-            <option value="forest">Forest (Green-Yellow)</option>
-        </select>
-        <hr>
-        <button id="open-render-page">Generate in 4K</button>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
     <script src="workbench.js"></script>
 </body>

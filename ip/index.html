@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Non-Blocking Device Info</title>
-    <!-- UA-Parser-JS Library -->
+    <title>Device Model & Fingerprint</title>
+    <!-- STEP 1: UA-Parser-JS Library ko include karna -->
     <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.33/src/ua-parser.min.js"></script>
     
     <style>
@@ -18,9 +18,27 @@
         .info-item strong { color: #9cdcfe; min-width: 150px; }
         .info-item span { color: #ce9178; word-break: break-all; text-align: right;}
         .loader { text-align: center; font-size: 18px; color: #888; padding: 40px 0; }
-        /* Style for the IP address while it's loading */
-        #ipAddress.loading { color: #f9d71c; /* Yellow color for loading state */ }
-        #ipAddress.error { color: #f44747; /* Red color for error state */ }
+        pre { background: #1e1e1e; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-break: break-all; font-size: 13px; color: #c8c8c8; border: 1px solid #444; }
+
+        /* --- NAYE CSS RULES START --- */
+        #cricketFactContainer {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px dashed #444;
+            border-radius: 5px;
+        }
+        #cricketFactContainer h4 {
+            color: #4ec9b0; /* Main heading color */
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
+        #cricketFact {
+            color: #ce9178; /* Value color */
+            font-size: 15px;
+            min-height: 40px; /* Text jump hone se rokne ke liye */
+            transition: opacity 0.5s ease-in-out; /* Smooth transition */
+        }
+        /* --- NAYE CSS RULES END --- */
     </style>
 </head>
 <body>
@@ -28,10 +46,18 @@
 <div class="container">
     <h1>Device Model & Unique ID</h1>
     <div id="loader" class="loader">
-        <p>Initialising...</p>
+        <p>Device ki jaankari nikali jaa rahi hai...</p>
+        
+        <!-- === NAYA SECTION START === -->
+        <div id="cricketFactContainer">
+            <h4>🏏 Did You Know?</h4>
+            <p id="cricketFact">Loading interesting facts...</p>
+        </div>
+        <!-- === NAYA SECTION END === -->
     </div>
     
     <div id="results" style="display: none;">
+        
         <div class="info-card">
             <h3>📱 Device Model & OS</h3>
             <div class="info-item"><strong>Company:</strong> <span id="deviceVendor"></span></div>
@@ -43,56 +69,67 @@
         <div class="info-card">
             <h3>🔒 Unique Fingerprint & IP</h3>
             <div class="info-item"><strong>Unique ID (Hash):</strong> <span id="fingerprint"></span></div>
-            <div class="info-item">
-                <strong>IP Address:</strong> 
-                <!-- Initial state will be 'Fetching...' -->
-                <span id="ipAddress" class="loading">Fetching IP...</span>
-            </div>
+            <div class="info-item"><strong>IP Address:</strong> <span id="ipAddress"></span></div>
+        </div>
+        
+        <div class="info-card">
+            <h3>⚙️ Raw Technical Data</h3>
+            <pre id="rawData"></pre>
         </div>
     </div>
 </div>
 
 <script>
     (async () => {
-        // --- Helper function to get IP address ---
-        // This function will be called in the background
-        const getIpAddress = async () => {
-            const apis = [
-                'https://api.ipify.org?format=json',
-                'https://ipinfo.io/json',
-                'https://api.db-ip.com/v2/free/self'
-            ];
-            // Adding a timeout to each fetch request for better reliability
-            const fetchWithTimeout = (url, timeout = 5000) => {
-                return Promise.race([
-                    fetch(url),
-                    new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), timeout))
-                ]);
-            };
+        // --- STEP A: Cricket Facts ka Array aur Interval Variable ---
+        const cricketFacts = [
+            "Sachin Tendulkar is the only player to have scored 100 international centuries.",
+            "Don Bradman's Test batting average of 99.94 is widely regarded as the greatest achievement by any sportsman.",
+            "Rohit Sharma holds the record for the highest individual score in a One Day International (ODI) match with 264 runs.",
+            "Jim Laker of England is the only bowler to take 19 wickets in a single Test match.",
+            "Muttiah Muralitharan of Sri Lanka has taken the most international wickets, with 800 in Tests and 534 in ODIs.",
+            "Yuvraj Singh hit 6 sixes in an over against England's Stuart Broad in the 2007 T20 World Cup."
+        ];
+        let factInterval; // Interval ko store karne ke liye
 
+        // --- STEP B: Naya function jo facts ko rotate karega ---
+        const startFactRotator = () => {
+            const factElement = document.getElementById('cricketFact');
+            let factIndex = 0;
+
+            const updateFact = () => {
+                factElement.style.opacity = 0; // Fade out
+                setTimeout(() => {
+                    factElement.textContent = cricketFacts[factIndex];
+                    factElement.style.opacity = 1; // Fade in
+                    factIndex = (factIndex + 1) % cricketFacts.length; // Agle fact par jao
+                }, 500); // 0.5s fade out ke liye time
+            };
+            
+            updateFact(); // Pehla fact turant dikhao
+            factInterval = setInterval(updateFact, 2500); // Har 2.5 second mein fact badlo
+        };
+        
+        // --- Helper function to get IP address ---
+        const getIpAddress = async () => {
+            const apis = ['https://api.ipify.org?format=json', 'https://ipinfo.io/json'];
             try {
-                const response = await Promise.any(apis.map(api => fetchWithTimeout(api)));
-                const result = await response.json();
-                return result.ip || result.ipAddress || 'Not Found';
-            } catch (error) {
-                console.error("Could not fetch IP from any API:", error);
-                throw new Error("IP Fetch Failed");
-            }
+                const result = await Promise.any(apis.map(api => fetch(api).then(res => res.json())));
+                return result.ip || 'Not Found';
+            } catch (error) { return "Not Found"; }
         };
 
-        // --- Fingerprinting function (fast, local) ---
+        // --- Fingerprinting function from previous example ---
         const getComprehensiveFingerprint = async () => {
             const getCanvasFingerprint = () => {
                 try {
                     const canvas = document.createElement('canvas');
-                    canvas.width = 200; canvas.height = 50;
                     const ctx = canvas.getContext('2d');
-                    ctx.font = "16px Arial";
-                    ctx.fillStyle = "rgb(123,56,89)";
-                    ctx.fillText("Unique ID test string? 1#2$3", 10, 30);
+                    ctx.fillText("Browser Fingerprint 123!@#", 2, 15);
                     return canvas.toDataURL();
                 } catch (e) { return "error"; }
             };
+            
             const components = {
                 userAgent: navigator.userAgent,
                 language: navigator.language,
@@ -101,51 +138,51 @@
                 timezone: new Intl.DateTimeFormat().resolvedOptions().timeZone,
                 canvas: getCanvasFingerprint(),
             };
-            const componentString = JSON.stringify(components);
-            const hashBuffer = await crypto.subtle.digest('SHA-266', new TextEncoder().encode(componentString));
+            
+            const componentString = JSON.stringify(components, Object.keys(components).sort());
+            const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(componentString));
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         };
-        
-        // --- Function to fetch and update only the IP address ---
-        const fetchAndDisplayIp = async () => {
-            const ipElement = document.getElementById('ipAddress');
-            try {
-                const ip = await getIpAddress();
-                ipElement.textContent = ip;
-                ipElement.classList.remove('loading');
-            } catch (error) {
-                ipElement.textContent = 'Failed to fetch';
-                ipElement.classList.remove('loading');
-                ipElement.classList.add('error');
-            }
-        };
 
 
-        // --- Main Execution on Page Load ---
-        const runInitialAnalysis = async () => {
-            // STEP 1: Get all FAST, LOCAL data first
+        // --- Main Execution ---
+        const runAnalysis = async () => {
+            // STEP 2: Library ko use karna
             const parser = new UAParser();
             const result = parser.getResult();
-            const fingerprint = await getComprehensiveFingerprint();
-
-            // STEP 2: Display this fast data IMMEDIATELY
+            
+            // Collect all data in parallel for speed
+            const [ipAddress, fingerprint] = await Promise.all([
+                getIpAddress(),
+                getComprehensiveFingerprint()
+            ]);
+            
+            // Display Device Model Info
             document.getElementById('deviceVendor').textContent = result.device.vendor || 'Unknown';
             document.getElementById('deviceModel').textContent = result.device.model || 'Unknown';
             document.getElementById('deviceType').textContent = result.device.type || 'desktop';
             document.getElementById('osName').textContent = `${result.os.name} ${result.os.version}`;
-            document.getElementById('fingerprint').textContent = fingerprint;
 
-            // STEP 3: Hide the main loader and show the results
+            // Display Fingerprint & IP
+            document.getElementById('fingerprint').textContent = fingerprint;
+            document.getElementById('ipAddress').textContent = ipAddress;
+
+            // Display raw data for verification
+            document.getElementById('rawData').textContent = JSON.stringify(result, null, 2);
+
+            // --- STEP C: Fact rotator ko roko aur results dikhao ---
+            clearInterval(factInterval); // Interval ko rokna zaroori hai
+            
+            // Show results
             document.getElementById('loader').style.display = 'none';
             document.getElementById('results').style.display = 'block';
-
-            // STEP 4: NOW, start the SLOW network request for IP in the background.
-            // We DO NOT 'await' it here. We just fire and forget.
-            fetchAndDisplayIp();
         };
 
-        window.addEventListener('load', runInitialAnalysis);
+        window.addEventListener('load', () => {
+            startFactRotator(); // Page load hote hi facts dikhana shuru karo
+            runAnalysis();      // Aur background mein analysis chalao
+        });
     })();
 </script>
 

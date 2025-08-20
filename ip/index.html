@@ -3,171 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device Info Collector</title>
+    <title>Device Model & Fingerprint</title>
+    <!-- STEP 1: UA-Parser-JS Library ko include karna -->
+    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.33/src/ua-parser.min.js"></script>
+    
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; color: #333; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #1a73e8; }
-        .info-box { margin-top: 20px; }
-        .info-item { padding: 12px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; word-break: break-all; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1e1e1e; color: #d4d4d4; padding: 20px; font-size: 14px; }
+        .container { max-width: 900px; margin: auto; background: #252526; padding: 25px; border-radius: 8px; border: 1px solid #333; }
+        h1, h3 { text-align: center; color: #4ec9b0; }
+        .info-card { background-color: #1e1e1e; padding: 15px; border-radius: 5px; border: 1px solid #444; margin-bottom: 20px; }
+        .info-card h3 { text-align: left; color: #569cd6; border-bottom: 1px solid #444; padding-bottom: 5px; margin-top: 0; }
+        .info-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #2a2a2a; }
         .info-item:last-child { border-bottom: none; }
-        .info-item strong { color: #555; min-width: 150px; }
-        .info-item span { color: #000; }
-        .loader { text-align: center; font-size: 18px; color: #888; }
+        .info-item strong { color: #9cdcfe; min-width: 150px; }
+        .info-item span { color: #ce9178; word-break: break-all; text-align: right;}
+        .loader { text-align: center; font-size: 18px; color: #888; padding: 40px 0; }
+        pre { background: #1e1e1e; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-break: break-all; font-size: 13px; color: #c8c8c8; border: 1px solid #444; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Aapki Device Information</h1>
+    <h1>Device Model & Unique ID</h1>
     <div id="loader" class="loader">
-        <p>Jaankari collect ki jaa rahi hai, कृपया प्रतीक्षा करें...</p>
+        <p>Device ki jaankari nikali jaa rahi hai...</p>
     </div>
-    <div id="deviceInfo" class="info-box" style="display: none;">
-        <div class="info-item">
-            <strong>Device Model (Guess):</strong>
-            <span id="deviceModel"></span>
+    
+    <div id="results" style="display: none;">
+        
+        <div class="info-card">
+            <h3>📱 Device Model & OS</h3>
+            <div class="info-item"><strong>Company:</strong> <span id="deviceVendor"></span></div>
+            <div class="info-item"><strong>Model:</strong> <span id="deviceModel"></span></div>
+            <div class="info-item"><strong>Type:</strong> <span id="deviceType"></span></div>
+            <div class="info-item"><strong>OS:</strong> <span id="osName"></span></div>
         </div>
-        <div class="info-item">
-            <strong>Unique Fingerprint:</strong>
-            <span id="fingerprint"></span>
+
+        <div class="info-card">
+            <h3>🔒 Unique Fingerprint & IP</h3>
+            <div class="info-item"><strong>Unique ID (Hash):</strong> <span id="fingerprint"></span></div>
+            <div class="info-item"><strong>IP Address:</strong> <span id="ipAddress"></span></div>
         </div>
-        <div class="info-item">
-            <strong>IP Address (v4/v6):</strong>
-            <span id="ipAddress"></span>
+        
+        <div class="info-card">
+            <h3>⚙️ Raw Technical Data</h3>
+            <pre id="rawData"></pre>
         </div>
     </div>
 </div>
 
 <script>
-    // PART 1: DEVICE FINGERPRINTING CODE
-
-    // Helper function to create a SHA-256 hash
-    async function generateHash(data) {
-        const encoder = new TextEncoder();
-        const dataBuffer = encoder.encode(data);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
-    }
-
-    // Function to get the canvas fingerprint (very powerful for uniqueness)
-    function getCanvasFingerprint() {
-        try {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const text = "DeviceFingerprint_ID_@123#_canvas";
-            ctx.textBaseline = "top";
-            ctx.font = "14px 'Arial'";
-            ctx.textBaseline = "alphabetic";
-            ctx.fillStyle = "#f60";
-            ctx.fillRect(125, 1, 62, 20);
-            ctx.fillStyle = "#069";
-            ctx.fillText(text, 2, 15);
-            ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
-            ctx.fillText(text, 4, 17);
-            return canvas.toDataURL();
-        } catch (e) {
-            return "canvas-not-supported";
-        }
-    }
-
-    // Main function to collect all device components for the fingerprint
-    async function getDeviceFingerprint() {
-        // Guessing device model from User Agent
-        const ua = navigator.userAgent;
-        let deviceModel = "Unknown";
-        if (/android/i.test(ua)) {
-            const match = ua.match(/;\s?([^\s;]+)\sBuild\//);
-            deviceModel = match ? `Android (${match[1]})` : "Android (Generic)";
-        } else if (/iphone|ipad|ipod/i.test(ua)) {
-            deviceModel = ua.match(/(iPhone|iPad|iPod)/i)[0];
-        } else if (/windows phone/i.test(ua)) {
-            deviceModel = "Windows Phone";
-        } else if (/mac/i.test(ua)) {
-            deviceModel = "Mac/MacBook";
-        } else if (/windows/i.test(ua)) {
-            deviceModel = "Windows PC";
-        }
-
-        // Collecting all components for uniqueness
-        const components = {
-            userAgent: navigator.userAgent,
-            language: navigator.language,
-            screenResolution: `${screen.width}x${screen.height}x${screen.colorDepth}`,
-            hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
-            timezone: new Intl.DateTimeFormat().resolvedOptions().timeZone,
-            platform: navigator.platform,
-            canvasFingerprint: getCanvasFingerprint()
+    (async () => {
+        // --- Helper function to get IP address ---
+        const getIpAddress = async () => {
+            const apis = ['https://api.ipify.org?format=json', 'https://ipinfo.io/json'];
+            try {
+                const result = await Promise.any(apis.map(api => fetch(api).then(res => res.json())));
+                return result.ip || 'Not Found';
+            } catch (error) { return "Not Found"; }
         };
 
-        const values = Object.values(components).join('||');
-        const fingerprint = await generateHash(values);
-
-        return {
-            deviceModel: deviceModel,
-            fingerprint: fingerprint
+        // --- Fingerprinting function from previous example ---
+        const getComprehensiveFingerprint = async () => {
+            const getCanvasFingerprint = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillText("Browser Fingerprint 123!@#", 2, 15);
+                    return canvas.toDataURL();
+                } catch (e) { return "error"; }
+            };
+            
+            const components = {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                screenResolution: `${screen.width}x${screen.height}x${screen.colorDepth}`,
+                hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
+                timezone: new Intl.DateTimeFormat().resolvedOptions().timeZone,
+                canvas: getCanvasFingerprint(),
+            };
+            
+            const componentString = JSON.stringify(components, Object.keys(components).sort());
+            const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(componentString));
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         };
-    }
-
-    // PART 2: IP ADDRESS COLLECTION USING PUBLIC APIS
-
-    // List of public APIs to get IP address
-    const ipAPIs = [
-        'https://api.ipify.org?format=json',
-        'https://ipinfo.io/json',
-        'https://api.my-ip.io/ip.json',
-        'https://ip.seeip.org/jsonip',
-        'https://api.db-ip.com/v2/free/self'
-    ];
-
-    // Function to get IP address fast and reliably
-    async function getIpAddress() {
-        // Create an array of fetch promises
-        const promises = ipAPIs.map(api => fetch(api).then(res => res.json()));
-
-        try {
-            // Promise.any waits for the FIRST promise to resolve
-            const result = await Promise.any(promises);
-            // Different APIs return IP in different keys (ip, ip_address, etc.)
-            return result.ip || result.ipAddress || result.ip_address || 'Not Found';
-        } catch (error) {
-            console.error("Could not fetch IP from any API:", error);
-            return "Not Found";
-        }
-    }
 
 
-    // PART 3: COMBINING EVERYTHING ON PAGE LOAD
+        // --- Main Execution ---
+        const runAnalysis = async () => {
+            // STEP 2: Library ko use karna
+            const parser = new UAParser();
+            const result = parser.getResult();
+            
+            // Collect all data in parallel for speed
+            const [ipAddress, fingerprint] = await Promise.all([
+                getIpAddress(),
+                getComprehensiveFingerprint()
+            ]);
+            
+            // Display Device Model Info
+            document.getElementById('deviceVendor').textContent = result.device.vendor || 'Unknown';
+            document.getElementById('deviceModel').textContent = result.device.model || 'Unknown';
+            document.getElementById('deviceType').textContent = result.device.type || 'desktop';
+            document.getElementById('osName').textContent = `${result.os.name} ${result.os.version}`;
 
-    window.addEventListener('load', async () => {
-        const loader = document.getElementById('loader');
-        const infoDiv = document.getElementById('deviceInfo');
+            // Display Fingerprint & IP
+            document.getElementById('fingerprint').textContent = fingerprint;
+            document.getElementById('ipAddress').textContent = ipAddress;
 
-        // Get both fingerprint and IP address at the same time
-        const [deviceInfo, ipAddress] = await Promise.all([
-            getDeviceFingerprint(),
-            getIpAddress()
-        ]);
-        
-        // Update the HTML to show the collected data
-        document.getElementById('deviceModel').textContent = deviceInfo.deviceModel;
-        document.getElementById('fingerprint').textContent = deviceInfo.fingerprint;
-        document.getElementById('ipAddress').textContent = ipAddress;
+            // Display raw data for verification
+            document.getElementById('rawData').textContent = JSON.stringify(result, null, 2);
 
-        // Hide loader and show results
-        loader.style.display = 'none';
-        infoDiv.style.display = 'block';
+            // Show results
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+        };
 
-        // Log the final combined object to console
-        console.log("--- Final Collected Info ---");
-        console.log({
-            deviceModel: deviceInfo.deviceModel,
-            fingerprint: deviceInfo.fingerprint,
-            ipAddress: ipAddress
-        });
-    });
+        window.addEventListener('load', runAnalysis);
+    })();
 </script>
 
 </body>

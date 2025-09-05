@@ -161,3 +161,68 @@ body {
     .profile-name { font-size: 1.75rem; }
     .profile-img { width: 100px; height: 100px; }
 }
+/* =========================================
+   Latest Updates Section Styles
+   ========================================= */
+
+/* The main list container */
+.updates-list {
+    list-style: none; /* Removes default bullet points */
+    padding: 0;
+    margin: 1rem 0 0 0; /* Adds some space below the heading */
+    width: 100%;
+}
+
+/* Individual list items and the link inside the last one */
+.update-item,
+.update-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    /* CORRECTED: Using the theme variable for the border */
+    border-bottom: 1px solid var(--glass-border); 
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+/* The clickable link element */
+.update-link {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+/* Remove border from the last item */
+.update-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+}
+
+/* Hover effect for all items */
+.update-item:hover {
+    /* CORRECTED: Using the theme variable for the hover background */
+    background-color: var(--glass-bg-hover);
+    border-radius: 8px;
+}
+
+/* Left side content (icon and text) */
+.update-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.update-content .icon {
+    width: 20px;
+    text-align: center;
+    color: var(--highlight-color);
+}
+
+/* Right side meta-info (date, status, or link icon) */
+.update-meta {
+    font-size: 0.85em;
+    font-weight: 500;
+    opacity: 0.7;
+    white-space: nowrap;
+    margin-left: 1rem;
+}

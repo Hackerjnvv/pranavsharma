@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Theme Toggler ---
     const themeToggle = document.getElementById('theme-toggle');
     const htmlEl = document.documentElement;
     const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -11,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', newTheme);
     });
 
-    // --- Interactive Background Orbs ---
     const orbs = document.querySelectorAll('.orb');
     window.addEventListener('mousemove', (e) => {
         const { clientX, clientY } = e;
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         orbs[2].style.transform = `translate(${x / 3}%, ${100 - y}%)`;
     });
 
-    // --- Typing Animation ---
     const typingText = document.getElementById('typing-text');
     const words = ["a Web Developer.", "an AI Enthusiast.", "a Student Programmer."];
     let wordIndex = 0;
@@ -40,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!isDeleting && charIndex === currentWord.length + 1) {
             isDeleting = true;
-            setTimeout(type, 2000); // Pause before deleting
+            setTimeout(type, 2000);
         } else if (isDeleting && charIndex === -1) {
             isDeleting = false;
             wordIndex = (wordIndex + 1) % words.length;
-            setTimeout(type, 500); // Pause before typing next word
+            setTimeout(type, 500);
         } else {
             const typingSpeed = isDeleting ? 75 : 150;
             setTimeout(type, typingSpeed);
@@ -54,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         type();
     }
 
-    // --- Lazy Load Animation for Gallery ---
     const gallery = document.getElementById('gallery');
     const galleryItems = document.querySelectorAll('.photo-gallery-grid a');
     const observer = new IntersectionObserver((entries) => {
@@ -69,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(gallery);
     }
 
-    // --- Form & Modal Logic ---
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
@@ -82,7 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-/* --- Custom Modal & Telegram Logic --- */
+function getVisitorId() {
+    const storageKey = 'visitor_unique_id';
+    let visitorId = localStorage.getItem(storageKey);
+    if (!visitorId) {
+        visitorId = crypto.randomUUID();
+        localStorage.setItem(storageKey, visitorId);
+    }
+    return visitorId;
+}
+
 function showModal(message, isSuccess = true) {
     const modalOverlay = document.getElementById('status-modal');
     const modalIcon = document.getElementById('modal-icon');
@@ -90,6 +94,12 @@ function showModal(message, isSuccess = true) {
     modalMessage.textContent = message;
     modalIcon.className = isSuccess ? 'modal-icon success fas fa-check-circle' : 'modal-icon error fas fa-times-circle';
     modalOverlay.classList.add('visible');
+}
+
+function escapeMarkdown(text) {
+    if (typeof text !== 'string') return '';
+    const specialChars = /[_*[```()~`>#+\-=|{}.!]/g;
+    return text.replace(specialChars, '\\$&');
 }
 
 const TELEGRAM_BOT_TOKEN = "7916096761:AAEkAF0lyvzPk6uelhkDtdkdn-8x-TSlXRA";
@@ -110,7 +120,7 @@ async function handleFormSubmit(event) {
     submitButton.disabled = true;
     submitButton.textContent = 'Sending...';
 
-    const clientDetails = (() => { /* Self-invoking function for details */
+    const clientDetails = (() => {
         const ua = navigator.userAgent;
         return {
             browser: (ua.match(/(?:Chrome|Firefox|Safari|Edge|MSIE|Trident|Opera)[\/: ]([\d.]+)/) || [])[0] || "Unknown",
@@ -119,23 +129,30 @@ async function handleFormSubmit(event) {
         };
     })();
 
+    const safeEmail = escapeMarkdown(emailInput.value);
+    const safeMessage = escapeMarkdown(messageInput.value);
+    const safeDevice = escapeMarkdown(`${clientDetails.device} (${clientDetails.os})`);
+    const safeBrowser = escapeMarkdown(clientDetails.browser);
+    const safeVisitorId = escapeMarkdown(getVisitorId());
+
     const messageText = `
 PORTFOLIO NOTIFICATION
----------------------------------
-📬 **Email:** ${emailInput.value}
-📝 **Message:** ${messageInput.value}
----------------------------------
-💻 **Device:** ${clientDetails.device} (${clientDetails.os})
-🌐 **Browser:** ${clientDetails.browser}
----------------------------------
-🔗 **From:** https://pranav-sharma.pages.dev
+\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-
+📬 *Email:* ${safeEmail}
+📝 *Message:* ${safeMessage}
+\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-
+💻 *Device:* ${safeDevice}
+🌐 *Browser:* ${safeBrowser}
+🔑 *Visitor ID:* ${safeVisitorId}
+\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-
+🔗 *From:* https://pranav\\-sharma\\.pages\\.dev
     `;
 
     try {
         const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ chat_id: CHAT_ID, text: messageText, parse_mode: 'Markdown' })
+            body: JSON.stringify({ chat_id: CHAT_ID, text: messageText, parse_mode: 'MarkdownV2' })
         });
 
         if (response.ok) {

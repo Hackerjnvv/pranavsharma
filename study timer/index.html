@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    
+    <!-- YouTube IFrame API Script (नया जोड़ा गया) -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <style>
         /* --- Root Variables for Theming --- */
@@ -88,7 +91,7 @@
             gap: 0.5rem;
         }
 
-        button, .control-btn, .adjust-btn { /* Added .adjust-btn */
+        button, .control-btn, .adjust-btn {
             background: none;
             border: none;
             color: var(--text-color);
@@ -104,7 +107,7 @@
             transition: background-color 0.2s, opacity 0.2s;
         }
         
-        button:disabled, .adjust-btn:disabled { /* Style for disabled buttons */
+        button:disabled, .adjust-btn:disabled {
             cursor: not-allowed;
             opacity: 0.5;
         }
@@ -119,169 +122,73 @@
         }
 
         #custom-color-picker {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: 28px;
-            height: 28px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            width: 28px; height: 28px; background-color: transparent;
+            border: none; cursor: pointer;
         }
-        #custom-color-picker::-webkit-color-swatch {
-            border-radius: 50%;
-            border: 2px solid var(--text-color);
-        }
-        #custom-color-picker::-moz-color-swatch {
-            border-radius: 50%;
-            border: 2px solid var(--text-color);
-        }
+        #custom-color-picker::-webkit-color-swatch { border-radius: 50%; border: 2px solid var(--text-color); }
+        #custom-color-picker::-moz-color-swatch { border-radius: 50%; border: 2px solid var(--text-color); }
 
-        /* --- Timer Styles (Special Attention) --- */
-        #timer-container {
-            text-align: center;
-        }
+        /* --- Timer Styles --- */
+        #timer-container { text-align: center; }
 
-        /* --- NEW: Time Adjustment Controls --- */
         .time-adjust-controls {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
+            display: flex; justify-content: center;
+            gap: 2rem; margin-bottom: 1.5rem;
         }
 
-        .adjust-group {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .adjust-group .label {
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            color: var(--primary-color);
-        }
-        
-        .adjust-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            padding: 0;
-            background-color: var(--shadow-color);
-        }
-
-        .adjust-btn .material-icons-outlined {
-            font-size: 20px;
-        }
-        /* --- End NEW --- */
+        .adjust-group { display: flex; align-items: center; gap: 0.75rem; }
+        .adjust-group .label { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; color: var(--primary-color); }
+        .adjust-btn { width: 32px; height: 32px; border-radius: 50%; padding: 0; background-color: var(--shadow-color); }
+        .adjust-btn .material-icons-outlined { font-size: 20px; }
 
         .timer-display {
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            font-family: 'Roboto', monospace;
-            
+            font-size: 5rem; font-weight: 700; margin-bottom: 1.5rem; font-family: 'Roboto', monospace;
             background: linear-gradient(45deg, var(--primary-color), #03a9f4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            
-            letter-spacing: -2px;
-            text-shadow: 2px 2px 15px rgba(0, 229, 255, 0.2);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; text-fill-color: transparent;
+            letter-spacing: -2px; text-shadow: 2px 2px 15px rgba(0, 229, 255, 0.2);
         }
+        .timer-display .separator { animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .timer-display .separator {
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .timer-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
+        .timer-controls { display: flex; justify-content: center; gap: 1rem; }
         .control-btn {
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
-            color: #000;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+            font-size: 1rem; font-weight: 500; padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color); color: #000;
+            border-radius: 25px; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
         }
-
-        .control-btn:hover {
-            opacity: 0.85;
-            color: #000;
-        }
+        .control-btn:hover { opacity: 0.85; color: #000; }
 
         /* --- YouTube Player --- */
         #player-container {
-            margin-top: 2rem;
-            border-top: 1px solid var(--shadow-color);
-            padding-top: 1.5rem;
-            display: none; 
+            margin-top: 2rem; border-top: 1px solid var(--shadow-color);
+            padding-top: 1.5rem; display: none; 
         }
-
-        #player-container.show {
-            display: block;
-        }
-
-        .player-input {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
+        #player-container.show { display: block; }
+        .player-input { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
         .player-input input {
-            flex-grow: 1;
-            padding: 0.75rem;
-            border: 1px solid var(--shadow-color);
-            border-radius: 8px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-size: 0.9rem;
+            flex-grow: 1; padding: 0.75rem; border: 1px solid var(--shadow-color);
+            border-radius: 8px; background-color: var(--bg-color);
+            color: var(--text-color); font-size: 0.9rem;
         }
-
         .player-input button {
-            background-color: var(--primary-color);
-            color: #000;
-            font-weight: 500;
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
+            background-color: var(--primary-color); color: #000;
+            font-weight: 500; border-radius: 8px; padding: 0.5rem 1rem;
         }
-        
-        .player-input button:hover {
-            color: #000;
-        }
+        .player-input button:hover { color: #000; }
 
         .video-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background-color: #000;
-            border-radius: 8px;
-            overflow: hidden;
+            position: relative; width: 100%; aspect-ratio: 16 / 9;
+            background-color: #000; border-radius: 8px; overflow: hidden;
         }
-
+        /* iframe को अब JS से बनाया जाएगा, इसलिए यहाँ से स्टाइल हटा सकते हैं या रख सकते हैं */
         .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
         <!-- Top Toolbar -->
         <header class="toolbar">
@@ -298,7 +205,6 @@
 
         <!-- Countdown Timer -->
         <main id="timer-container">
-            <!-- NEW: Time Adjustment Controls -->
             <div class="time-adjust-controls">
                 <div class="adjust-group">
                     <button class="adjust-btn" id="inc-hours" title="Increase Hours"><span class="material-icons-outlined">add</span></button>
@@ -311,12 +217,9 @@
                     <button class="adjust-btn" id="dec-minutes" title="Decrease Minutes"><span class="material-icons-outlined">remove</span></button>
                 </div>
             </div>
-
             <div class="timer-display">
-                <span id="hours">03</span>
-                <span class="separator">:</span>
-                <span id="minutes">00</span>
-                <span class="separator">:</span>
+                <span id="hours">03</span><span class="separator">:</span>
+                <span id="minutes">00</span><span class="separator">:</span>
                 <span id="seconds">00</span>
             </div>
             <div class="timer-controls">
@@ -333,161 +236,110 @@
                 <button id="load-video-btn">Load Video</button>
             </div>
             <div class="video-wrapper">
-                <iframe 
-                    id="youtube-player" 
-                    src="" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+                <!-- इस div को API द्वारा iframe से बदल दिया जाएगा -->
+                <div id="youtube-player"></div>
             </div>
         </section>
     </div>
 
     <script>
         // --- DOM Element Selection ---
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-        const startBtn = document.getElementById('start-btn');
-        const pauseBtn = document.getElementById('pause-btn');
-        const resetBtn = document.getElementById('reset-btn');
-
-        // NEW: Time adjustment buttons
-        const incHoursBtn = document.getElementById('inc-hours');
-        const decHoursBtn = document.getElementById('dec-hours');
-        const incMinutesBtn = document.getElementById('inc-minutes');
-        const decMinutesBtn = document.getElementById('dec-minutes');
+        const hoursEl = document.getElementById('hours'), minutesEl = document.getElementById('minutes'), secondsEl = document.getElementById('seconds');
+        const startBtn = document.getElementById('start-btn'), pauseBtn = document.getElementById('pause-btn'), resetBtn = document.getElementById('reset-btn');
+        const incHoursBtn = document.getElementById('inc-hours'), decHoursBtn = document.getElementById('dec-hours'), incMinutesBtn = document.getElementById('inc-minutes'), decMinutesBtn = document.getElementById('dec-minutes');
         const adjustBtns = document.querySelectorAll('.adjust-btn');
-
-        const lightModeBtn = document.getElementById('light-mode-btn');
-        const darkModeBtn = document.getElementById('dark-mode-btn');
-        const customColorPicker = document.getElementById('custom-color-picker');
-
-        const togglePlayerBtn = document.getElementById('toggle-player-btn');
-        const playerContainer = document.getElementById('player-container');
-        const youtubeUrlInput = document.getElementById('youtube-url');
-        const loadVideoBtn = document.getElementById('load-video-btn');
-        const youtubePlayer = document.getElementById('youtube-player');
+        const lightModeBtn = document.getElementById('light-mode-btn'), darkModeBtn = document.getElementById('dark-mode-btn'), customColorPicker = document.getElementById('custom-color-picker');
+        const togglePlayerBtn = document.getElementById('toggle-player-btn'), playerContainer = document.getElementById('player-container'), youtubeUrlInput = document.getElementById('youtube-url'), loadVideoBtn = document.getElementById('load-video-btn');
 
         // --- Timer Logic ---
-        let timerInterval;
-        const DEFAULT_TIME = 3 * 60 * 60; // 3 hours in seconds
+        let timerInterval, isRunning = false;
+        const DEFAULT_TIME = 3 * 60 * 60;
         let totalSeconds = DEFAULT_TIME;
-        let isRunning = false;
 
         function updateTimerDisplay() {
-            // Prevent time from going negative
             if (totalSeconds < 0) totalSeconds = 0;
-
-            let hours = Math.floor(totalSeconds / 3600);
-            let minutes = Math.floor((totalSeconds % 3600) / 60);
-            let seconds = totalSeconds % 60;
-
-            hoursEl.textContent = String(hours).padStart(2, '0');
-            minutesEl.textContent = String(minutes).padStart(2, '0');
-            secondsEl.textContent = String(seconds).padStart(2, '0');
+            let h = Math.floor(totalSeconds / 3600), m = Math.floor((totalSeconds % 3600) / 60), s = totalSeconds % 60;
+            hoursEl.textContent = String(h).padStart(2, '0');
+            minutesEl.textContent = String(m).padStart(2, '0');
+            secondsEl.textContent = String(s).padStart(2, '0');
         }
-
-        // NEW: Function to enable/disable adjustment buttons
-        function toggleAdjustButtons(enabled) {
-            adjustBtns.forEach(btn => btn.disabled = !enabled);
-        }
-
+        function toggleAdjustButtons(enabled) { adjustBtns.forEach(btn => btn.disabled = !enabled); }
         function startTimer() {
             if (isRunning || totalSeconds <= 0) return;
             isRunning = true;
-            toggleAdjustButtons(false); // Disable buttons when timer starts
+            toggleAdjustButtons(false);
             timerInterval = setInterval(() => {
                 totalSeconds--;
                 updateTimerDisplay();
                 if (totalSeconds <= 0) {
                     clearInterval(timerInterval);
                     isRunning = false;
-                    toggleAdjustButtons(true); // Re-enable buttons when timer finishes
+                    toggleAdjustButtons(true);
                     alert('Timer Finished!');
                 }
             }, 1000);
         }
-
-        function pauseTimer() {
-            isRunning = false;
-            clearInterval(timerInterval);
-            toggleAdjustButtons(true); // Re-enable buttons on pause
-        }
-
-        function resetTimer() {
-            pauseTimer();
-            totalSeconds = DEFAULT_TIME; // Reset to the original 3 hours
-            updateTimerDisplay();
-        }
-
+        function pauseTimer() { isRunning = false; clearInterval(timerInterval); toggleAdjustButtons(true); }
+        function resetTimer() { pauseTimer(); totalSeconds = DEFAULT_TIME; updateTimerDisplay(); }
         startBtn.addEventListener('click', startTimer);
         pauseBtn.addEventListener('click', pauseTimer);
         resetBtn.addEventListener('click', resetTimer);
-
-        // NEW: Event Listeners for time adjustment
-        incHoursBtn.addEventListener('click', () => {
-            if (isRunning) return;
-            totalSeconds += 3600;
-            updateTimerDisplay();
-        });
-
-        decHoursBtn.addEventListener('click', () => {
-            if (isRunning) return;
-            totalSeconds -= 3600;
-            updateTimerDisplay();
-        });
-
-        incMinutesBtn.addEventListener('click', () => {
-            if (isRunning) return;
-            totalSeconds += 60;
-            updateTimerDisplay();
-        });
-
-        decMinutesBtn.addEventListener('click', () => {
-            if (isRunning) return;
-            totalSeconds -= 60;
-            updateTimerDisplay();
-        });
-
+        incHoursBtn.addEventListener('click', () => { if (!isRunning) { totalSeconds += 3600; updateTimerDisplay(); } });
+        decHoursBtn.addEventListener('click', () => { if (!isRunning) { totalSeconds -= 3600; updateTimerDisplay(); } });
+        incMinutesBtn.addEventListener('click', () => { if (!isRunning) { totalSeconds += 60; updateTimerDisplay(); } });
+        decMinutesBtn.addEventListener('click', () => { if (!isRunning) { totalSeconds -= 60; updateTimerDisplay(); } });
 
         // --- Theme Switcher Logic ---
-        lightModeBtn.addEventListener('click', () => {
-            document.documentElement.setAttribute('data-theme', 'light');
-        });
+        lightModeBtn.addEventListener('click', () => document.documentElement.setAttribute('data-theme', 'light'));
+        darkModeBtn.addEventListener('click', () => document.documentElement.setAttribute('data-theme', 'dark'));
+        customColorPicker.addEventListener('input', (e) => document.documentElement.style.setProperty('--primary-color', e.target.value));
 
-        darkModeBtn.addEventListener('click', () => {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        });
+        // =========================================================
+        // --- YouTube Player Logic (API के साथ अपडेट किया गया) ---
+        // =========================================================
+        let player; // Player variable को global scope में रखें
 
-        customColorPicker.addEventListener('input', (e) => {
-            document.documentElement.style.setProperty('--primary-color', e.target.value);
-        });
+        // यह function YouTube API script लोड होने के बाद अपने-आप कॉल होता है।
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '100%',
+                width: '100%',
+                videoId: '', // शुरू में खाली
+                playerVars: {
+                    'playsinline': 1,
+                    'autoplay': 1, // API के साथ autoplay बेहतर काम करता है
+                    'controls': 1
+                },
+                events: {
+                    // 'onReady': onPlayerReady // अगर जरूरत हो तो इस्तेमाल करें
+                }
+            });
+        }
 
-        // --- YouTube Player Logic ---
         togglePlayerBtn.addEventListener('click', () => {
             const isHidden = !playerContainer.classList.contains('show');
-            
+            playerContainer.classList.toggle('show');
+
             if (isHidden) {
-                playerContainer.classList.add('show');
                 togglePlayerBtn.innerHTML = '<span class="material-icons-outlined">hide_source</span> Hide Player';
             } else {
-                playerContainer.classList.remove('show');
                 togglePlayerBtn.innerHTML = '<span class="material-icons-outlined">play_circle_outline</span> Show Player';
-                // Pause video when hiding by reloading the src
-                youtubePlayer.src = youtubePlayer.src;
+                // Player को pause करें, अगर वह मौजूद है और चल रहा है
+                if (player && typeof player.pauseVideo === 'function') {
+                    player.pauseVideo();
+                }
             }
         });
 
         loadVideoBtn.addEventListener('click', () => {
             const url = youtubeUrlInput.value;
             const videoId = getYouTubeID(url);
-            if (videoId) {
-                youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            if (videoId && player) {
+                // API का उपयोग करके वीडियो लोड और प्ले करें
+                player.loadVideoById(videoId);
+                player.playVideo();
             } else {
-                alert('Invalid YouTube URL. Please use a valid link.');
+                alert('Invalid YouTube URL or player not ready.');
             }
         });
 
@@ -498,7 +350,7 @@
         }
 
         // --- Initial Setup ---
-        updateTimerDisplay(); // Set initial time on display
+        updateTimerDisplay();
     </script>
 </body>
 </html>

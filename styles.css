@@ -348,7 +348,7 @@ html[data-theme="light"] .fa-moon { display: block; }
     border-top: 1px solid var(--glass-border);
     margin-top: 2rem;
 }
-.social-links { margin-bottom: 1rem; }
+
 .social-links a {
     color: var(--text-secondary);
     font-size: 1.5rem;

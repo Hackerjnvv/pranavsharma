@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
 
 /* =========================================
    1. ROOT VARIABLES & THEMES
@@ -9,32 +9,66 @@
     --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* --- Dark Theme (Default) --- */
+/* --- Dark Theme (Applied from Source) --- */
 html[data-theme="dark"] {
-    --bg-color: #11101d;
-    --text-primary: #e0e0e9;
-    --text-secondary: #a3a3c2;
-    --highlight-color: hsl(190, 100%, 70%); /* Bright Cyan */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --orb-color-1: hsl(260, 100%, 55%); /* Purple */
-    --orb-color-2: hsl(190, 100%, 50%); /* Cyan */
-    --orb-color-3: hsl(320, 100%, 55%); /* Pink */
+    --bg-color: #000;
+    --text-primary: #fff;
+    --text-secondary: rgba(255, 255, 255, 0.65);
+
+    /* Gradients from source theme */
+    --highlight-grad: linear-gradient(45deg, #ff6e7f, #bfe9ff);
+    --button-grad: linear-gradient(135deg, #6366f1, #4f46e5);
+
+    /* Solid color for smaller highlights, taken from the gradient */
+    --highlight-color: #bfe9ff;
+
+    /* Glassmorphism settings from source theme */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+
+    /* Orb colors matching the new palette */
+    --orb-color-1: #ff6e7f; /* Pink/Red from highlight gradient */
+    --orb-color-2: #bfe9ff; /* Light Blue from highlight gradient */
+    --orb-color-3: #6366f1; /* Indigo from button gradient */
 }
 
-/* --- Light Theme --- */
+/* --- Light Theme (Original) --- */
+/* --- Light Theme (Original) --- */
 html[data-theme="light"] {
     --bg-color: #f4f7fa;
     --text-primary: #1a202c;
     --text-secondary: #4a5568;
-    --highlight-color: hsl(260, 85%, 65%); /* Vibrant Purple */
+    
+    /* --- NEW: Defining gradients and colors for light theme --- */
+    --highlight-grad: linear-gradient(45deg, #6a11cb, #2575fc); /* Purple to Blue Gradient */
+    --button-grad: linear-gradient(135deg, #6a11cb, #2575fc);
+    --button-text-color: #ffffff; /* White text for buttons */
+
+    --highlight-color: #2575fc; /* Solid blue for smaller highlights */
     --glass-bg: rgba(255, 255, 255, 0.6);
     --glass-border: rgba(0, 0, 0, 0.1);
     --shadow-color: rgba(100, 100, 150, 0.15);
+    
+    /* --- NEW: Brighter orb colors for light theme --- */
     --orb-color-1: hsl(220, 100%, 80%); /* Light Blue */
     --orb-color-2: hsl(300, 100%, 85%); /* Light Pink */
     --orb-color-3: hsl(40, 100%, 75%);  /* Light Orange */
+}
+
+/* Find the .contact-form button rule and change the 'color' property */
+.contact-form button {
+    background: var(--button-grad);
+    /* CHANGE THIS LINE */
+    color: var(--button-text-color); 
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem;
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 /* =========================================
@@ -46,15 +80,20 @@ html[data-theme="light"] {
     box-sizing: border-box;
 }
 
+/* Find this existing rule in your styles.css */
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
     color: var(--text-primary);
     line-height: 1.7;
     overflow-x: hidden;
+    /* --- ADD THIS LINE TO LOCK SCROLLING --- */
+    overflow-y: hidden; 
     transition: background-color 0.4s ease, color 0.4s ease;
     scroll-behavior: smooth;
 }
+
+
 
 h3 {
     font-size: 1.5rem;
@@ -68,10 +107,18 @@ h3 {
 a {
     color: var(--highlight-color);
     text-decoration: none;
+    transition: filter 0.3s ease;
+}
+
+a:hover {
+    filter: brightness(1.2);
 }
 
 .highlight {
-    color: var(--highlight-color);
+    background: var(--highlight-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: 600;
 }
 
@@ -87,12 +134,25 @@ a {
 @keyframes orb-animate-2 { 0%, 100% { transform: translate(30vw, 30vh) scale(0.7); } 50% { transform: translate(-30vw, -30vh) scale(1); } }
 @keyframes orb-animate-3 { 0%, 100% { transform: translate(-10vw, 25vh) scale(0.9); } 50% { transform: translate(10vw, -25vh) scale(0.7); } }
 
-.background-orbs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+/* Find this existing rule */
+.background-orbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    /* --- MAKE SURE THESE TWO LINES ARE HERE --- */
+    opacity: 0;
+    transition: opacity 1.5s ease-in;
+}
+
 .orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(150px);
-    opacity: 0.4;
+    opacity: 0.5;
     width: 50vmax; height: 50vmax;
     top: -25vmax; left: -25vmax;
     animation-iteration-count: infinite;
@@ -100,7 +160,7 @@ a {
     animation-direction: alternate;
 }
 .orb:nth-child(1) { background: var(--orb-color-1); animation-name: orb-animate-1; animation-duration: 25s; }
-.orb:nth-child(2) { background: var(--orb-color-2); animation-name: orb-animate-2; animation-duration: 30s; }
+.orb:nth-child(2) { background: var(--orb-color-2); animation-name: orb-animate-2; animation-duration: 30s; opacity: 0.4; }
 .orb:nth-child(3) { background: var(--orb-color-3); animation-name: orb-animate-3; animation-duration: 22s; opacity: 0.3; }
 
 /* =========================================
@@ -111,7 +171,7 @@ a {
     top: 0;
     z-index: 10;
     padding: 1rem 5%;
-    background: var(--glass-bg);
+    background: rgba(0,0,0,0.3);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--glass-border);
@@ -126,8 +186,15 @@ a {
 }
 
 .header-title {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    background: var(--highlight-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
 }
 
 .theme-button {
@@ -146,7 +213,7 @@ a {
 .theme-button:hover {
     background-color: var(--glass-border);
     color: var(--text-primary);
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(15deg);
 }
 html[data-theme="dark"] .fa-sun { display: block; }
 html[data-theme="dark"] .fa-moon { display: none; }
@@ -195,13 +262,14 @@ html[data-theme="light"] .fa-moon { display: block; }
     box-shadow: 0 0 20px var(--shadow-color), 0 0 30px -10px var(--highlight-color);
     object-fit: cover;
 }
-.profile-name { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.profile-name { font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; }
 .profile-bio { font-size: 1.1rem; color: var(--text-secondary); max-width: 500px; margin: 0 auto 1rem; }
 .typing-container { font-size: 1.1rem; color: var(--text-secondary); min-height: 1.7em; }
 #typing-text::after {
     content: '|';
     animation: blink 0.7s infinite;
     font-weight: 200;
+    color: var(--highlight-color);
 }
 @keyframes blink { 50% { opacity: 0; } }
 
@@ -211,35 +279,29 @@ html[data-theme="light"] .fa-moon { display: block; }
 .contact-form { display: grid; gap: 0.75rem; }
 .contact-form input, .contact-form textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.1);
+    background: transparent;
     border: 1px solid var(--glass-border);
-    border-radius: 10px;
-    padding: 0.75rem;
+    border-radius: 12px;
+    padding: 1rem;
     font-family: var(--font-main);
     color: var(--text-primary);
     font-size: 1rem;
     transition: all 0.3s ease;
 }
+/* REPLACE WITH THIS RULE */
+.contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7; /* Making it slightly transparent like a placeholder */
+}
+}
 .contact-form input:focus, .contact-form textarea:focus {
     outline: none;
     border-color: var(--highlight-color);
-    box-shadow: 0 0 10px -2px var(--highlight-color);
-}
-.contact-form button {
-    background: linear-gradient(45deg, var(--highlight-color), color-mix(in srgb, var(--highlight-color) 70%, var(--orb-color-1)));
-    color: var(--bg-color);
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem;
-    font-family: var(--font-main);
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    box-shadow: 0 0 15px -2px var(--highlight-color);
 }
 .contact-form button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px -5px var(--highlight-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.5);
     filter: brightness(1.1);
 }
 
@@ -263,6 +325,7 @@ html[data-theme="light"] .fa-moon { display: block; }
     border: 3px solid var(--highlight-color);
     border-radius: 50%;
     z-index: 1;
+    box-shadow: 0 0 10px var(--highlight-color);
 }
 .timeline-date { font-weight: 600; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.25rem; }
 .timeline-content h4 { font-weight: 600; font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; border: none; padding: 0;}
@@ -276,15 +339,16 @@ html[data-theme="light"] .fa-moon { display: block; }
     padding: 0.75rem 1rem;
     text-decoration: none;
     color: var(--text-primary);
-    background: var(--glass-bg);
+    background: transparent;
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     transition: all 0.3s ease;
 }
 .projects-list li a:hover {
-    background: var(--glass-border);
+    background: var(--glass-bg);
+    border-color: var(--highlight-color);
     transform: translateY(-3px);
-    box-shadow: 0 4px 10px var(--shadow-color);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 .projects-list .icon {
     margin-right: 1rem;
@@ -302,6 +366,7 @@ html[data-theme="light"] .fa-moon { display: block; }
 .projects-list li a:hover .link-icon {
     transform: translate(3px, -3px);
     opacity: 1;
+    color: var(--highlight-color);
 }
 
 /* --- Achievements List --- */
@@ -316,13 +381,13 @@ html[data-theme="light"] .fa-moon { display: block; }
     color: var(--highlight-color);
     font-size: 1.2rem;
 }
-.achievements-list span { font-weight: 500; }
+.achievements-list span { font-weight: 500; color: var(--text-primary); }
 .achievements-list .details { opacity: 0.8; font-size: 0.9em; }
 
 /* --- Photo Gallery --- */
 .photo-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
 }
 .photo-gallery-grid img {
@@ -345,6 +410,7 @@ html[data-theme="light"] .fa-moon { display: block; }
     padding: 3rem 1rem 2rem;
     color: var(--text-secondary);
     font-size: 0.9rem;
+    background: rgba(0,0,0,0.2);
     border-top: 1px solid var(--glass-border);
     margin-top: 2rem;
 }
@@ -358,8 +424,9 @@ html[data-theme="light"] .fa-moon { display: block; }
 .social-links a:hover {
     color: var(--highlight-color);
     transform: translateY(-5px);
+    filter: none; /* Override general 'a:hover' filter */
 }
-.site-footer .fa-heart { color: #e25555; }
+.site-footer .fa-heart { color: #ff6e7f; }
 
 /* =========================================
    8. MODAL
@@ -397,19 +464,22 @@ html[data-theme="light"] .fa-moon { display: block; }
 .modal-overlay.active .modal-content {
     transform: scale(1);
 }
-.modal-icon { font-size: 3rem; margin-bottom: 1rem; }
+.modal-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--highlight-color); }
 .modal-message { font-size: 1.1rem; margin-bottom: 1.5rem; }
 .modal-button {
-    background: var(--highlight-color);
-    color: var(--bg-color);
+    background: var(--button-grad);
+    color: var(--text-primary);
     border: none;
     border-radius: 10px;
     padding: 0.6rem 2rem;
     font-weight: 600;
     cursor: pointer;
-    transition: filter 0.3s ease;
+    transition: Fall 0.3s ease;
 }
-.modal-button:hover { filter: brightness(1.1); }
+.modal-button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.5);
+}
 
 /* =========================================
    9. RESPONSIVE DESIGN
@@ -435,4 +505,31 @@ html[data-theme="light"] .fa-moon { display: block; }
     .profile-name {
         font-size: 1.75rem;
     }
+}
+/* =========================================
+   10. INTRO ANIMATION STYLES
+   ========================================= */
+#container {
+    transition: opacity 1.5s ease-in-out;
+}
+
+.main-content {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease-in;
+}
+
+.main-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- ADD THIS NEW RULE AT THE END OF THE FILE (if it's not already there) --- */
+.background-orbs.visible {
+    opacity: 0.5; /* This restores the original opacity */
+}
+/* --- ADD THIS NEW CLASS AT THE END OF YOUR CSS FILE --- */
+/* This class will be added via JS to re-enable scrolling */
+body.scroll-enabled {
+    overflow-y: auto;
 }

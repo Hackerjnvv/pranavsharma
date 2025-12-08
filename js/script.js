@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Ensure the page always loads at the top
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
     const themeToggle = document.getElementById('theme-toggle');
     const htmlEl = document.documentElement;
     const savedTheme = localStorage.getItem('theme') || 'dark';

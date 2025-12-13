@@ -19,13 +19,42 @@
             text-align: center;
             color: #4CAF50;
         }
+
+        /* --- Naya Code (Button ke liye) --- */
+        .button-container {
+            text-align: center;
+            margin: 20px 0; /* Upar aur neeche thodi jagah */
+        }
+
+        .pdf-button {
+            display: inline-block;
+            background-color: #d9534f; /* Laal rang */
+            color: white; /* Text ka rang safed */
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none; /* Link ka underline hatane ke liye */
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pdf-button:hover {
+            background-color: #c9302c; /* Hover karne par thoda gehra laal */
+            transform: translateY(-2px); /* Button ko thoda upar uthane ka effect */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        /* --- Yahan tak naya code --- */
+
         #table-container {
             margin-top: 20px;
-            overflow-x: auto; /* Agar table screen se badi ho to scrollbar aa jayega */
+            overflow-x: auto;
         }
         table {
             width: 100%;
-            border-collapse: collapse; /* Borders ko merge karne ke liye */
+            border-collapse: collapse;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         th, td {
@@ -38,10 +67,10 @@
             color: white;
         }
         tbody tr:nth-child(even) {
-            background-color: #f2f2f2; /* Rows ko alag-alag color dene ke liye */
+            background-color: #f2f2f2;
         }
         tbody tr:hover {
-            background-color: #ddd; /* Mouse hover pe row ka color change hoga */
+            background-color: #ddd;
         }
         #loading {
             text-align: center;
@@ -53,6 +82,15 @@
 <body>
 
     <h1>Birthday Data Master</h1>
+
+    <!-- === NAYA BUTTON YAHA ADD KIYA GAYA HAI === -->
+    <div class="button-container">
+        <a href="https://pranav-sharma-pages.dev/birthday/birthday2025.pdf" target="_blank" rel="noopener noreferrer" class="pdf-button">
+            ⬇️ Download Birthday PDF
+        </a>
+    </div>
+    <!-- ========================================= -->
+
     <div id="loading">Loading data from Excel file... Please wait.</div>
     <div id="table-container"></div>
 
@@ -69,7 +107,7 @@
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                const arrayBuffer = await response.arrayBuffer(); // File ko binary format mein lena
+                const arrayBuffer = await response.arrayBuffer();
 
                 // 2. SheetJS library ka istemal karke data ko padhna
                 const data = new Uint8Array(arrayBuffer);
@@ -79,7 +117,7 @@
                 const firstSheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[firstSheetName];
 
-                // 4. Sheet ke data ko JSON (array of arrays) mein convert karna
+                // 4. Sheet ke data ko JSON mein convert karna
                 const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
                 // 5. HTML table banana
@@ -103,12 +141,10 @@
                 return;
             }
 
-            // Table elements create karna
             const table = document.createElement('table');
             const thead = document.createElement('thead');
             const tbody = document.createElement('tbody');
             
-            // Header (pehli row se)
             const headerRow = document.createElement('tr');
             const headers = data[0];
             headers.forEach(headerText => {
@@ -118,7 +154,6 @@
             });
             thead.appendChild(headerRow);
 
-            // Table body (baaki sabhi rows se)
             const bodyRows = data.slice(1);
             bodyRows.forEach(rowData => {
                 const tr = document.createElement('tr');
@@ -130,7 +165,6 @@
                 tbody.appendChild(tr);
             });
 
-            // Table ko page pe add karna
             table.appendChild(thead);
             table.appendChild(tbody);
             container.appendChild(table);

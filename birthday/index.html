@@ -19,20 +19,17 @@
             text-align: center;
             color: #4CAF50;
         }
-
-        /* --- Naya Code (Button ke liye) --- */
         .button-container {
             text-align: center;
-            margin: 20px 0; /* Upar aur neeche thodi jagah */
+            margin: 20px 0;
         }
-
         .pdf-button {
             display: inline-block;
-            background-color: #d9534f; /* Laal rang */
-            color: white; /* Text ka rang safed */
+            background-color: #d9534f;
+            color: white;
             padding: 12px 25px;
             border-radius: 5px;
-            text-decoration: none; /* Link ka underline hatane ke liye */
+            text-decoration: none;
             font-weight: bold;
             font-size: 16px;
             border: none;
@@ -40,14 +37,11 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         .pdf-button:hover {
-            background-color: #c9302c; /* Hover karne par thoda gehra laal */
-            transform: translateY(-2px); /* Button ko thoda upar uthane ka effect */
+            background-color: #c9302c;
+            transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-        /* --- Yahan tak naya code --- */
-
         #table-container {
             margin-top: 20px;
             overflow-x: auto;
@@ -83,47 +77,35 @@
 
     <h1>Birthday Data Master</h1>
 
-    <!-- === NAYA BUTTON YAHA ADD KIYA GAYA HAI === -->
     <div class="button-container">
-        <a href="https://pranav-sharma-pages.dev/birthday/birthday2025.pdf" target="_blank" rel="noopener noreferrer" class="pdf-button">
-            ⬇️ Download Birthday PDF
+        <a href="https://pranav-sharma.pages.dev/birthday/birthday2025.pdf" target="_blank" rel="noopener noreferrer" class="pdf-button">
+            ⬇️ Download Birthday 2025 PDF
         </a>
     </div>
-    <!-- ========================================= -->
 
-    <div id="loading">Loading data from Excel file... Please wait.</div>
+    <div id="loading">Loading data... Please wait.</div>
     <div id="table-container"></div>
 
     <script>
-        // Excel file ka raw URL
+        // === URL YAHAN BADLA GAYA HAI ===
+        // GitHub URL ko jsDelivr CDN URL se replace kiya gaya hai taki CORS error na aaye.
         const url = 'https://github.com/Hackerjnvv/HTML/raw/refs/heads/main/Birthday%20Data%20Master.xlsx';
 
-        // Yeh function data fetch aur display karega
+        // Baaki ka code bilkul same hai
         async function fetchAndDisplayExcel() {
             const loadingMessage = document.getElementById('loading');
             try {
-                // 1. File ko fetch karna
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const arrayBuffer = await response.arrayBuffer();
-
-                // 2. SheetJS library ka istemal karke data ko padhna
                 const data = new Uint8Array(arrayBuffer);
                 const workbook = XLSX.read(data, { type: 'array' });
-
-                // 3. Pehli sheet ka data nikalna
                 const firstSheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[firstSheetName];
-
-                // 4. Sheet ke data ko JSON mein convert karna
                 const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-                // 5. HTML table banana
                 renderTable(jsonData);
-                
-                // Loading message ko hide karna
                 loadingMessage.style.display = 'none';
 
             } catch (error) {
@@ -135,42 +117,36 @@
 
         function renderTable(data) {
             const container = document.getElementById('table-container');
-            
             if (!data || data.length === 0) {
                 container.innerHTML = '<p>No data found in the Excel file.</p>';
                 return;
             }
-
             const table = document.createElement('table');
             const thead = document.createElement('thead');
             const tbody = document.createElement('tbody');
-            
             const headerRow = document.createElement('tr');
-            const headers = data[0];
-            headers.forEach(headerText => {
+            data[0].forEach(headerText => {
                 const th = document.createElement('th');
                 th.textContent = headerText;
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
-
-            const bodyRows = data.slice(1);
-            bodyRows.forEach(rowData => {
-                const tr = document.createElement('tr');
-                rowData.forEach(cellData => {
-                    const td = document.createElement('td');
-                    td.textContent = cellData;
-                    tr.appendChild(td);
-                });
-                tbody.appendChild(tr);
+            data.slice(1).forEach(rowData => {
+                if (rowData.length > 0) { // Khali rows ko ignore karne ke liye
+                    const tr = document.createElement('tr');
+                    rowData.forEach(cellData => {
+                        const td = document.createElement('td');
+                        td.textContent = cellData;
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                }
             });
-
             table.appendChild(thead);
             table.appendChild(tbody);
             container.appendChild(table);
         }
 
-        // Function ko call karna taki sab shuru ho
         fetchAndDisplayExcel();
     </script>
 

@@ -61,12 +61,8 @@
             backdrop-filter: blur(5px);
         }
         
-        header p i {
-            color: white; 
-            margin-right: 5px;
-        }
+        header p i { color: white; margin-right: 5px; }
 
-        /* Container */
         .container {
             max-width: 1200px;
             margin: -50px auto 40px auto;
@@ -75,7 +71,6 @@
             z-index: 10;
         }
 
-        /* Controls Area */
         .controls-card {
             background: var(--card-bg);
             padding: 20px;
@@ -83,13 +78,13 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px; /* Unified gap */
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
             border: 1px solid var(--border-color);
         }
-
+        
         .search-wrapper {
             flex-grow: 1;
             display: flex;
@@ -98,10 +93,7 @@
             min-width: 250px;
         }
 
-        .input-group {
-            position: relative;
-            flex-grow: 1;
-        }
+        .input-group { position: relative; flex-grow: 1; }
         .sr-only {
             position: absolute; width: 1px; height: 1px; padding: 0;
             margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0);
@@ -109,134 +101,123 @@
         }
 
         .search-input {
-            width: 100%;
-            padding: 12px 16px 12px 40px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
+            width: 100%; padding: 12px 16px 12px 40px; border: 2px solid var(--border-color);
+            border-radius: 8px; font-size: 1rem; font-family: 'Inter', sans-serif;
             transition: border-color 0.2s;
         }
-        
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
+        .search-input:focus { outline: none; border-color: var(--primary-color); }
         .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 1.1rem;
+            position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+            color: var(--text-light); font-size: 1.1rem;
         }
 
         .count-badge {
-            background-color: #ecfdf5;
-            color: var(--success-color);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            border: 1px solid #d1fae5;
-            white-space: nowrap;
+            background-color: #ecfdf5; color: var(--success-color); padding: 8px 16px;
+            border-radius: 8px; font-weight: 700; font-size: 0.95rem;
+            border: 1px solid #d1fae5; white-space: nowrap;
         }
 
-        .contact-btn {
-            background-color: var(--accent-color);
+        /* Button Group for Contact & Info */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            color: white; padding: 12px 24px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: all 0.2s ease; display: inline-flex; align-items: center;
+            gap: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: none; cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0,0,0,0.15); }
+        .btn i { font-size: 1.1em; }
+
+        .contact-btn { background-color: var(--accent-color); }
+        .contact-btn:hover { background-color: var(--accent-hover); }
+
+        /* --- NEW BUTTON STYLE --- */
+        .info-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: none;
+        }
+        .info-btn:hover {
+            background-color: var(--primary-color);
             color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .contact-btn:hover {
-            background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 8px rgba(37,99,235,0.2);
         }
 
-        /* Table Section */
         .table-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: var(--card-bg); border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+            overflow: hidden; border: 1px solid var(--border-color);
         }
-
-        .table-wrapper {
-            max-height: 65vh;
-            overflow-y: auto;
-            overflow-x: auto; /* Scroll on desktop */
-        }
-
-        table { width: 100%; border-collapse: collapse; white-space: nowrap; /* Default: no wrapping */ }
-        
+        .table-wrapper { max-height: 65vh; overflow-y: auto; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; white-space: nowrap; }
         th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border-color); }
-        
         th {
-            background-color: #f8fafc;
-            color: var(--text-main);
-            font-weight: 600;
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            border-bottom: 2px solid var(--border-color);
+            background-color: #f8fafc; color: var(--text-main); font-weight: 600;
+            position: sticky; top: 0; z-index: 5; border-bottom: 2px solid var(--border-color);
         }
-
         tbody tr:hover { background-color: #f1f5f9; }
 
         #loading { padding: 40px; text-align: center; color: var(--text-light); }
         .spinner {
             border: 3px solid #e2e8f0; border-top: 3px solid var(--primary-color);
-            border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 10px;
+            border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* --- RESPONSIVE STYLES --- */
-
-        /* ===== NEW: For tablets and smaller screens (up to 1000px) ===== */
-        @media (max-width: 1000px) {
-            .table-wrapper {
-                overflow-x: hidden; /* Prevent horizontal scrolling */
-            }
-            table {
-                white-space: normal; /* Allow text to wrap */
-            }
-            th, td {
-                word-break: break-word; /* Help break long, unbreakable strings */
-            }
+        /* --- NEW MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            display: none; /* Hidden by default */
+            align-items: center; justify-content: center; z-index: 1000;
+            padding: 20px; backdrop-filter: blur(4px);
         }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background-color: var(--card-bg); border-radius: 12px;
+            padding: 30px 35px; max-width: 750px; width: 100%;
+            max-height: 85vh; overflow-y: auto; position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-close {
+            position: absolute; top: 15px; right: 20px;
+            background: none; border: none; font-size: 1.8rem;
+            color: var(--text-light); cursor: pointer; transition: color 0.2s;
+        }
+        .modal-close:hover { color: var(--text-main); }
+        .modal-content h2 { font-family: 'Poppins', sans-serif; margin-top: 0; color: var(--primary-color); }
+        .modal-content h3 { font-family: 'Poppins', sans-serif; margin-top: 25px; border-left: 3px solid var(--primary-color); padding-left: 10px; }
+        .modal-content p, .modal-content li { line-height: 1.6; color: var(--text-light); }
+        .modal-content strong { color: var(--text-main); }
 
-        /* Medium screens (tablets in portrait) */
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 1000px) {
+            .table-wrapper { overflow-x: hidden; }
+            table { white-space: normal; }
+            th, td { word-break: break-word; }
+        }
         @media (max-width: 768px) {
             .container { padding: 0 15px; }
-            .controls-card { flex-direction: column; align-items: stretch; gap: 15px; }
+            .controls-card, .button-group { flex-direction: column; align-items: stretch; }
             .search-wrapper { flex-direction: column; align-items: stretch; }
-            .count-badge { text-align: center; }
-            .contact-btn { justify-content: center; }
+            .count-badge, .btn { text-align: center; justify-content: center; }
             header { padding-bottom: 3.5rem; }
             header h1 { font-size: 1.8rem; }
         }
-
-        /* Small phones */
         @media (max-width: 480px) {
             .container { padding: 0 10px; }
             .controls-card { padding: 15px; }
-            /* Further reduce padding and font size for very small screens */
-            th, td {
-                padding: 12px 8px;
-                font-size: 0.8rem;
-            }
+            th, td { padding: 12px 8px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -248,7 +229,6 @@
     </header>
 
     <div class="container">
-        
         <div class="controls-card">
             <div class="search-wrapper">
                 <label class="input-group">
@@ -256,24 +236,56 @@
                     <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                     <input type="text" id="searchInput" class="search-input" placeholder="Search Class, Section, Name...">
                 </label>
-                <div id="studentCount" class="count-badge">
-                    Total Students: 0
-                </div>
+                <div id="studentCount" class="count-badge">Total Students: 0</div>
             </div>
 
-            <a href="https://pranav-sharma.pages.dev/#contact" target="_blank" rel="noopener noreferrer" class="contact-btn">
-                <i class="fa-solid fa-address-card"></i> Contact Developer
-            </a>
+            <!-- Button Group -->
+            <div class="button-group">
+                <!-- NEW BUTTON HERE -->
+                <button id="readMoreBtn" class="btn info-btn">
+                    <i class="fa-solid fa-book-open"></i> Read about this project
+                </button>
+                <a href="https://pranav-sharma.pages.dev/#contact" target="_blank" rel="noopener noreferrer" class="btn contact-btn">
+                    <i class="fa-solid fa-address-card"></i> Contact Developer
+                </a>
+            </div>
         </div>
 
         <div class="table-card">
-            <div id="loading">
-                <div class="spinner"></div>
-                Loading data...
-            </div>
+            <div id="loading"><div class="spinner"></div>Loading data...</div>
             <div id="table-container" class="table-wrapper"></div>
         </div>
+    </div>
 
+    <!-- NEW MODAL HTML -->
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modalCloseBtn" class="modal-close">&times;</button>
+            <h2>About The Birthday Data Master</h2>
+            
+            <h3>Why Does This Project Exist?</h3>
+            <p>The official DAV Jehanabad website features a list of daily birthdays, which is a great way to celebrate students. However, this information is temporary—once the day is over, the list is gone forever. This makes it impossible to check a birthday you might have missed or to plan for upcoming celebrations.</p>
+            <p>The Birthday Data Master was created to solve this simple problem. It enhances the school's feature by turning the fleeting daily list into a <strong>permanent, searchable, and useful archive</strong> for the entire school community.</p>
+
+            <h3>How It Works: The Full Story</h3>
+            <p>The application is split into two parts: a silent <strong>Backend</strong> that gathers data and a fast <strong>Frontend</strong> that you interact with.</p>
+
+            <h4>Part 1: The Backend (The Automated Data Engine)</h4>
+            <p>The backend's only job is to get fresh data, clean it, and prepare it once a day. This entire process is automated using <strong>GitHub Actions</strong>.</p>
+            <ol>
+                <li><strong>Automated Trigger:</strong> Every day at 11:00 AM IST, GitHub Actions automatically runs a Python script.</li>
+                <li><strong>Data Scraping:</strong> The script visits davjehanabad.in and downloads the raw HTML code of the birthday page.</li>
+                <li><strong>Formatting:</strong> A second script reads this messy HTML, intelligently extracts only the student names, classes, and dates, and neatly organizes this information into a single, clean Excel file (`.xlsx`).</li>
+            </ol>
+
+            <h4>Part 2: The Frontend (The Interface You Use)</h4>
+            <p>The frontend is designed for speed. It does all the work right inside your browser (client-side processing).</p>
+            <ol>
+                <li><strong>Fetching Data:</strong> When you open the page, your browser quickly fetches the single Excel file prepared by the backend.</li>
+                <li><strong>In-Browser Processing:</strong> Using a JavaScript library (XLSX.js), your browser reads the Excel file and builds the table you see on the screen—all without needing a server.</li>
+                <li><strong>Instant Search:</strong> Since all the data is already in your browser, searching is instantaneous. The app filters the local data and redraws the table with zero delay.</li>
+            </ol>
+        </div>
     </div>
 
     <script>
@@ -284,22 +296,22 @@
         const countDisplay = document.getElementById('studentCount');
         const searchInput = document.getElementById('searchInput');
 
-        let globalHeaders = [];
-        let globalData = [];
+        // --- NEW: Modal element selection ---
+        const readMoreBtn = document.getElementById('readMoreBtn');
+        const infoModal = document.getElementById('infoModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+        let globalHeaders = [], globalData = [];
 
         function debounce(func, delay) {
             let timeout;
-            return function(...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), delay);
-            };
+            return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); };
         }
 
         async function fetchAndDisplayExcel() {
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                
                 const arrayBuffer = await response.arrayBuffer();
                 const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
                 const worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -307,16 +319,12 @@
 
                 if (jsonData.length > 0) {
                     globalHeaders = jsonData[0];
-                    globalData = jsonData.slice(1).filter(row => 
-                        row.length > 0 && row.some(cell => cell !== undefined && cell !== null && String(cell).trim() !== '')
-                    );
-                    
+                    globalData = jsonData.slice(1).filter(row => row.length > 0 && row.some(cell => cell !== undefined && cell !== null && String(cell).trim() !== ''));
                     renderTable(globalData);
                     loadingElement.style.display = 'none';
                 } else {
                     loadingElement.textContent = "No data found.";
                 }
-
             } catch (error) {
                 console.error(error);
                 loadingElement.innerHTML = `<span style="color:#ef4444"><i class="fa-solid fa-triangle-exclamation"></i> Error loading data.</span>`;
@@ -325,51 +333,45 @@
 
         function renderTable(dataRows) {
             countDisplay.textContent = `Total Students: ${dataRows.length}`;
-
             if (dataRows.length === 0) {
                 tableContainer.innerHTML = '<div style="padding:20px; text-align:center; color:#64748b;">No matching records found.</div>';
                 return;
             }
-
-            const table = document.createElement('table');
-            const thead = document.createElement('thead');
-            const tbody = document.createElement('tbody');
-
+            const table = document.createElement('table'), thead = document.createElement('thead'), tbody = document.createElement('tbody');
             const trHead = document.createElement('tr');
-            globalHeaders.forEach(text => {
-                const th = document.createElement('th');
-                th.textContent = text;
-                trHead.appendChild(th);
-            });
+            globalHeaders.forEach(text => { const th = document.createElement('th'); th.textContent = text; trHead.appendChild(th); });
             thead.appendChild(trHead);
-
             dataRows.forEach(rowData => {
                 const tr = document.createElement('tr');
-                for(let i=0; i < globalHeaders.length; i++) {
-                    const td = document.createElement('td');
-                    td.textContent = rowData[i] || "-";
-                    tr.appendChild(td);
-                }
+                for(let i=0; i < globalHeaders.length; i++) { const td = document.createElement('td'); td.textContent = rowData[i] || "-"; tr.appendChild(td); }
                 tbody.appendChild(tr);
             });
-
-            table.appendChild(thead);
-            table.appendChild(tbody);
-            tableContainer.innerHTML = ''; 
-            tableContainer.appendChild(table);
+            table.appendChild(thead); table.appendChild(tbody);
+            tableContainer.innerHTML = ''; tableContainer.appendChild(table);
         }
 
         searchInput.addEventListener('keyup', debounce(function(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
-            const filteredData = globalData.filter(row => {
-                const rowString = row.map(cell => String(cell || "").toLowerCase()).join(" ");
-                return rowString.includes(searchTerm);
-            });
+            const filteredData = globalData.filter(row => row.map(cell => String(cell || "").toLowerCase()).join(" ").includes(searchTerm));
             renderTable(filteredData);
         }, 300));
-
+        
         fetchAndDisplayExcel();
-    </script>
 
+        // --- NEW: Modal event listeners ---
+        readMoreBtn.addEventListener('click', () => {
+            infoModal.classList.add('active');
+        });
+        modalCloseBtn.addEventListener('click', () => {
+            infoModal.classList.remove('active');
+        });
+        // Close modal if user clicks on the dark overlay
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) {
+                infoModal.classList.remove('active');
+            }
+        });
+
+    </script>
 </body>
 </html>

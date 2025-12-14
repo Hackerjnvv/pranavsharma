@@ -23,7 +23,7 @@
             --text-light: #64748b;
             --border-color: #e2e8f0;
             --success-color: #10b981;
-            --info-color: #0ea5e9; /* Blue for info */
+            --info-color: #0ea5e9;
         }
 
         * { box-sizing: border-box; }
@@ -34,7 +34,7 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-main);
-            -webkit-text-size-adjust: 100%; /* Prevent font scaling on mobile */
+            -webkit-text-size-adjust: 100%;
         }
 
         /* Header */
@@ -90,21 +90,19 @@
             border: 1px solid var(--border-color);
         }
 
-        /* Search Box Styles */
         .search-wrapper {
             flex-grow: 1;
             display: flex;
             gap: 15px;
             align-items: center;
-            min-width: 250px; /* Reduced min-width */
+            min-width: 250px;
         }
 
-        /* Accessibility: Using label for the input group */
         .input-group {
             position: relative;
             flex-grow: 1;
         }
-        .sr-only { /* Hides text visually but keeps it for screen readers */
+        .sr-only {
             position: absolute; width: 1px; height: 1px; padding: 0;
             margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0);
             white-space: nowrap; border-width: 0;
@@ -134,7 +132,6 @@
             font-size: 1.1rem;
         }
 
-        /* Student Counter Badge */
         .count-badge {
             background-color: #ecfdf5;
             color: var(--success-color);
@@ -146,7 +143,6 @@
             white-space: nowrap;
         }
 
-        /* Contact Button Styles */
         .contact-btn {
             background-color: var(--accent-color);
             color: white;
@@ -168,10 +164,6 @@
             box-shadow: 0 6px 8px rgba(0,0,0,0.15);
         }
 
-        .contact-btn i {
-            font-size: 1.1em;
-        }
-
         /* Table Section */
         .table-card {
             background: var(--card-bg);
@@ -184,10 +176,10 @@
         .table-wrapper {
             max-height: 65vh;
             overflow-y: auto;
-            overflow-x: auto; /* Default is auto for bigger screens */
+            overflow-x: auto; /* Scroll on desktop */
         }
 
-        table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+        table { width: 100%; border-collapse: collapse; white-space: nowrap; /* Default: no wrapping */ }
         
         th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border-color); }
         
@@ -203,7 +195,6 @@
 
         tbody tr:hover { background-color: #f1f5f9; }
 
-        /* Loading */
         #loading { padding: 40px; text-align: center; color: var(--text-light); }
         .spinner {
             border: 3px solid #e2e8f0; border-top: 3px solid var(--primary-color);
@@ -213,7 +204,20 @@
 
         /* --- RESPONSIVE STYLES --- */
 
-        /* Medium screens (tablets) */
+        /* ===== NEW: For tablets and smaller screens (up to 1000px) ===== */
+        @media (max-width: 1000px) {
+            .table-wrapper {
+                overflow-x: hidden; /* Prevent horizontal scrolling */
+            }
+            table {
+                white-space: normal; /* Allow text to wrap */
+            }
+            th, td {
+                word-break: break-word; /* Help break long, unbreakable strings */
+            }
+        }
+
+        /* Medium screens (tablets in portrait) */
         @media (max-width: 768px) {
             .container { padding: 0 15px; }
             .controls-card { flex-direction: column; align-items: stretch; gap: 15px; }
@@ -224,21 +228,15 @@
             header h1 { font-size: 1.8rem; }
         }
 
-        /* --- NEW: Small phones (the main change you requested) --- */
+        /* Small phones */
         @media (max-width: 480px) {
-            .table-wrapper {
-                overflow-x: hidden; /* STRICTLY PREVENT horizontal scrolling */
-            }
-            table {
-                white-space: normal; /* ALLOW text to wrap to the next line */
-            }
-            th, td {
-                padding: 12px 8px; /* Reduce padding to save space */
-                font-size: 0.8rem; /* Decrease font size */
-                word-break: break-word; /* Help long words to break if needed */
-            }
             .container { padding: 0 10px; }
             .controls-card { padding: 15px; }
+            /* Further reduce padding and font size for very small screens */
+            th, td {
+                padding: 12px 8px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -253,7 +251,6 @@
         
         <div class="controls-card">
             <div class="search-wrapper">
-                <!-- Accessibility Improvement: Added label -->
                 <label class="input-group">
                     <span class="sr-only">Search by Class, Section, or Name</span>
                     <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -282,17 +279,14 @@
     <script>
         const url = 'https://birthday-api.pages.dev/Birthday%20Data%20Master.xlsx';
         
-        // --- IMPROVEMENT: Cache DOM element selections ---
         const loadingElement = document.getElementById('loading');
         const tableContainer = document.getElementById('table-container');
         const countDisplay = document.getElementById('studentCount');
         const searchInput = document.getElementById('searchInput');
 
-        // Global variables
         let globalHeaders = [];
         let globalData = [];
 
-        // --- IMPROVEMENT: Debounce function for performance ---
         function debounce(func, delay) {
             let timeout;
             return function(...args) {
@@ -313,7 +307,6 @@
 
                 if (jsonData.length > 0) {
                     globalHeaders = jsonData[0];
-                    // Filter out any completely empty rows
                     globalData = jsonData.slice(1).filter(row => 
                         row.length > 0 && row.some(cell => cell !== undefined && cell !== null && String(cell).trim() !== '')
                     );
@@ -354,7 +347,7 @@
                 const tr = document.createElement('tr');
                 for(let i=0; i < globalHeaders.length; i++) {
                     const td = document.createElement('td');
-                    td.textContent = rowData[i] || "-"; // Use a dash for empty cells
+                    td.textContent = rowData[i] || "-";
                     tr.appendChild(td);
                 }
                 tbody.appendChild(tr);
@@ -366,18 +359,15 @@
             tableContainer.appendChild(table);
         }
 
-        // --- IMPROVEMENT: Using the debounced search handler ---
         searchInput.addEventListener('keyup', debounce(function(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
             const filteredData = globalData.filter(row => {
-                // Creates a single searchable string from the row's cells
                 const rowString = row.map(cell => String(cell || "").toLowerCase()).join(" ");
                 return rowString.includes(searchTerm);
             });
             renderTable(filteredData);
-        }, 300)); // 300ms delay
+        }, 300));
 
-        // Initial data fetch
         fetchAndDisplayExcel();
     </script>
 

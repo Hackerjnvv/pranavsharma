@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Drowsiness Detector</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="model.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <h1>Web Drowsiness Detector 😴</h1>
+    <p id="loading-message">Loading Models & Starting Webcam...</p>
+    <div class="container">
+        <video id="video" width="720" height="560" autoplay muted></video>
+    </div>
+    <audio id="alarmSound" src="alarm.mp3" preload="auto"></audio>
+</body>
+</html>

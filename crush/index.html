@@ -87,7 +87,9 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzx1fMn6K4lR3XyqxluuUGizyhPNs07wU4PA1IVrPsEND7cH0KWhCKYIB8LOiBU9itL/exec';
+        // --- SETUP ---
+        // ⚠️ PASTE YOUR NEW WEB APP URL FROM GOOGLE HERE ⚠️
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxhrQbf9pH8e3aMkWXDe-aoLUjjRVkCqIb8X7etMR0v96ShQc34g5HrySBAVRk8zEY/exec';
         
         const questions = [
             { id: 'situation', type: 'radio', label: "Let's start. Describe your situation:", options: [ "I'm a boy, crushing on a girl", "I'm a girl, crushing on a boy", "It's a different situation" ]},
@@ -123,7 +125,7 @@
         }
 
         window.onload = function() {
-            renderQuestion(); // Always start with questions unless there's shared data
+            renderQuestion(); // Always start with questions
             const urlParams = new URLSearchParams(window.location.search);
             const sharedData = urlParams.get('data');
 
@@ -177,8 +179,8 @@
         }
 
         function renderQuestion() {
-            document.getElementById('question-area').style.display = 'block'; // Make sure it's visible
-            document.getElementById('result-container').style.display = 'none'; // Hide results
+            document.getElementById('question-area').style.display = 'block';
+            document.getElementById('result-container').style.display = 'none';
             const progressIndicator = document.getElementById('progress-indicator');
             const questionCard = document.getElementById('question-card');
             const question = questions[currentQuestionIndex];
@@ -205,9 +207,13 @@
         }
 
         function startAnalysis() {
-            document.getElementById('question-area').style.display = 'none'; document.getElementById('processing-container').style.display = 'block';
+            document.getElementById('question-area').style.display = 'none';
+            document.getElementById('processing-container').style.display = 'block';
             sendDataToSheet(answers.your_name, answers.crush_name);
-            runFakeAnalysis(() => { document.getElementById('processing-container').style.display = 'none'; showResults(); });
+            runFakeAnalysis(() => {
+                document.getElementById('processing-container').style.display = 'none';
+                showResults();
+            });
         }
         
         // --- HELPER FUNCTIONS ---
@@ -218,13 +224,12 @@
             }
             fetch(scriptURL, {
                 method: 'POST',
-                // No 'mode' property needed. Let the browser handle CORS correctly.
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ yourName, crushName })
             })
             .then(res => res.json())
             .then(data => {
-                console.log("Success:", data);
+                console.log("Success: Data sent to Google Sheet.", data);
             })
             .catch(error => console.error('Error!', error.message)); 
         }

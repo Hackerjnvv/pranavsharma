@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Crush Paradox Profiler</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono&display=swap');
+
+        :root {
+            --bg-color: #f4f4f9; --card-bg: #ffffff; --text-color: #212529; --subtle-text: #6c757d;
+            --border-color: #dee2e6; --primary-color: #007bff; --success-color: #28a745; --error-color: #dc3545;
+            --urgent-color: #fd7e14;
+        }
+
+        /* Basic & Container Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 20px; background-color: var(--bg-color); color: var(--text-color);
+        }
+        .container {
+            width: 100%; max-width: 480px; padding: 30px; background: var(--card-bg);
+            border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        /* Question Area */
+        #question-area { animation: fadeIn 0.5s ease-out; }
+        #progress-indicator { font-weight: 600; text-align: center; margin-bottom: 20px; color: var(--primary-color); transition: color 0.3s ease; }
+        #progress-indicator.urgent { color: var(--urgent-color); }
+        #question-card h2 { font-size: 1.5rem; text-align: center; margin-bottom: 25px; line-height: 1.4; }
+        .form-group { margin-bottom: 22px; }
+        input[type="text"] { width: 100%; padding: 14px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 10px; font-size: 1rem; }
+        .radio-group label { display: flex; align-items: center; cursor: pointer; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 10px; transition: background-color 0.2s; }
+        .radio-group label:hover { background-color: var(--bg-color); }
+        input[type="radio"] { margin-right: 12px; width: 18px; height: 18px; accent-color: var(--primary-color); }
+        .error-message { color: var(--error-color); text-align: center; margin-top: 10px; height: 20px; }
+        button#next-btn { width: 100%; padding: 15px; background: var(--primary-color); border: none; border-radius: 10px; color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        
+        /* Other Screens & Analysis Blocks */
+        #processing-container, #result-container { display: none; }
+        .analysis-log { font-family: 'Roboto Mono', monospace; font-size: 0.9rem; color: var(--subtle-text); padding: 20px; background: #f8f9fa; border-radius: 12px; }
+        .analysis-log p { opacity: 0; animation: fadeIn 0.5s forwards; }
+        .final-verdict-box { padding: 20px; border-radius: 12px; text-align: center; font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 25px; }
+        .verdict-yes { background-color: var(--success-color); } .verdict-no { background-color: var(--error-color); }
+        .analysis-block, .final-analysis, .cosmic-analysis { background-color: var(--bg-color); padding: 15px; border-radius: 10px; text-align: center; line-height: 1.6; }
+        .cosmic-analysis { margin: 25px 0; padding: 20px; }
+        #cosmic-score { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); }
+        
+        /* --- NEW STYLE FOR HIGHLIGHTING NAMES --- */
+        .name-highlight {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin: 0 5px;
+        }
+
+        /* Share Link Styles */
+        .share-wrapper { margin-top: 25px; text-align: center; }
+        .share-wrapper input { width: 100%; text-align: center; padding: 10px; border: 1px dashed var(--primary-color); border-radius: 8px; background: #e9f3ff; color: var(--primary-color); font-weight: 600; margin-bottom: 10px; }
+        .share-wrapper button { background: var(--success-color); font-size: 1rem; padding: 12px; width: 100%; border-radius: 8px; border: none; color: white; font-weight: 600; cursor: pointer; }
+        
+        @keyframes fadeIn { to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="question-area">
+            <div id="progress-indicator"></div>
+            <div id="question-card"></div>
+        </div>
+        <div id="processing-container">
+            <h4>Analyzing...</h4>
+            <div class="analysis-log" id="analysis-log"></div>
+        </div>
+        <div id="result-container">
+            <div id="final-verdict" class="final-verdict-box"></div>
+            <div id="analysis-details"></div>
+            <div class="cosmic-analysis"><h4>✨ Cosmic Connection Score ✨</h4><div id="cosmic-score"></div></div>
+            <div class="share-wrapper">
+                <h4>Share this Result!</h4>
+                <input type="text" id="share-link-input" readonly>
+                <button id="copy-btn">Copy Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- SETUP ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyG0IzEjmZHg4MGn3WUDie8QqwdiekdjnlZdRWBz5ltBKAFnDLCiG7RGyYAGrLYSpCZ/exec';
+        
+        const questions = [
+            { id: 'situation', type: 'radio', label: "Let's start. Describe your situation:", options: [ "I'm a boy, crushing on a girl", "I'm a girl, crushing on a boy", "It's a different situation" ]},
+            { id: 'your_name', type: 'text', label: "Aapka Naam?", placeholder: "Aapka naam yahan likhein" },
+            { id: 'crush_name', type: 'text', label: "Aapki crush ka naam?", placeholder: "Crush ka naam yahan likhein" },
+            { id: 'connection', type: 'radio', label: "What's your connection with them?", options: ['We are friends', 'Classmates / Colleagues', 'Acquaintances', 'We are basically strangers']},
+            { id: 'signals', type: 'radio', label: "Have you received any 'signals' from them?", options: ['Yes, definitely!', 'Maybe, I\'m not sure', 'No, not at all']},
+            { id: 'effort', type: 'radio', label: "So, what's your final move?", options: ['Effort Daalunga/Daalungi', 'Cool Banunga/Banungi'] }
+        ];
+
+        let currentQuestionIndex = 0;
+        const answers = {};
+
+        // --- SHARABLE LINK LOGIC ---
+        function displaySharedResult(data) {
+            document.getElementById('question-area').style.display = 'none';
+            document.getElementById('processing-container').style.display = 'none';
+            document.getElementById('result-container').style.display = 'block';
+
+            const { yourName, crushName, scenario } = data;
+            const finalVerdictBox = document.getElementById('final-verdict');
+            const analysisDetails = document.getElementById('analysis-details');
+            document.getElementById('cosmic-score').textContent = calculateCosmicScore(yourName, crushName);
+            document.querySelector('.share-wrapper').style.display = 'none';
+
+            // --- MODIFIED TEXT FOR SHARED LINKS ---
+            if (scenario === 'no') {
+                finalVerdictBox.textContent = "NAHI 💔"; finalVerdictBox.className = 'final-verdict-box verdict-no';
+                analysisDetails.innerHTML = `<div class="analysis-block">Afsos! <strong>${crushName}</strong> ne <strong>${yourName}</strong> ka patta kaat diya. 😔</div>`;
+            } else {
+                finalVerdictBox.textContent = "HAAN ✅"; finalVerdictBox.className = 'final-verdict-box verdict-yes';
+                analysisDetails.innerHTML = `<div class="analysis-block">Mubarak ho! Connection ban gaya hai!<br><span class="name-highlight">${yourName}</span> ❤️ <span class="name-highlight">${crushName}</span></div>`;
+            }
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedData = urlParams.get('data');
+
+            if (sharedData) {
+                try {
+                    const decodedString = atob(sharedData);
+                    const data = JSON.parse(decodedString);
+                    if (data.yourName && data.crushName && data.scenario) {
+                        displaySharedResult(data);
+                    } else { renderQuestion(); }
+                } catch (e) {
+                    console.error("Invalid shared data:", e);
+                    renderQuestion();
+                }
+            } else {
+                renderQuestion();
+            }
+        };
+
+        // --- CORE QUIZ LOGIC ---
+        function showResults() {
+            document.getElementById('processing-container').style.display = 'none';
+            document.getElementById('result-container').style.display = 'block';
+            
+            const finalVerdictBox = document.getElementById('final-verdict'); 
+            const analysisDetails = document.getElementById('analysis-details');
+            document.getElementById('cosmic-score').textContent = calculateCosmicScore(answers.your_name, answers.crush_name);
+            const putEffort = answers.effort.startsWith('Effort');
+            const scenario = putEffort ? 'no' : 'yes';
+
+            // --- MODIFIED TEXT FOR QUIZ RESULTS ---
+            if (scenario === 'no') {
+                finalVerdictBox.textContent = "NAHI 💔"; finalVerdictBox.className = 'final-verdict-box verdict-no';
+                // New "Patta kaat diya" text
+                analysisDetails.innerHTML = `<div class="analysis-block">Afsos! <strong>${answers.crush_name}</strong> ne <strong>${answers.your_name}</strong> ka patta kaat diya. 😔</div>`;
+            } else {
+                finalVerdictBox.textContent = "HAAN ✅"; finalVerdictBox.className = 'final-verdict-box verdict-yes';
+                // New stylish name display text
+                analysisDetails.innerHTML = `<div class="analysis-block">Mubarak ho! Connection ban gaya hai!<br><span class="name-highlight">${answers.your_name}</span> ❤️ <span class="name-highlight">${answers.crush_name}</span></div>`;
+            }
+
+            const dataToEncode = { yourName: answers.your_name, crushName: answers.crush_name, scenario: scenario };
+            const jsonString = JSON.stringify(dataToEncode);
+            const base64String = btoa(jsonString);
+            const shareURL = `${window.location.origin}${window.location.pathname}?data=${base64String}`;
+            
+            const shareInput = document.getElementById('share-link-input');
+            const copyBtn = document.getElementById('copy-btn');
+            shareInput.value = shareURL;
+
+            copyBtn.onclick = () => {
+                navigator.clipboard.writeText(shareURL).then(() => {
+                    copyBtn.textContent = 'Copied! ✅';
+                    setTimeout(() => { copyBtn.textContent = 'Copy Link'; }, 2000);
+                });
+            };
+        }
+
+        function renderQuestion() {
+            const progressIndicator = document.getElementById('progress-indicator');
+            const questionCard = document.getElementById('question-card');
+            const question = questions[currentQuestionIndex];
+            progressIndicator.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            progressIndicator.classList.toggle('urgent', (questions.length - currentQuestionIndex) <= 2);
+            let inputHtml = '';
+            if (question.type === 'text') { inputHtml = `<input type="text" id="${question.id}" placeholder="${question.placeholder}" required>`; } 
+            else if (question.type === 'radio') {
+                inputHtml = `<div class="radio-group">`;
+                question.options.forEach(option => { inputHtml += `<label><input type="radio" name="${question.id}" value="${option}" required> ${option}</label>`; });
+                inputHtml += `</div>`;
+            }
+            questionCard.innerHTML = `<h2>${question.label}</h2><div class="form-group">${inputHtml}</div><div class="error-message" id="error-message"></div><button id="next-btn">${(currentQuestionIndex === questions.length - 1) ? 'Analyze My Fate 🔮' : 'Next →'}</button>`;
+            document.getElementById('next-btn').addEventListener('click', handleNext);
+        }
+
+        function handleNext() {
+            const question = questions[currentQuestionIndex]; const errorMsg = document.getElementById('error-message');
+            let value;
+            if (question.type === 'text') { value = document.getElementById(question.id).value.trim(); if (!value) { errorMsg.textContent = "Please fill this field."; return; } } 
+            else if (question.type === 'radio') { const selected = document.querySelector(`input[name="${question.id}"]:checked`); if (!selected) { errorMsg.textContent = "Please select an option."; return; } value = selected.value; }
+            answers[question.id] = value; errorMsg.textContent = ''; currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) { renderQuestion(); } else { startAnalysis(); }
+        }
+
+        function startAnalysis() {
+            document.getElementById('question-area').style.display = 'none'; document.getElementById('processing-container').style.display = 'block';
+            sendDataToSheet(answers.your_name, answers.crush_name);
+            runFakeAnalysis(() => { document.getElementById('processing-container').style.display = 'none'; showResults(); });
+        }
+        
+        // --- HELPER FUNCTIONS ---
+        function sendDataToSheet(yourName, crushName) { 
+            if (scriptURL.includes('YAHAN_APNA_WEB_APP_URL_PASTE_KARO')) return; 
+            fetch(scriptURL, { method: 'POST', body: JSON.stringify({ yourName, crushName }), headers: { 'Content-Type': 'application/json' } })
+            .catch(error => console.error('Error!', error.message)); 
+        }
+
+        function calculateCosmicScore(name1, name2) { 
+            return `${(name1.length * 7 + name2.length * 3) % 100}%`; 
+        }
+
+        function runFakeAnalysis(callback) { 
+            const logElement = document.getElementById('analysis-log'); 
+            logElement.innerHTML = ''; 
+            const logEntries = ["[INPUT RECEIVED]", "[ENCRYPTING DATA]", "[PROCESSING] > Calculating synaptic resonance...", "[ASTROLOGY] > Cross-referencing vectors...", "[ANALYZING BEHAVIORAL PATTERNS]", "[FINALIZING] > Compiling paradox verdict..."]; 
+            logEntries.forEach((entry, index) => { 
+                setTimeout(() => { 
+                    const p = document.createElement('p'); p.textContent = entry; logElement.appendChild(p); 
+                }, index * 400); 
+            }); 
+            setTimeout(callback, logEntries.length * 400 + 300); 
+        }
+
+    </script>
+</body>
+</html>  

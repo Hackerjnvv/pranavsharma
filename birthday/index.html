@@ -24,7 +24,6 @@
             --border-color: #e2e8f0;
             --success-color: #10b981;
             --info-color: #0ea5e9;
-            --section-header-bg: #f8fafc; /* Lighter than th background */
         }
 
         * { box-sizing: border-box; }
@@ -137,6 +136,7 @@
         .contact-btn { background-color: var(--accent-color); }
         .contact-btn:hover { background-color: var(--accent-hover); }
 
+        /* --- NEW BUTTON STYLE --- */
         .info-btn {
             background-color: transparent;
             color: var(--primary-color);
@@ -164,22 +164,6 @@
         }
         tbody tr:hover { background-color: #f1f5f9; }
 
-        /* --- NEW: Section Header Style --- */
-        .section-header td {
-            background-color: var(--section-header-bg);
-            color: var(--primary-color);
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.05rem;
-            padding-top: 20px;
-            padding-bottom: 12px;
-            border-top: 2px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-        tr.section-header:first-child td {
-             border-top: none;
-        }
-
         #loading { padding: 40px; text-align: center; color: var(--text-light); }
         .spinner {
             border: 3px solid #e2e8f0; border-top: 3px solid var(--primary-color);
@@ -188,6 +172,7 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
+        /* --- NEW MODAL STYLES --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(15, 23, 42, 0.6);
@@ -215,6 +200,7 @@
         .modal-content p, .modal-content li { line-height: 1.6; color: var(--text-light); }
         .modal-content strong { color: var(--text-main); }
 
+        /* --- RESPONSIVE STYLES --- */
         @media (max-width: 1000px) {
             .table-wrapper { overflow-x: hidden; }
             table { white-space: normal; }
@@ -253,7 +239,9 @@
                 <div id="studentCount" class="count-badge">Total Students: 0</div>
             </div>
 
+            <!-- Button Group -->
             <div class="button-group">
+                <!-- NEW BUTTON HERE -->
                 <button id="readMoreBtn" class="btn info-btn">
                     <i class="fa-solid fa-book-open"></i> Read about this project
                 </button>
@@ -269,15 +257,19 @@
         </div>
     </div>
 
+    <!-- NEW MODAL HTML -->
     <div id="infoModal" class="modal-overlay">
         <div class="modal-content">
             <button id="modalCloseBtn" class="modal-close">&times;</button>
             <h2>About The Birthday Data Master</h2>
+            
             <h3>Why Does This Project Exist?</h3>
             <p>The official DAV Jehanabad website features a list of daily birthdays, which is a great way to celebrate students. However, this information is temporary—once the day is over, the list is gone forever. This makes it impossible to check a birthday you might have missed or to plan for upcoming celebrations.</p>
             <p>The Birthday Data Master was created to solve this simple problem. It enhances the school's feature by turning the fleeting daily list into a <strong>permanent, searchable, and useful archive</strong> for the entire school community.</p>
+
             <h3>How It Works: The Full Story</h3>
             <p>The application is split into two parts: a silent <strong>Backend</strong> that gathers data and a fast <strong>Frontend</strong> that you interact with.</p>
+
             <h4>Part 1: The Backend (The Automated Data Engine)</h4>
             <p>The backend's only job is to get fresh data, clean it, and prepare it once a day. This entire process is automated using <strong>GitHub Actions</strong>.</p>
             <ol>
@@ -285,6 +277,7 @@
                 <li><strong>Data Scraping:</strong> The script visits davjehanabad.in and downloads the raw HTML code of the birthday page.</li>
                 <li><strong>Formatting:</strong> A second script reads this messy HTML, intelligently extracts only the student names, classes, and dates, and neatly organizes this information into a single, clean Excel file (`.xlsx`).</li>
             </ol>
+
             <h4>Part 2: The Frontend (The Interface You Use)</h4>
             <p>The frontend is designed for speed. It does all the work right inside your browser (client-side processing).</p>
             <ol>
@@ -303,27 +296,16 @@
         const countDisplay = document.getElementById('studentCount');
         const searchInput = document.getElementById('searchInput');
 
+        // --- NEW: Modal element selection ---
         const readMoreBtn = document.getElementById('readMoreBtn');
         const infoModal = document.getElementById('infoModal');
         const modalCloseBtn = document.getElementById('modalCloseBtn');
 
         let globalHeaders = [], globalData = [];
-        let dateColumnIndex = -1; // To store the index of the date column
 
         function debounce(func, delay) {
             let timeout;
             return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); };
-        }
-        
-        // --- NEW: Helper function to parse 'DD-Month' into a comparable Date object ---
-        function parseDateFromRow(row) {
-            if (dateColumnIndex === -1 || !row[dateColumnIndex]) return null;
-            const dateStr = row[dateColumnIndex].replace('-', ' '); // "01-August" -> "01 August"
-            const date = new Date(dateStr);
-            if (isNaN(date)) return null;
-            // Set a common year to make comparison easier
-            date.setFullYear(new Date().getFullYear());
-            return date;
         }
 
         async function fetchAndDisplayExcel() {
@@ -337,35 +319,8 @@
 
                 if (jsonData.length > 0) {
                     globalHeaders = jsonData[0];
-                    // Find the 'Date of Birth' column
-                    dateColumnIndex = globalHeaders.findIndex(h => h.toLowerCase().includes('date'));
-                    
-                    globalData = jsonData.slice(1).filter(row => row.length > 0 && row.some(cell => String(cell).trim() !== ''));
-
-                    // --- NEW: Sorting Logic ---
-                    const today = new Date();
-                    today.setHours(0, 0, 0, 0);
-                    const todayDayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-
-                    globalData.sort((a, b) => {
-                        const dateA = parseDateFromRow(a);
-                        const dateB = parseDateFromRow(b);
-                        
-                        if (!dateA) return 1; // Put rows without dates at the end
-                        if (!dateB) return -1;
-                        
-                        const dayOfYearA = Math.floor((dateA - new Date(dateA.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-                        const dayOfYearB = Math.floor((dateB - new Date(dateB.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-                        
-                        // This logic handles year-end wrapping
-                        const diffA = (dayOfYearA - todayDayOfYear + 366) % 366;
-                        const diffB = (dayOfYearB - todayDayOfYear + 366) % 366;
-
-                        return diffA - diffB;
-                    });
-                    
-                    renderTable(globalData, true); // Render with sections initially
-                    countDisplay.textContent = `Total Students: ${globalData.length}`;
+                    globalData = jsonData.slice(1).filter(row => row.length > 0 && row.some(cell => cell !== undefined && cell !== null && String(cell).trim() !== ''));
+                    renderTable(globalData);
                     loadingElement.style.display = 'none';
                 } else {
                     loadingElement.textContent = "No data found.";
@@ -376,107 +331,47 @@
             }
         }
 
-        // --- UPDATED: renderTable function to handle sections ---
-        function renderTable(dataRows, showSections = false) {
+        function renderTable(dataRows) {
+            countDisplay.textContent = `Total Students: ${dataRows.length}`;
             if (dataRows.length === 0) {
                 tableContainer.innerHTML = '<div style="padding:20px; text-align:center; color:#64748b;">No matching records found.</div>';
                 return;
             }
-            const table = document.createElement('table');
-            const thead = document.createElement('thead');
-            const tbody = document.createElement('tbody');
-            
+            const table = document.createElement('table'), thead = document.createElement('thead'), tbody = document.createElement('tbody');
             const trHead = document.createElement('tr');
             globalHeaders.forEach(text => { const th = document.createElement('th'); th.textContent = text; trHead.appendChild(th); });
             thead.appendChild(trHead);
-
-            // Helper to create a data row
-            const createDataRow = (rowData) => {
+            dataRows.forEach(rowData => {
                 const tr = document.createElement('tr');
-                for(let i=0; i < globalHeaders.length; i++) {
-                    const td = document.createElement('td');
-                    td.textContent = rowData[i] || "-";
-                    tr.appendChild(td);
-                }
-                return tr;
-            };
-
-            // Helper to create a section header row
-            const createSectionHeader = (title) => {
-                const tr = document.createElement('tr');
-                tr.className = 'section-header';
-                const td = document.createElement('td');
-                td.colSpan = globalHeaders.length;
-                td.innerHTML = title;
-                tr.appendChild(td);
-                return tr;
-            };
-
-            if (showSections && dateColumnIndex !== -1) {
-                // Logic for sectioned view
-                let addedTodayHeader = false, addedTomorrowHeader = false, addedUpcomingHeader = false;
-                const today = new Date(); today.setHours(0,0,0,0);
-                const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
-
-                dataRows.forEach(rowData => {
-                    const bday = parseDateFromRow(rowData);
-                    if (!bday) return; // Skip rows with invalid dates
-                    
-                    bday.setFullYear(today.getFullYear()); // Normalize year for comparison
-                    
-                    if (bday.getTime() === today.getTime()) {
-                        if (!addedTodayHeader) {
-                            tbody.appendChild(createSectionHeader("🎂 Today's Birthdays"));
-                            addedTodayHeader = true;
-                        }
-                    } else if (bday.getTime() === tomorrow.getTime()) {
-                        if (!addedTomorrowHeader) {
-                            tbody.appendChild(createSectionHeader("🎉 Tomorrow's Birthdays"));
-                            addedTomorrowHeader = true;
-                        }
-                    } else {
-                        if (!addedUpcomingHeader) {
-                            tbody.appendChild(createSectionHeader("🗓️ Upcoming Birthdays"));
-                            addedUpcomingHeader = true;
-                        }
-                    }
-                    tbody.appendChild(createDataRow(rowData));
-                });
-
-            } else {
-                // Logic for simple/filtered view
-                dataRows.forEach(rowData => {
-                    tbody.appendChild(createDataRow(rowData));
-                });
-            }
-
-            table.appendChild(thead);
-            table.appendChild(tbody);
-            tableContainer.innerHTML = '';
-            tableContainer.appendChild(table);
+                for(let i=0; i < globalHeaders.length; i++) { const td = document.createElement('td'); td.textContent = rowData[i] || "-"; tr.appendChild(td); }
+                tbody.appendChild(tr);
+            });
+            table.appendChild(thead); table.appendChild(tbody);
+            tableContainer.innerHTML = ''; tableContainer.appendChild(table);
         }
 
         searchInput.addEventListener('keyup', debounce(function(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                renderTable(globalData, true); // Re-render with sections if search is cleared
-                countDisplay.textContent = `Total Students: ${globalData.length}`;
-            } else {
-                const filteredData = globalData.filter(row => row.map(cell => String(cell || "").toLowerCase()).join(" ").includes(searchTerm));
-                renderTable(filteredData, false); // Render filtered data without sections
-                countDisplay.textContent = `Matching: ${filteredData.length}`;
-            }
+            const filteredData = globalData.filter(row => row.map(cell => String(cell || "").toLowerCase()).join(" ").includes(searchTerm));
+            renderTable(filteredData);
         }, 300));
         
         fetchAndDisplayExcel();
 
-        // Modal event listeners
-        readMoreBtn.addEventListener('click', () => infoModal.classList.add('active'));
-        modalCloseBtn.addEventListener('click', () => infoModal.classList.remove('active'));
-        infoModal.addEventListener('click', (e) => {
-            if (e.target === infoModal) infoModal.classList.remove('active');
+        // --- NEW: Modal event listeners ---
+        readMoreBtn.addEventListener('click', () => {
+            infoModal.classList.add('active');
         });
+        modalCloseBtn.addEventListener('click', () => {
+            infoModal.classList.remove('active');
+        });
+        // Close modal if user clicks on the dark overlay
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) {
+                infoModal.classList.remove('active');
+            }
+        });
+
     </script>
 </body>
 </html>
